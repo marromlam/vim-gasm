@@ -85,8 +85,8 @@ let g:vimtex_quickfix_latexlog = {'default' : 0}
 "}}}
 
 " Python paths {{{
-let g:python3_host_prog = expand("$HOMEBREW_PREFIX/bin/python3.9")
-let g:pydocstring_doq_path = expand("$HOMEBREW_PREFIX/bin/doq")
+let g:python3_host_prog = expand("$HOMEBREW/bin/python3.9")
+let g:pydocstring_doq_path = expand("$HOMEBREW/bin/doq")
 autocmd FileType python setlocal tabstop=2 shiftwidth=2 smarttab expandtab
 " }}}
 
