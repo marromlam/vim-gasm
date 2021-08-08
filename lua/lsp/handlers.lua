@@ -4,18 +4,18 @@ local M = {}
 
 function M.setup()
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = lvim.lsp.diagnostics.virtual_text,
-    signs = lvim.lsp.diagnostics.signs.active,
-    underline = lvim.lsp.document_highlight,
+    virtual_text = nvim.lsp.diagnostics.virtual_text,
+    signs = nvim.lsp.diagnostics.signs.active,
+    underline = nvim.lsp.document_highlight,
   })
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
     local config = { -- your config
-      virtual_text = lvim.lsp.diagnostics.virtual_text,
-      signs = lvim.lsp.diagnostics.signs,
-      underline = lvim.lsp.diagnostics.underline,
-      update_in_insert = lvim.lsp.diagnostics.update_in_insert,
-      severity_sort = lvim.lsp.diagnostics.severity_sort,
+      virtual_text = nvim.lsp.diagnostics.virtual_text,
+      signs = nvim.lsp.diagnostics.signs,
+      underline = nvim.lsp.diagnostics.underline,
+      update_in_insert = nvim.lsp.diagnostics.update_in_insert,
+      severity_sort = nvim.lsp.diagnostics.severity_sort,
     }
     local uri = params.uri
     local bufnr = vim.uri_to_bufnr(uri)
@@ -52,11 +52,11 @@ function M.setup()
   end
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = lvim.lsp.popup_border,
+    border = nvim.lsp.popup_border,
   })
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = lvim.lsp.popup_border,
+    border = nvim.lsp.popup_border,
   })
 end
 

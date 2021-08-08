@@ -1,17 +1,16 @@
-CONFIG_PATH = os.getenv "HOME" .. "/.local/share/lunarvim/lvim"
+CONFIG_PATH = os.getenv "HOME" .. "/.config/nvim"
 DATA_PATH = vim.fn.stdpath "data"
 CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
-lvim = {
+nvim = {
   leader = "space",
-  colorscheme = "spacegray",
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
   vsnip_dir = os.getenv "HOME" .. "/.config/snippets",
-  database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
+  database = { save_location = "~/.config/nvim_db", auto_execute = 1 },
   keys = {},
 
   -- TODO why do we need this?
@@ -108,7 +107,7 @@ if status_ok then
 end
 
 -- TODO move all of this into lang specific files, only require when using
-lvim.lang = {
+nvim.lang = {
   asm = {
     formatters = {
       {
@@ -708,12 +707,12 @@ lvim.lang = {
             },
             diagnostics = {
               -- Get the language server to recognize the `vim` global
-              globals = { "vim", "lvim" },
+              globals = { "vim", "nvim" },
             },
             workspace = {
               -- Make the server aware of Neovim runtime files
               library = {
-                [vim.fn.expand "~/.local/share/lunarvim/lvim/lua"] = true,
+                [vim.fn.expand "~/.config/nvim/lua"] = true,
                 [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                 [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
               },
@@ -1252,15 +1251,24 @@ lvim.lang = {
   },
 }
 
-require("keymappings").config()
-require("core.which-key").config()
-require "core.status_colors"
-require("core.gitsigns").config()
-require("core.compe").config()
-require("core.dashboard").config()
-require("core.dap").config()
-require("core.terminal").config()
-require("core.telescope").config()
-require("core.treesitter").config()
-require("core.nvimtree").config()
-require("core.rooter").config()
+
+-- Main modules
+require("keys.mappings").config()
+require("keys.which-key").config()
+require "packconf.status_colors"
+require("packconf.gitsigns").config()
+require("packconf.compe").config()
+require("packconf.dashboard").config()
+require("packconf.dap").config()
+require("packconf.terminal").config()
+require("packconf.telescope").config()
+require("packconf.treesitter").config()
+require("packconf.nvimtree").config()
+require("packconf.rooter").config()
+
+-- Custom modules
+require("packconf.airline")
+require("packconf.folding")
+require("packconf.ipython-cell")
+require("packconf.better-whitespace")
+require("packconf.slime")

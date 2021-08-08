@@ -35,9 +35,9 @@ local function r_inspect_settings(structure, limit, separator)
   separator = separator:gsub("%.%[", "%[")
   if type(structure) == "function" then
     -- don't print functions
-    io.write("-- lvim", separator:sub(2), " = function ()\n")
+    io.write("-- nvim", separator:sub(2), " = function ()\n")
   else
-    io.write("lvim", separator:sub(2), " = ", tostring(structure), "\n")
+    io.write("nvim", separator:sub(2), " = ", tostring(structure), "\n")
   end
   return limit - 1
 end
@@ -58,8 +58,8 @@ function utils.generate_settings()
   -- sets the default output file as test.lua
   io.output(file)
 
-  -- write all `lvim` related settings to `lv-settings.lua` file
-  r_inspect_settings(lvim, 10000, ".")
+  -- write all `nvim` related settings to `lv-settings.lua` file
+  r_inspect_settings(nvim, 10000, ".")
 
   -- closes the open file
   io.close(file)
@@ -67,8 +67,8 @@ end
 
 -- autoformat
 function utils.toggle_autoformat()
-  if lvim.format_on_save then
-    require("core.autocmds").define_augroups {
+  if nvim.format_on_save then
+    require("packconf.autocmds").define_augroups {
       autoformat = {
         {
           "BufWritePre",
@@ -79,7 +79,7 @@ function utils.toggle_autoformat()
     }
   end
 
-  if not lvim.format_on_save then
+  if not nvim.format_on_save then
     vim.cmd [[
       if exists('#autoformat#BufWritePre')
         :autocmd! autoformat
@@ -89,16 +89,16 @@ function utils.toggle_autoformat()
 end
 
 function utils.reload_lv_config()
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
+  vim.cmd "source ~/.config/nvim/lua/settings.lua"
   vim.cmd("source " .. USER_CONFIG_PATH)
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
+  vim.cmd "source ~/.config/nvim/lua/plugins.lua"
   local plugins = require "plugins"
-  local plugin_loader = require("plugin-loader").init()
+  local plugin_loader = require("all-packs").init()
   utils.toggle_autoformat()
-  plugin_loader:load { plugins, lvim.plugins }
+  plugin_loader:load { plugins, nvim.plugins }
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
-  require("keymappings").setup()
+  require("keys.mappings").setup()
   -- vim.cmd ":PackerClean"
 end
 
@@ -115,7 +115,7 @@ end
 function utils.get_active_client_by_ft(filetype)
   local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do
-    if client.name == lvim.lang[filetype].lsp.provider then
+    if client.name == nvim.lang[filetype].lsp.provider then
       return client
     end
   end
@@ -164,8 +164,8 @@ function utils.gsub_args(args)
   return args
 end
 
-function utils.lvim_log(msg)
-  if lvim.debug then
+function utils.nvim_log(msg)
+  if nvim.debug then
     vim.notify(msg, vim.log.levels.DEBUG)
   end
 end
