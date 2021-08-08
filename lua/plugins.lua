@@ -1,6 +1,18 @@
+-- Thss file handles the main vim plugins, those nobody can live wihtout.
+
+
 return {
-  -- Packer can manage itself as an optional plugin
+
+  -- Packer {{{
+
+  -- This is the plugin manager we are using in vim-gasm
   { "wbthomason/packer.nvim" },
+
+  -- }}}
+
+
+  -- LSP {{{
+
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
   { "jose-elias-alvarez/null-ls.nvim" },
@@ -10,8 +22,8 @@ return {
     config = function()
       local lspinstall = require "lspinstall"
       lspinstall.setup()
-      if lvim.builtin.lspinstall.on_config_done then
-        lvim.builtin.lspinstall.on_config_done(lspinstall)
+      if nvim.builtin.lspinstall.on_config_done then
+        nvim.builtin.lspinstall.on_config_done(lspinstall)
       end
     end,
   },
@@ -20,25 +32,33 @@ return {
   { "nvim-lua/plenary.nvim" },
   { "tjdevries/astronauta.nvim" },
 
-  -- Telescope
+  -- }}}
+
+
+  -- Telescope {{{
+
   {
     "nvim-telescope/telescope.nvim",
     config = function()
-      require("core.telescope").setup()
-      if lvim.builtin.telescope.on_config_done then
-        lvim.builtin.telescope.on_config_done(require "telescope")
+      require("packconf.telescope").setup()
+      if nvim.builtin.telescope.on_config_done then
+        nvim.builtin.telescope.on_config_done(require "telescope")
       end
     end,
   },
 
-  -- Completion & Snippets
+  -- }}}
+
+
+  -- Completion & Snippets {{{
+
   {
     "hrsh7th/nvim-compe",
     event = "InsertEnter",
     config = function()
-      require("core.compe").setup()
-      if lvim.builtin.compe.on_config_done then
-        lvim.builtin.compe.on_config_done(require "compe")
+      require("packconf.compe").setup()
+      if nvim.builtin.compe.on_config_done then
+        nvim.builtin.compe.on_config_done(require "compe")
       end
     end,
     -- wants = "vim-vsnip",
@@ -70,36 +90,44 @@ return {
     -- event = "InsertEnter",
     after = "nvim-compe",
     config = function()
-      require "core.autopairs"
-      if lvim.builtin.autopairs.on_config_done then
-        lvim.builtin.autopairs.on_config_done(require "nvim-autopairs")
+      require "packconf.autopairs"
+      if nvim.builtin.autopairs.on_config_done then
+        nvim.builtin.autopairs.on_config_done(require "nvim-autopairs")
       end
     end,
   },
 
-  -- Treesitter
+  -- }}}
+
+
+  -- Treesitter {{{
+
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "0.5-compat",
     -- run = ":TSUpdate",
     config = function()
-      require("core.treesitter").setup()
-      if lvim.builtin.treesitter.on_config_done then
-        lvim.builtin.treesitter.on_config_done(require "nvim-treesitter.configs")
+      require("packconf.treesitter").setup()
+      if nvim.builtin.treesitter.on_config_done then
+        nvim.builtin.treesitter.on_config_done(require "nvim-treesitter.configs")
       end
     end,
   },
 
-  -- NvimTree
+  -- }}}
+
+
+  -- NvimTree {{{
+
   {
     "kyazdani42/nvim-tree.lua",
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
-      require("core.nvimtree").setup()
-      if lvim.builtin.nvimtree.on_config_done then
-        lvim.builtin.nvimtree.on_config_done(require "nvim-tree.config")
+      require("packconf.nvimtree").setup()
+      if nvim.builtin.nvimtree.on_config_done then
+        nvim.builtin.nvimtree.on_config_done(require "nvim-tree.config")
       end
     end,
   },
@@ -108,27 +136,35 @@ return {
     "lewis6991/gitsigns.nvim",
 
     config = function()
-      require("core.gitsigns").setup()
-      if lvim.builtin.gitsigns.on_config_done then
-        lvim.builtin.gitsigns.on_config_done(require "gitsigns")
+      require("packconf.gitsigns").setup()
+      if nvim.builtin.gitsigns.on_config_done then
+        nvim.builtin.gitsigns.on_config_done(require "gitsigns")
       end
     end,
     event = "BufRead",
   },
 
-  -- Whichkey
+  -- }}}
+
+
+  -- Whichkey {{{
+
   {
     "folke/which-key.nvim",
     config = function()
-      require("core.which-key").setup()
-      if lvim.builtin.which_key.on_config_done then
-        lvim.builtin.which_key.on_config_done(require "which-key")
+      require("keys.which-key").setup()
+      if nvim.builtin.which_key.on_config_done then
+        nvim.builtin.which_key.on_config_done(require "which-key")
       end
     end,
     event = "BufWinEnter",
   },
 
-  -- Comments
+  -- }}}
+
+
+  -- Comments {{{
+
   {
     "terrortylor/nvim-comment",
     event = "BufRead",
@@ -138,96 +174,125 @@ return {
         return
       end
       nvim_comment.setup()
-      if lvim.builtin.comment.on_config_done then
-        lvim.builtin.comment.on_config_done(nvim_comment)
+      if nvim.builtin.comment.on_config_done then
+        nvim.builtin.comment.on_config_done(nvim_comment)
       end
     end,
   },
 
-  -- vim-rooter
+  -- }}}
+
+
+  -- vim-rooter: Have the file system follow you around {{{
+
   {
     "airblade/vim-rooter",
     -- event = "BufReadPre",
     config = function()
-      require("core.rooter").setup()
-      if lvim.builtin.rooter.on_config_done then
-        lvim.builtin.rooter.on_config_done()
+      require("packconf.rooter").setup()
+      if nvim.builtin.rooter.on_config_done then
+        nvim.builtin.rooter.on_config_done()
       end
     end,
-    disable = not lvim.builtin.rooter.active,
+    disable = not nvim.builtin.rooter.active,
   },
 
-  -- Icons
-  { "kyazdani42/nvim-web-devicons" },
+  -- }}}
 
-  -- Status Line and Bufferline
+
+  -- Status Line and Bufferline {{{
+
   {
     "glepnir/galaxyline.nvim",
     config = function()
-      require "core.galaxyline"
-      if lvim.builtin.galaxyline.on_config_done then
-        lvim.builtin.galaxyline.on_config_done(require "galaxyline")
+      -- require "packconf.galaxyline"
+      -- require "packconf.neonline"
+      require "packconf.my-galaxyline"
+      -- require "packconf.evilline"
+      -- require "packconf.eviline"
+      if nvim.builtin.galaxyline.on_config_done then
+        nvim.builtin.galaxyline.on_config_done(require "galaxyline")
       end
     end,
     event = "BufWinEnter",
-    disable = not lvim.builtin.galaxyline.active,
+    disable = not nvim.builtin.galaxyline.active,
   },
+
 
   {
     "romgrk/barbar.nvim",
     config = function()
-      require "core.bufferline"
-      if lvim.builtin.bufferline.on_config_done then
-        lvim.builtin.bufferline.on_config_done()
+      -- require "packconf.bufferline"
+      require("packconf.bufferline").setup()
+      if nvim.builtin.bufferline.on_config_done then
+        nvim.builtin.bufferline.on_config_done()
       end
     end,
     event = "BufWinEnter",
   },
 
-  -- Debugging
+  -- }}}
+
+
+  -- Debugging {{{
+
   {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
     config = function()
-      require("core.dap").setup()
-      if lvim.builtin.dap.on_config_done then
-        lvim.builtin.dap.on_config_done(require "dap")
+      require("packconf.dap").setup()
+      if nvim.builtin.dap.on_config_done then
+        nvim.builtin.dap.on_config_done(require "dap")
       end
     end,
-    disable = not lvim.builtin.dap.active,
+    disable = not nvim.builtin.dap.active,
   },
+
 
   -- Debugger management
   {
     "Pocco81/DAPInstall.nvim",
     -- event = "BufWinEnter",
     -- event = "BufRead",
-    disable = not lvim.builtin.dap.active,
+    disable = not nvim.builtin.dap.active,
   },
 
-  -- Dashboard
+  -- }}}
+
+
+  -- Dashboard {{{
+
   {
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
     config = function()
-      require("core.dashboard").setup()
-      if lvim.builtin.dashboard.on_config_done then
-        lvim.builtin.dashboard.on_config_done(require "dashboard")
+      require("packconf.dashboard").setup()
+      if nvim.builtin.dashboard.on_config_done then
+        nvim.builtin.dashboard.on_config_done(require "dashboard")
       end
     end,
-    disable = not lvim.builtin.dashboard.active,
+    disable = not nvim.builtin.dashboard.active,
   },
 
-  -- Terminal
+  -- }}}
+
+
+  -- Terminal {{{
   {
     "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
     config = function()
-      require("core.terminal").setup()
-      if lvim.builtin.terminal.on_config_done then
-        lvim.builtin.terminal.on_config_done(require "toggleterm")
+      require("packconf.terminal").setup()
+      if nvim.builtin.terminal.on_config_done then
+        nvim.builtin.terminal.on_config_done(require "toggleterm")
       end
     end,
-    disable = not lvim.builtin.terminal.active,
+    disable = not nvim.builtin.terminal.active,
   },
+
+  -- }}}
+
 }
+
+
+-- vim: foldmethod=marker
