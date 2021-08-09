@@ -66,12 +66,12 @@ vim.g.bufferline = {
   clickable = true,
 
   -- Excludes buffers from the tabline
-  -- exclude_ft = ['javascript'],
-  -- exclude_name = ['package.json'],
+  -- exclude_ft = ["javascript"],
+  -- exclude_name = ["package.json"],
 
   -- Enable/disable icons
-  -- if set to 'numbers', will show buffer index in the tabline
-  -- if set to 'both', will show buffer index and icons in the tabline
+  -- if set to "numbers", will show buffer index in the tabline
+  -- if set to "both", will show buffer index and icons in the tabline
   icons = true,
 
   -- If set, the icon color will follow its corresponding buffer
@@ -81,11 +81,11 @@ vim.g.bufferline = {
   icon_custom_colors = false,
 
   -- Configure icons on the bufferline.
-  icon_separator_active = '',
-  icon_separator_inactive = '',
-  icon_close_tab = '',
-  icon_close_tab_modified = '●',
-  icon_pinned = '車',
+  icon_separator_active = "",
+  icon_separator_inactive = "",
+  icon_close_tab = "",
+  icon_close_tab_modified = "●",
+  icon_pinned = "車",
 
   -- Sets the maximum padding width with which to surround each tab
   maximum_padding = 2,
@@ -102,7 +102,7 @@ vim.g.bufferline = {
   -- New buffer letters are assigned in this order. This order is
   -- optimal for the qwerty keyboard layout but might need adjustement
   -- for other layouts.
-  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+  letters = "asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP",
 
   -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
   -- where X is the buffer number. But only a static string is accepted here.
@@ -113,22 +113,20 @@ vim.g.bufferline = {
 
 -- {{{
 
+vim.g.python3_host_prog = vim.fn.expand(os.getenv "HOMEBREW" .. "/bin/python3.9")
+vim.g.pydocstring_doq_path = os.getenv "HOMEBREW" .. "/bin/doq"
+
+vim.g.lsp_settings = {
+  clangd = {
+    cmd = "/home3/marcos.romero/.linuxbrew/bin/clangd"
+  }
+}
+
 
 vim.cmd [[
 xmap <S-CR> <Plug>SlimeRegionSend<CR>
-" let fg_target = 'red'
-"
-" let fg_current  = s:fg(['Normal'], '#efefef')
-" let fg_visible  = s:fg(['TabLineSel'], '#efefef')
-" let fg_inactive = s:fg(['TabLineFill'], '#888888')
-"
-" let fg_modified  = s:fg(['WarningMsg'], '#E5AB0E')
-" let fg_special  = s:fg(['Special'], '#599eff')
-" let fg_subtle  = s:fg(['NonText', 'Comment'], '#555555')
-"
-" let bg_current  = s:bg(['Normal'], '#000000')
-" let bg_visible  = s:bg(['TabLineSel', 'Normal'], '#000000')
-" let bg_inactive = s:bg(['TabLineFill', 'StatusLine'], '#000000')
+
+
 ]]
 -- set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 
