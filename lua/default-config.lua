@@ -1255,6 +1255,7 @@ nvim.lang = {
 -- Main modules
 require("keys.mappings").config()
 require("keys.which-key").config()
+require "packconf.status_colors"
 require("packconf.gitsigns").config()
 require("packconf.compe").config()
 require("packconf.dashboard").config()
