@@ -65,7 +65,7 @@ nvim.plugins = {
   -- Sensible defaults
      {"tpope/vim-sensible"},
   -- Better Comments
-     {"tpope/vim-commentary"},
+     -- {"tpope/vim-commentary"},
   -- Change dates fast
      -- {"tpope/vim-speeddating"},
   -- Repeat stuff
@@ -93,7 +93,7 @@ nvim.plugins = {
   --   -- Vimux - tmux pannels runing files from vim
   --   {"benmills/vimux"}
   -- else
-    {"knubie/vim-kitty-navigator"},
+    -- {"knubie/vim-kitty-navigator"},
   -- endif
 
   -- }}}
@@ -103,16 +103,16 @@ nvim.plugins = {
 
   -- {"blueyed/vim-diminactive"},                -- Helps identifying active window
   -- {'TaDaa/vimade'},
-  {"nathanaelkane/vim-indent-guides"},        -- Provides indentation guides
+  -- {"nathanaelkane/vim-indent-guides"},        -- Provides indentation guides
   -- {"vim-airline/vim-airline"},                -- Statusline
 
   -- Themes
   -- {"morhetz/gruvbox"},
     -- {"joshdick/onedark.vim"},
     -- {"sainnhe/gruvbox-material"},
-  {'marko-cerovac/material.nvim'},
+  -- {'marko-cerovac/material.nvim'},
 
-    {"folke/tokyonight.nvim"},
+    -- {"folke/tokyonight.nvim"},
 
   -- {"rktjmp/lush.nvim"},
   -- {"npxbr/gruvbox.nvim"},
@@ -165,7 +165,7 @@ nvim.plugins = {
 
   -- Editor {{{
 
- {"bkad/CamelCaseMotion"},          -- Motions for inside camel case
+ -- {"bkad/CamelCaseMotion"},          -- Motions for inside camel case
  {"junegunn/vim-easy-align"},       -- Helps alignment
  {"kkoomen/vim-doge"},              -- Docblock generator
  {"lervag/vimtex"},                 -- Support for vimtex
@@ -179,10 +179,10 @@ nvim.plugins = {
   -- Tools {{{
 
   {"dhruvasagar/vim-table-mode"},    -- Better handling for tables in markdown
-  {"voldikss/vim-floaterm"},
-  {"kassio/neoterm"},                -- REPL integration
+  -- {"voldikss/vim-floaterm"},
+  -- {"kassio/neoterm"},                -- REPL integration
   {"reedes/vim-pencil"},             -- Auto hard breaks for text files
-  {"sedm0784/vim-you-autocorrect"},  -- Automatic autocorrect
+  -- {"sedm0784/vim-you-autocorrect"},  -- Automatic autocorrect
   {"tpope/vim-obsession"},           -- Save sessions automatically
   {"cdelledonne/vim-cmake"},
 
