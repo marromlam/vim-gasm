@@ -42,6 +42,12 @@ M.config = function()
         empty_open = "",
         symlink = "",
       },
+      lsp = {
+        hin = "",
+        info = "",
+        warning = "",
+        error = "",
+      }
     },
   }
 end
