@@ -1,4 +1,6 @@
 local M = {}
+
+
 M.config = function()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
@@ -8,15 +10,21 @@ M.config = function()
   nvim.builtin.telescope = {
     active = false,
     defaults = {
-      prompt_prefix = "   ",
-      selection_caret = " ➜ ",
-      entry_prefix = "   ",
-      initial_mode = "insert",
-      selection_strategy = "reset",
-      sorting_strategy = "descending",
-      layout_strategy = "horizontal",
+      vimgrep_arguments = {
+        'rg',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case'
+      },
+      prompt_prefix = "   ", selection_caret = " ➜ ", entry_prefix = "   ",
+      results_title = '', preview_title = '', prompt_title = '',
+      initial_mode = "insert", selection_strategy = "reset",
+      sorting_strategy = "descending", layout_strategy = "horizontal",
       layout_config = {
-        width = 0.8,
+        width = 0.5,
         prompt_position = "bottom",
         preview_cutoff = 100,
         horizontal = { mirror = false },
@@ -28,15 +36,8 @@ M.config = function()
       -- path_display = { shorten = 5 },
       winblend = 0,
       border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-      --
-      -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-      -- borderchars = {
-      --   { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-      --   prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
-      --   results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
-      --   preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-      -- },
+      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }, -- curved
+      -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└'}, -- straight
       --
       color_devicons = true,
       use_less = true,
@@ -81,36 +82,32 @@ M.config = function()
       -- Your special builtin config goes in here
       buffers = {
         theme = "ivy",
-        sort_lastused = true,
-        results_title = '',
-        preview_title = '',
-        prompt_title = '',
-        -- prompt_prefix = '',
-        -- previewer = false,
+        results_title = '', preview_title = '', prompt_title = '',
+        sort_lastused = true, previewer = false,
         layout_config = {
-          height = 0.25,
-          -- preview_width = 0.5,
+          height = 0.2,
           vertical = { mirror = true },
-          prompt_position = "bottom",
+          prompt_position = "botto:",
         }
       },
-      find_files = {
-        results_title = '',
-        preview_title = '',
-        prompt_title = '',
+      live_grep = {
+        results_title = '', preview_title = '', prompt_title = '',
         winblend = 0,
         layout_config = {
-          width = 0.8,
-          height = 0.8,
-          -- prompt_position = "bottom",
-          -- preview_cutoff = 100,
+          width = 0.9, height = 0.9,
           preview_width = 0.5,
           horizontal = { mirror = false },
           vertical = { mirror = false },
         },
-        -- prompt_prefix = 'Files>',
-        -- previewer = 0.5,
-        -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      },
+      find_files = {
+        results_title = '', preview_title = '', prompt_title = '',
+        layout_config = {
+          width = 0.8, height = 0.8,
+          preview_width = 0.5,
+          horizontal = { mirror = false },
+          vertical = { mirror = false },
+        },
       }
     },
     extensions = {
@@ -122,6 +119,7 @@ M.config = function()
   }
 end
 
+
 M.setup = function()
   local status_ok, telescope = pcall(require, "telescope")
   if not status_ok then
@@ -129,5 +127,20 @@ M.setup = function()
   end
   telescope.setup(nvim.builtin.telescope)
 end
+
+
+-- fzf dotfiles from anywhere
+M.search_dotfiles = function()
+  require("telescope.builtin").find_files({
+    prompt_title = "search fictional couscous",
+    cwd = "~/fictional-couscous",
+    show_line = false;
+    results_title = '',
+    preview_title = '',
+    no_ignore = true,
+    hidden = true
+  })
+end
+
 
 return M
