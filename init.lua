@@ -126,7 +126,18 @@ vim.g.lsp_settings = {
 vim.cmd [[
 xmap <S-CR> <Plug>SlimeRegionSend<CR>
 
+" make sure that viewer is selected according to the suffix.
+let g:netrw_browsex_viewer="-"
 
+" functions for file extension '.md'.
+function! NFH_md(f)
+    execute '!typora' a:f
+endfunction
+
+" functions for file extension '.pdf'.
+function! NFH_pdf(f)
+    execute '!zathura' a:f
+endfunction
 ]]
 -- set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 

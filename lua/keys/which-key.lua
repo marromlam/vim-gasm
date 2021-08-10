@@ -85,12 +85,12 @@ M.config = function()
 
       -- close current buffer
       ["x"] = { "<cmd>BufferClose<CR>", "Close Buffer" },
-      ["X"] = { "<cmd>bdelete!<CR>", "Close Buffer" },
+      ["X"] = { "<cmd>BufferCloseAllButCurrent<CR>", "Close Buffer" },
 
       -- close all buffers
-      ["z"] = { "<cmd>%bdelete<CR>", "Close All Buffers" },
-      ["Z"] = { "<cmd>%bdelete!<CR>", "Close All Buffers" },
-      ["o"] = { "<cmd>BufferCloseAllButCurrent<CR>", "Close All Buffers But Current" },
+      ["z"] = { "<cmd>bdelete<CR>", "Close All Buffers" },
+      ["Z"] = { "<cmd>bdelete!<CR>", "Close All Buffers" },
+      ["o"] = { "<cmd>only<CR>", "Close All Buffers But Current" },
 
       -- less common shorcuts
       B = {
@@ -144,6 +144,8 @@ M.config = function()
         r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
         R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
         s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+        P = { "<cmd>Git push<cr>", "Git push" },
+        p = { "<cmd>Git pull<cr>", "Git pull" },
         u = {
           "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
           "Undo Stage Hunk",
@@ -225,6 +227,12 @@ M.config = function()
       T = {
         name = "Treesitter",
         i = { ":TSConfigInfo<cr>", "Info" },
+        d = { "<cmd> lua require('packconf.telescope').search_dotfiles()<CR>", "Telescope fictional-couscous" }
+      },
+
+      t = {
+        name = "Telescope",
+        d = { "<cmd> lua require('packconf.telescope').search_dotfiles()<CR>", "Telescope fictional-couscous" }
       },
 
       -- }}}

@@ -93,7 +93,7 @@ nvim.plugins = {
   --   -- Vimux - tmux pannels runing files from vim
   --   {"benmills/vimux"}
   -- else
-    -- {"knubie/vim-kitty-navigator"},
+    {"knubie/vim-kitty-navigator"},
   -- endif
 
   -- }}}
@@ -146,7 +146,6 @@ nvim.plugins = {
   {"tpope/vim-sleuth"},
   -- Cool Icons
   {"kyazdani42/nvim-web-devicons"},
-  {"ryanoasis/vim-devicons"},
   -- Auto pairs for '(' '[' '{'
   {"jiangmiao/auto-pairs"},
 
@@ -184,8 +183,13 @@ nvim.plugins = {
   {"reedes/vim-pencil"},             -- Auto hard breaks for text files
   -- {"sedm0784/vim-you-autocorrect"},  -- Automatic autocorrect
   {"tpope/vim-obsession"},           -- Save sessions automatically
+
+  -- CMake integration
   {"cdelledonne/vim-cmake"},
 
+  -- CMake (lua) integration : In the future we should try to use these two
+  -- {"Shatur/neovim-cmake"},
+  -- {"skywind3000/asyncrun.vim"},
   -- }}}
 
 
@@ -198,8 +202,14 @@ nvim.plugins = {
 
   -- juKitty {{{
 
-  {"jpalardy/vim-slime"},
-  {"hanschen/vim-ipython-cell"},
+  -- {"jpalardy/vim-slime"},
+  -- {"hanschen/vim-ipython-cell"},
+
+  {"marromlam/kitty-repl.nvim",
+    config = function()
+    require('kitty-runner').setup()
+    end
+  },
 
   -- }}}
 

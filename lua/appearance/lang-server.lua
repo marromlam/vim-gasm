@@ -1,4 +1,5 @@
 local LSP = {
+  -- Lang Server
   LspDiagnosticsDefaultError = { fg = C.error },
   LspDiagnosticsDefaultWarning = { fg = C.warning },
   LspDiagnosticsDefaultInformation = { fg = C.info_yellow },
@@ -25,9 +26,11 @@ local LSP = {
   LspDiagnosticsUnderlineHint = { style = "underline" },
   QuickScopePrimary = { fg = C.purple_test, style = "underline" },
   QuickScopeSecondary = { fg = C.cyan_test, style = "underline" },
+  -- Telescope
   TelescopeSelection = { fg = C.hint_blue },
   TelescopeMatching = { fg = C.info_yellow, style = "bold" },
-  TelescopeBorder = { fg = C.cyan, bg = Config.transparent_background and "NONE" or C.bg },
+  TelescopeBorder = { fg = C.accent, bg = C.bg },
+  -- NvimTree
   NvimTreeFolderIcon = { fg = C.blue },
   NvimTreeIndentMarker = { fg = C.gray },
   NvimTreeNormal = { fg = C.light_gray, bg = C.bg_alt },
@@ -49,6 +52,7 @@ local LSP = {
   LirDir = { fg = C.blue },
   LirSymLink = { fg = C.cyan },
   LirEmptyDirText = { fg = C.blue },
+  -- Buffers
   BufferCurrent = { fg = C.fg, bg = C.bg },
   BufferCurrentIndex = { fg = C.fg, bg = C.bg },
   BufferCurrentMod = { fg = C.info_yellow, bg = C.bg },
@@ -78,6 +82,7 @@ local LSP = {
   xmlTagName = { fg = C.cyan },
   xmlEndTag = { fg = C.cyan },
   CompeDocumentation = { bg = C.bg_alt },
+  -- Git
   DiffViewNormal = { fg = C.gray, bg = C.bg_alt },
   DiffviewStatusAdded = { fg = C.sign_add },
   DiffviewStatusModified = { fg = C.sign_change },
@@ -92,6 +97,7 @@ local LSP = {
   diffFile = { fg = C.bg_alt },
   diffNewFile = { fg = C.green },
   diffOldFile = { fg = C.red },
+  -- Debug
   debugPc = { bg = C.cyan },
   debugBreakpoint = { fg = C.red, style = "reverse" },
 }
