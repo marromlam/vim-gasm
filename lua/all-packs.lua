@@ -108,11 +108,11 @@ nvim.plugins = {
 
   -- Themes
   -- {"morhetz/gruvbox"},
-    -- {"joshdick/onedark.vim"},
-    -- {"sainnhe/gruvbox-material"},
+  -- {"joshdick/onedark.vim"},
+  -- {"sainnhe/gruvbox-material"},
   -- {'marko-cerovac/material.nvim'},
 
-    -- {"folke/tokyonight.nvim"},
+  -- {"folke/tokyonight.nvim"},
 
   -- {"rktjmp/lush.nvim"},
   -- {"npxbr/gruvbox.nvim"},
