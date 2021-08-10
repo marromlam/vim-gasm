@@ -1,7 +1,7 @@
-local present1, gl = pcall(require, "galaxyline")
-if not present1 then
-	print("galxyline not found")
-	return
+local _test, gl = pcall(require, "galaxyline")
+if not _test then
+  print("galaxyline not found")
+  return
 end
 
 local gls = gl.section
