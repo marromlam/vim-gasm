@@ -24,48 +24,27 @@ gl.short_line_list = {
 
 -- VistaPlugin = extension.vista_nearest
 
-local colors = {
-    bg       = "#5C687A",
-    line_bg  = "#16191D",
-    fg       = "#8FBCBB",
-    fg_green = "#65a380",
-
-    yellow   = "#E5C07B",
-    cyan     = "#70C0BA",
-    darkblue = "#83A598",
-    green    = "#98C379",
-    orange   = "#FF8800",
-    purple   = "#C678DD",
-    magenta  = "#C858E9",
-    blue     = "#73BA9F",
-    red      = "#D54E53",
-}
-
--- local palette_status_ok, colors = pcall(require, nvim.colorscheme .. ".palette")
-local palette_status_ok, colors = pcall(require,  "appearance.palettes." .. "assegonia")
-local palette_status_ok, _colors = pcall(require,  "appearance.palettes." .. nvim.colorscheme)
+local _, colors = pcall(require,  "appearance.palettes." .. "assegonia")
+local _, _colors = pcall(require,  "appearance.palettes." .. nvim.colorscheme)
 for k,v in pairs(_colors) do colors[k] = v end
 
-if not palette_status_ok then
-  print("shit")
-  colors = nvim.builtin.galaxyline.colors
-end
 
 local use_coc = false
 if vim.g.nerd_galaxyline_lsp == "coc" then
-	use_coc = true
+  use_coc = true
 end
 
 local function lsp_status(status)
-    local shorter_stat = ""
-    for match in string.gmatch(status, "[^%s]+")  do
-        local err_warn = string.find(match, "^[WE]%d+", 0)
-        if not err_warn then
-            shorter_stat = shorter_stat .. " " .. match
-        end
+  local shorter_stat = ""
+  for match in string.gmatch(status, "[^%s]+")  do
+    local err_warn = string.find(match, "^[WE]%d+", 0)
+    if not err_warn then
+      shorter_stat = shorter_stat .. " " .. match
     end
-    return shorter_stat
+  end
+  return shorter_stat
 end
+
 
 local function get_coc_lsp()
   local status = vim.fn["coc#status"]()
@@ -286,6 +265,12 @@ insert_left {
 
 -- }}}
 
+insert_left {
+  Space = {
+    provider = function() return " " end,
+    highlight = {colors.red,colors.line_bg}
+  }
+}
 
 -- Diagnosis {{{2
 
@@ -369,17 +354,17 @@ insert_right{
   ViMode = {
     icon = function()
         local icons = {
-            n      = "\u{1F150} ",
+            n      = "🅝 ",
             i      = "🅘 ",
-            c      = "🅒",
-            V      = "🅥",
-            [""] = "🅥",
-            v      = "🅥",
-            C      = "🅒",
-            R      = "🅡",
-            t      = "🅣",
-            -- n      = "",
-            -- i      = "",
+            c      = "🅒 ",
+            V      = "🅥 ",
+            [""] = "🅥 ",
+            v      = "🅥 ",
+            C      = "🅒 ",
+            R      = "🅡 ",
+            t      = "🅣 ",
+            n      = "",
+            i      = "",
             c      = "",
             V      = "",
             [""] = "",
