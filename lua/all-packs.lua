@@ -104,6 +104,7 @@ nvim.plugins = {
   -- {"blueyed/vim-diminactive"},                -- Helps identifying active window
   -- {'TaDaa/vimade'},
   -- {"nathanaelkane/vim-indent-guides"},        -- Provides indentation guides
+  {"glepnir/indent-guides.nvim"},
   -- {"vim-airline/vim-airline"},                -- Statusline
 
   -- Themes
@@ -190,6 +191,10 @@ nvim.plugins = {
   -- CMake (lua) integration : In the future we should try to use these two
   -- {"Shatur/neovim-cmake"},
   -- {"skywind3000/asyncrun.vim"},
+
+  -- Snap / faster fuzzy-finding
+  { 'camspiers/snap' },
+
   -- }}}
 
 
