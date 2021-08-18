@@ -87,7 +87,7 @@ return {
   -- Autopairs
   {
     "windwp/nvim-autopairs",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     after = "nvim-compe",
     config = function()
       require "packconf.autopairs"
@@ -122,7 +122,7 @@ return {
   {
     "kyazdani42/nvim-tree.lua",
     -- event = "BufWinOpen",
-    -- cmd = "NvimTreeToggle",
+    cmd = "NvimTreeToggle",
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
       require("packconf.nvimtree").setup()
@@ -187,7 +187,7 @@ return {
 
   {
     "airblade/vim-rooter",
-    -- event = "BufReadPre",
+    event = "BufReadPre",
     config = function()
       require("packconf.rooter").setup()
       if nvim.builtin.rooter.on_config_done then
@@ -238,7 +238,7 @@ return {
 
   {
     "mfussenegger/nvim-dap",
-    -- event = "BufWinEnter",
+    event = "BufWinEnter",
     config = function()
       require("packconf.dap").setup()
       if nvim.builtin.dap.on_config_done then
@@ -252,7 +252,7 @@ return {
   -- Debugger management
   {
     "Pocco81/DAPInstall.nvim",
-    -- event = "BufWinEnter",
+    event = "BufWinEnter",
     -- event = "BufRead",
     disable = not nvim.builtin.dap.active,
   },
