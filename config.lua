@@ -10,13 +10,13 @@ an executable
 
 -- general
 
-nvim.format_on_save = true
-nvim.lint_on_save = true
+-- nvim.format_on_save = true
+-- nvim.lint_on_save = true
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
-nvim.leader = "space"
+-- nvim.leader = "space"
 -- add your own keymapping
-nvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+-- nvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- unmap a default keymapping
 -- nvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
@@ -36,16 +36,16 @@ nvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-nvim.builtin.dashboard.active = true
-nvim.builtin.terminal.active = true
-nvim.builtin.nvimtree.side = "left"
-nvim.builtin.nvimtree.show_icons.git = 1
+-- nvim.builtin.dashboard.active = true
+-- jnvim.builtin.terminal.active = true
+--- nvim.builtin.nvimtree.side = "left"
+-- nvim.builtin.nvimtree.show_icons.git = 1
 
 
 -- if you don't want all the parsers change this to a table of the ones you want
-nvim.builtin.treesitter.ensure_installed = "maintained"
-nvim.builtin.treesitter.ignore_install = { "haskell" }
-nvim.builtin.treesitter.highlight.enabled = true
+-- nvim.builtin.treesitter.ensure_installed = "maintained"
+-- nvim.builtin.treesitter.ignore_install = { "haskell" }
+-- nvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers
