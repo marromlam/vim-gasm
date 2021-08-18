@@ -74,7 +74,7 @@ M.config = function()
       -- }}}
 
 
-      ["e"] = { "<cmd>lua require'packconf.nvimtree'.toggle_tree()<CR>", "Explorer" },
+      ["e"] = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
       ["§"] = { "<cmd>Telescope find_files<CR>", "Find File" },
       ["r"] = { "<cmd>Telescope live_grep<cr>", "Text" },
 
@@ -134,16 +134,25 @@ M.config = function()
       -- }}}
 
 
+ 
       -- Git {{{
       g = {
         name = "Git",
+	      h = {"<cmd>diffget //2<cr>", "Get diff from left"},
         j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
         k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-        l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-        p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+        -- l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+	      l = {"<cmd>diffget //3<cr>", "Get diff from right"},
+        
+	      b = {"<cmd>Git blame<cr>", "Git Blame"},
+
+        --p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
         r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
         R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+        -- s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+        
+	      s = {"<cmd>Git<cr>", "Git Status"},
+
         P = { "<cmd>Git push<cr>", "Git push" },
         p = { "<cmd>Git pull<cr>", "Git pull" },
         u = {
@@ -151,13 +160,14 @@ M.config = function()
           "Undo Stage Hunk",
         },
         o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+        -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
         C = {
           "<cmd>Telescope git_bcommits<cr>",
           "Checkout commit(for current file)",
         },
       },
+
 
       l = {
         name = "LSP",

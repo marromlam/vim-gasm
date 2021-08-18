@@ -100,8 +100,10 @@ function M.config()
       -- Tab switch buffer
       -- ["<S-l>"] = ":BufferNext<CR>",
       -- ["<S-h>"] = ":BufferPrevious<CR>",
-      ["<Tab>"] = ":BufferNext<CR>",
-      ["<S-Tab>"] = ":BufferPrevious<CR>",
+      -- ["<Tab>"] = ":BufferNext<CR>",
+      -- ["<S-Tab>"] = ":BufferPrevious<CR>",
+      ["<Tab>"] = ":BufferLineCycleNext<CR>",
+      ["<S-Tab>"] = ":BufferLineCyclePrev<CR>",
 
       -- Move current line / block with Alt-j/k a la vscode.
       ["<A-j>"] = ":m .+1<CR>==",
@@ -168,7 +170,7 @@ function M.print(mode)
 end
 
 function M.setup()
-  vim.g.mapleader = (nvim.leader == "space" and " ") or nvim.leader
+  vim.g.mapleader = " " --(nvim.leader == "space" and " ") or nvim.leader
   M.load(nvim.keys)
 end
 

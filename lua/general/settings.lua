@@ -14,7 +14,7 @@ M.load_options = function()
     -- formatoptions = -=cro,
     --
     --
-    hidden = true, -- required to keep multiple buffers and open multiple buffers
+    hidden = true,                        -- required to keep multiple buffers and open multiple buffers
     wrap = false, -- display lines as one long line
     -- clipboard = "unnamedplus", -- allows neovim to access the system clipboard
     colorcolumn = "99999", -- fixes indentline for now
