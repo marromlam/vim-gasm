@@ -35,7 +35,7 @@ g.dashboard_custom_header = {
 "⠀⠉⠀⠀⠀⠃⠀⢸⣿⡇⢸⣿⡇⠀⠀⣿⣿⠀⢀⣭⡶⠶⢾⣿⡇⠀⢹⣷⠀⢰⣿⠁⠀⣿⣿⠀⢸⣿⡇⠀⢸⣿⡇⠀⢸⣿⡇",
 "⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⢿⣷⣤⣴⣿⣿⠀⢻⣿⣤⣤⢾⣿⡇⠀⠈⢿⣶⡾⠏⠀⠀⣿⣿⠀⢸⣿⡇⠀⢸⣿⡇⠀⢸⣿⡇",
 "⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠈⠉⠉⠁⠉⠀⠀⠉⠉⠁⠈⠉⠁⠀⠀⠀⠉⠀⠀⠀⠀⠉⠉⠀⠈⠉⠁⠀⠈⠉⠁⠀⠈⠉⠁",
-"              with <3 in Santiago by Marcosito "
+"               with ♥ in Santiago by Marcosito "
 }
 
 g.dashboard_custom_section = {
