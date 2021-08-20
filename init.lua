@@ -19,8 +19,8 @@
 
 
 -- Set appearance
-vim.g.colorscheme = "assegonia"
-vim.g.colors_style = "darker"
+vim.g.colorscheme = "material"
+vim.g.colors_style = "oceanic"
 vim.g.colors_lighter_contrast = false
 vim.g.nvchad_theme = "onedark"
 
@@ -32,13 +32,13 @@ vim.g.pydocstring_doq_path = os.getenv "HOMEBREW" .. "/bin/doq"
 
 
 -- Since we won't load Packer at startup
-cmd "silent! command PackerCompile lua require 'packer_list' require('packer').compile()"
-cmd "silent! command PackerInstall lua require 'packer_list' require('packer').install()"
-cmd "silent! command PackerStatus lua require 'packer_list' require('packer').status()"
-cmd "silent! command PackerSync lua require 'packer_list' require('packer').sync()"
-cmd "silent! command PackerUpdate lua require 'packer_list' require('packer').update()"
+vim.cmd "silent! command PackerCompile lua require 'packer_list' require('packer').compile()"
+vim.cmd "silent! command PackerInstall lua require 'packer_list' require('packer').install()"
+vim.cmd "silent! command PackerStatus lua require 'packer_list' require('packer').status()"
+vim.cmd "silent! command PackerSync lua require 'packer_list' require('packer').sync()"
+vim.cmd "silent! command PackerUpdate lua require 'packer_list' require('packer').update()"
 
 
 -- Load only stricly needed config
-pcall(require, "general.settings")
-pcall(require, "keys.mappings")
+require "general.settings"
+require "keys.mappings".config()
