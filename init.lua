@@ -20,9 +20,8 @@
 
 -- Set appearance
 vim.g.colorscheme = "material"
-vim.g.colors_style = "oceanic"
+vim.g.colors_style = "darker"
 vim.g.colors_lighter_contrast = false
-vim.g.nvchad_theme = "onedark"
 
 
 -- Set binaries
