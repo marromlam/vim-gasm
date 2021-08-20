@@ -26,7 +26,7 @@ compe.setup {
    -- documentation = true,
    source = {
       path = {
-        kind = " ",
+        kind = "",
         true
       },
       buffer = {
@@ -34,7 +34,7 @@ compe.setup {
         true
       },
       calc = {
-        kind = "  ",
+        kind = "",
         true
       },
       vsnip = {
@@ -42,12 +42,12 @@ compe.setup {
         true
       },
       nvim_lsp = {
-        kind = " ",
+        kind = "",
         true
       },
       nvim_lua = true,
       spell = {
-        kind = " ",
+        kind = "",
         true
       },
       emoji = {
@@ -58,7 +58,7 @@ compe.setup {
         kind = "﬌",
         true },
       tabnine = {
-        kind = "T9",
+        kind = "☭",
         true
       },
       tags = false,
