@@ -371,6 +371,7 @@ return packer.startup(function()
     event = "BufEnter",
     config = function()
       require('kitty-repl').setup()
+      require('pack-config.kitty-repl')
     end
   }
 
@@ -485,7 +486,7 @@ return packer.startup(function()
     -- after = "nvim-base16.lua",
     event = "BufWinEnter",
     config = function()
-      require "pack-config.bufferline2"
+      require "pack-config.bufferline"
     end,
     setup = function()
       -- print('bufferline set')
@@ -580,7 +581,7 @@ return packer.startup(function()
           disable = false,
           after = "telescope.nvim",
           config = function()
-             require "pack-config.chadsheet"
+             require "pack-config.cheatsheet".setup()
           end,
           setup = function()
              --require("mappings").chadsheet()
@@ -624,7 +625,6 @@ return packer.startup(function()
   packer.use {
     "akinsho/nvim-toggleterm.lua",
     disable = false,
-    --after = "which-key.nvim",
     event = "BufWinEnter",
     config = function()
       require("pack-config.terminal").config()
@@ -803,7 +803,7 @@ return packer.startup(function()
   packer.use {
     "folke/which-key.nvim",
     disable = false,
-    --event = "BufWinEnter",
+    event = "BufWinEnter",
     config = function()
       require("keys.which-key").config()
       require("keys.which-key").setup()
