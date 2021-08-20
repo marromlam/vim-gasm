@@ -31,6 +31,14 @@ vim.g.python3_host_prog = vim.fn.expand(os.getenv "HOMEBREW" .. "/bin/python3.9"
 vim.g.pydocstring_doq_path = os.getenv "HOMEBREW" .. "/bin/doq"
 
 
+-- Since we won't load Packer at startup
+cmd "silent! command PackerCompile lua require 'packer_list' require('packer').compile()"
+cmd "silent! command PackerInstall lua require 'packer_list' require('packer').install()"
+cmd "silent! command PackerStatus lua require 'packer_list' require('packer').status()"
+cmd "silent! command PackerSync lua require 'packer_list' require('packer').sync()"
+cmd "silent! command PackerUpdate lua require 'packer_list' require('packer').update()"
+
+
 -- Load only stricly needed config
 pcall(require, "general.settings")
 pcall(require, "keys.mappings")
