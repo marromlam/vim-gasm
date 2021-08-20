@@ -32,7 +32,7 @@ return packer.startup(function()
     disable = false,
     event = "BufRead",
     config = function()
-      require("pack-config.others").colorizer()
+      require("pack-config.colorizer").config()
     end
   }
 
@@ -208,7 +208,7 @@ return packer.startup(function()
       disable = true,
       event = "WinScrolled",
       config = function()
-          require("pack-config.others").neoscroll()
+          require("pack-config.neoscroll").config()
       end
   }
 
@@ -234,7 +234,7 @@ return packer.startup(function()
       disable = false,
       event = "BufRead",
       setup = function()
-          require("pack-config.others").blankline()
+          require("pack-config.blankline").config()
       end
   }
 
@@ -304,7 +304,7 @@ return packer.startup(function()
       disable = false,
       event = "BufEnter",
       config = function()
-          require("pack-config.others").lspkind()
+          require("pack-config.lspkind").config()
       end
   }
 
@@ -313,7 +313,7 @@ return packer.startup(function()
       disable = false,
       after = "nvim-lspconfig",
       config = function()
-          require("pack-config.others").signature()
+          require("pack-config.signature").config()
       end
   }
 
@@ -645,7 +645,7 @@ return packer.startup(function()
     disable = false,
     cmd = "CommentToggle",
     config = function()
-        require("pack-config.others").comment()
+        require("pack-config.comment").comment()
     end,
     setup = function()
         -- print('proper comment setup')  
