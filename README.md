@@ -9,3 +9,4 @@ Aiming for a full-written in lua neovim configuration, luavim arises.
 * Using builtin LSP and Treesitter.
 
 ## How does it look?
+![Dashboard](images/dashboard.png)
