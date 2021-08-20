@@ -7,6 +7,18 @@ Aiming for a full-written in lua neovim configuration, luavim arises.
 * Less than 0.5s startup time in very old computers.
 * +70 configures plugins.
 * Using builtin LSP and Treesitter.
+* Tabnine completion enabled.
+
 
 ## How does it look?
 ![Dashboard](images/dashboard.png)
+
+
+## Testing and usage
+This is a very beta stage of the project, hence lot of bugs are expected. 
+Here I post some useful comments, I hope:
+* I use kitty as my terminal with Victor Mono and Iosevka fonts + Nerdfonts.
+* My main machine runs macOS but this was tested in CentOS7 and SCL6 too.
+* Neovim version *0.6* was installed via `brew install neovim --HEAD`.
+* I try to use as much as possible homebrew binaries.
+* This is very related with my other project fictional-couscous. 
