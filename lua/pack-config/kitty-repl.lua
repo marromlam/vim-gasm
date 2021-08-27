@@ -7,5 +7,4 @@ nvim_set_keymap('n', '<leader>;c', ':KittyREPLClear<cr>', {})
 nvim_set_keymap('n', '<leader>;k', ':KittyREPLKill<cr>', {})
 nvim_set_keymap('n', '<leader>;l', ':KittyREPLRunAgain<cr>', {})
 -- trigger these automatically on extension
-nvim_set_keymap('n', '<leader>;w', ':StartIPythonConsole<cr>', {})
-nvim_set_keymap('n', '<leader>;W', ':StartClingConsole<cr>', {})
+nvim_set_keymap('n', '<leader>;w', ':KittyREPLStart<cr>', {})
