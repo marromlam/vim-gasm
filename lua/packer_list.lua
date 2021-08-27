@@ -666,11 +666,11 @@ return packer.startup(function()
 
   packer.use {
     "lervag/vimtex",
-    disable = true,
+    disable = False,
     event = "BufWinEnter",
     ft = "tex",
     config = function()
-      -- to be vim -> lua translated
+      require("pack-config.vimtex")
     end,
   }
 
