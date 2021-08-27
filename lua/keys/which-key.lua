@@ -92,7 +92,7 @@ M.setup = function()
     -- }}}
 
 
-    ["e"] = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
+    ["e"] = { ":NvimTreeToggle<cr>", "Explorer" },
     ["§"] = { "<cmd>Telescope find_files<CR>", "Find File" },
     ["r"] = { "<cmd>Telescope live_grep<cr>", "Text" },
 
@@ -100,15 +100,15 @@ M.setup = function()
 
     -- list buffers
     ["b"] = { "<cmd>Telescope buffers<cr>", "List Buffers" },
-    ["1"] = { "<cmd>require('bufferline').go_to_buffer(1)<cr>", "Go to buffer 1" },
-    ["2"] = { "<cmd>require('bufferline').go_to_buffer(2)<cr>", "Go to buffer 2" },
-    ["3"] = { "<cmd>require('bufferline').go_to_buffer(3)<cr>", "Go to buffer 3" },
-    ["4"] = { "<cmd>require('bufferline').go_to_buffer(4)<cr>", "Go to buffer 4" },
-    ["5"] = { "<cmd>require('bufferline').go_to_buffer(5)<cr>", "Go to buffer 5" },
-    ["6"] = { "<cmd>require('bufferline').go_to_buffer(6)<cr>", "Go to buffer 6" },
-    ["7"] = { "<cmd>require('bufferline').go_to_buffer(7)<cr>", "Go to buffer 7" },
-    ["8"] = { "<cmd>require('bufferline').go_to_buffer(8)<cr>", "Go to buffer 8" },
-    ["9"] = { "<cmd>require('bufferline').go_to_buffer(9)<cr>", "Go to buffer 9" },
+    ["1"] = { "<cmd>BufferLineGoToBuffer 1<cr>", "Go to buffer 1" },
+    ["2"] = { "<cmd>BufferLineGoToBuffer 2<cr>", "Go to buffer 2" },
+    ["3"] = { "<cmd>BufferLineGoToBuffer 3<cr>", "Go to buffer 3" },
+    ["4"] = { "<cmd>BufferLineGoToBuffer 4<cr>", "Go to buffer 4" },
+    ["5"] = { "<cmd>BufferLineGoToBuffer 5<cr>", "Go to buffer 5" },
+    ["6"] = { "<cmd>BufferLineGoToBuffer 6<cr>", "Go to buffer 6" },
+    ["7"] = { "<cmd>BufferLineGoToBuffer 7<cr>", "Go to buffer 7" },
+    ["8"] = { "<cmd>BufferLineGoToBuffer 8<cr>", "Go to buffer 8" },
+    ["9"] = { "<cmd>BufferLineGoToBuffer 9<cr>", "Go to buffer 9" },
 
     -- close current buffer
     ["x"] = { "<cmd>bdelete<CR>", "Close Buffer" },
