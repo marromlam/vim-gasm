@@ -92,7 +92,7 @@ function M.config()
 
       -- send code with slime
       -- ['<S-CR>'] = "<ESC><Plug>SlimeLineSend<CR>",
-      ['<S-CR>'] = "<ESC><cmd>SlimeSendCurrentLine<CR>i<CR>",
+      ['<S-CR>'] = "<ESC><cmd>KittyREPLSend<CR>i",
     },
 
     ---@usage change or add keymappings for normal mode
@@ -124,7 +124,7 @@ function M.config()
       ["<C-q>"] = ":call QuickFixToggle()<CR>",
 
       -- send code with slime
-      ['<S-CR>'] = "<cmd>SlimeSendCurrentLine<CR><CR>",
+      ['<S-CR>'] = ":KittyREPLSend<cr><cr>",
       ['[c'] = "<cmd>IPythonCellPrevCell<CR>",
       [']c'] = "<cmd>IPythonCellNextCell<CR>",
     },
@@ -145,6 +145,7 @@ function M.config()
       [">"] = ">gv",
       -- Toggle comment
       ["gc"] = "<cmd>CommentToggle<cr>",
+      ['<S-CR>'] = ":KittyREPLSend<CR>",
     },
 
     ---@usage change or add keymappings for visual block mode
