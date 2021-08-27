@@ -44,7 +44,7 @@ opt.title = true                -- set the title of window to the value of the t
 opt.titlestring = "nvim"        -- what the title of the window will be set to
 
 -- Enable undo persistence
-opt.undodir = "~/.cache/undo"   -- set an undo directory
+opt.undodir = os.getenv("HOME") .. "/.cache/undo"   -- set an undo directory
 opt.undofile = true             -- enable persistent undo
 opt.swapfile = false            -- creates a swapfile
 opt.backup = false              -- creates a backup file
