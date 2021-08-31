@@ -645,11 +645,7 @@ return packer.startup(function()
     disable = false,
     cmd = "CommentToggle",
     config = function()
-        require("pack-config.comment").comment()
-    end,
-    setup = function()
-        -- print('proper comment setup')  
-        -- require "keys.mappings".comment_nvim()
+      require("pack-config.comment").config()
     end
   }
 
