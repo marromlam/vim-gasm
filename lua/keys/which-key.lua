@@ -77,11 +77,13 @@ M.setup = function()
   vmappings = {
     ["/"] = { ":CommentToggle<CR>", "Comment" },
     ['h'] = "<cmd><Plug>SlimeLineSend<CR>",
+    ["y"] = { "<cmd>OSCYankRegion<CR>", "Yank using osc52" },
   }
 
   mappings = {
     ["w"] = { "<cmd>w!<CR>", "Save" },
     ["q"] = { "<cmd>q!<CR>", "Quit" },
+    ["y"] = { "<cmd>OSCYank<CR>", "Yank using osc52" },
     -- ["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
 
     -- Create splits {{{
@@ -150,7 +152,7 @@ M.setup = function()
 
     -- Packer {{{
 
-    p = {
+    P = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
       i = { "<cmd>PackerInstall<cr>", "Install" },

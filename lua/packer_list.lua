@@ -143,6 +143,12 @@ return packer.startup(function()
     event = "VimEnter"
   }
 
+  packer.use {
+    -- "fcpg/vim-osc52",
+    "ojroques/vim-oscyank",
+    disable = false,
+  }
+
   -- Sensible defaults
   packer.use {
     "tpope/vim-sensible",
