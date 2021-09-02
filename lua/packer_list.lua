@@ -236,12 +236,12 @@ return packer.startup(function()
   }
 
   packer.use {
-      "lukas-reineke/indent-blankline.nvim",
-      disable = false,
-      event = "BufRead",
-      setup = function()
-          require("pack-config.blankline").config()
-      end
+    "lukas-reineke/indent-blankline.nvim",
+    disable = false,
+    event = "BufRead",
+    config = function()
+      require("pack-config.blankline").config()
+    end
   }
 
   -- }}}
@@ -649,6 +649,7 @@ return packer.startup(function()
   packer.use {
     "terrortylor/nvim-comment",
     disable = false,
+    event = "BufWinEnter",
     cmd = "CommentToggle",
     config = function()
       require("pack-config.comment").config()

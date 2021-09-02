@@ -55,6 +55,7 @@ local colors = {
   purple_test   = "#ff007c",
   cyan_test     = "#00dfff",
   ui_blue       = "#264F78",
+  struct        = "#264F78",
 
   none          = 'NONE'
 

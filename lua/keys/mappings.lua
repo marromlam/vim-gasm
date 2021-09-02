@@ -98,7 +98,7 @@ function M.config()
     ---@usage change or add keymappings for normal mode
     normal_mode = {
       -- Toggle CommentToggle
-      ["gc"] = "<cmd>CommentToggle<cr>",
+      -- ["gc"] = "<cmd>CommentToggle<cr>",
 
       -- Resize with arrows
       ["<Up>"] = ":resize -2<CR>",
@@ -144,7 +144,7 @@ function M.config()
       ["<"] = "<gv",
       [">"] = ">gv",
       -- Toggle comment
-      ["gc"] = "<cmd>CommentToggle<cr>",
+      -- ["gc"] = "<cmd>CommentToggle<cr>",
       ['<S-CR>'] = ":KittyREPLSend<CR>",
     },
 
@@ -154,7 +154,7 @@ function M.config()
       ["K"] = ":move '<-2<CR>gv-gv",
       ["J"] = ":move '>+1<CR>gv-gv",
       -- Toggle comment
-      ["gc"] = "<cmd>CommentToggle<cr>",
+      -- ["gc"] = "<cmd>CommentToggle<cr>",
     },
   }
 
