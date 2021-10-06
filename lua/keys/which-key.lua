@@ -77,7 +77,7 @@ M.setup = function()
   vmappings = {
     ["/"] = { ":CommentToggle<CR>", "Comment" },
     ['h'] = "<cmd><Plug>SlimeLineSend<CR>",
-    ["y"] = { "<cmd>OSCYankRegion<CR>", "Yank using osc52" },
+    ["y"] = { "<cmd>OSCYank<CR>", "Yank using osc52" },
   }
 
   mappings = {
@@ -152,7 +152,7 @@ M.setup = function()
 
     -- Packer {{{
 
-    P = {
+    p = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
       i = { "<cmd>PackerInstall<cr>", "Install" },
@@ -167,6 +167,7 @@ M.setup = function()
     -- Git {{{
     g = {
       name = "Git",
+	    f = {"<cmd>Git fetch<cr>", "Git fetch"},
 	    h = {"<cmd>diffget //2<cr>", "Get diff from left"},
       j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
