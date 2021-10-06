@@ -6,7 +6,7 @@ local g = vim.g
 
 opt.hidden = true
 opt.wrap = false
---vim.cmd [[set clipboard+=unnamedplus]]
+vim.cmd [[set clipboard=unnamedplus]]
 
 opt.termguicolors = true
 opt.cul = true
