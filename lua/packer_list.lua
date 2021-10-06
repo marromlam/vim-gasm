@@ -140,7 +140,7 @@ return packer.startup(function()
   packer.use {
     "farmergreg/vim-lastplace",
     disable = false,
-    event = "VimEnter"
+    -- event = "VimEnter"
   }
 
   packer.use {
@@ -566,6 +566,13 @@ return packer.startup(function()
         require "pack-config.treesitter"
     end
   }
+
+  packer.use {
+    "ibab/vim-snakemake",
+    disable = false,
+    event = "BufRead",
+  }
+
 
   -- }}}
 
