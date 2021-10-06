@@ -401,12 +401,18 @@ return packer.startup(function()
 
   packer.use {
     "christoomey/vim-tmux-navigator",
-    disable = true,
-    event = "BufWinEnter",
+    disable = false,
     config = function()
       vim.g.tmux_navigator_save_on_switch = 1
     end,
-    cond = function() return false end
+    cond = function() 
+      local is_tmux = os.getenv "TMUX"
+      if is_tmux then
+        return true
+      else
+        return false
+      end
+    end
   }
 
   packer.use {
@@ -421,7 +427,7 @@ return packer.startup(function()
 
   packer.use {
     "knubie/vim-kitty-navigator",
-    disable = false,
+    disable = true,
     event = "BufWinEnter",
     config = function()
       -- require "appearance"
@@ -806,7 +812,7 @@ return packer.startup(function()
   packer.use {
     "folke/which-key.nvim",
     disable = false,
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     config = function()
       require("keys.which-key").config()
       require("keys.which-key").setup()
