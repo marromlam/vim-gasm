@@ -433,12 +433,19 @@ return packer.startup(function()
 
   packer.use {
     "knubie/vim-kitty-navigator",
-    disable = true,
+    disable = false,
     event = "BufWinEnter",
     config = function()
       -- require "appearance"
     end,
-    cond = function() return true end
+    cond = function() 
+      local is_tmux = os.getenv "TMUX"
+      if is_tmux then
+        return false
+      else
+        return true
+      end
+    end
   }
 
   -- }}}
