@@ -283,6 +283,15 @@ return packer.startup(function()
     after = "vim-fugitive"
   }
 
+  packer.use {
+    'marromlam/git-worktree.nvim',
+    disable = false,
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension("git_worktree")
+    end
+  }
+
   -- }}}
 
 
@@ -400,10 +409,29 @@ return packer.startup(function()
   }
 
   packer.use {
+    "knubie/vim-kitty-navigator",
+    disable = false,
+    event = "BufWinEnter",
+    config = function()
+      -- require "appearance"
+      vim.g.kitty_navigator_no_mappings = 1
+    end,
+    cond = function() 
+      local is_tmux = os.getenv "TMUX"
+      if is_tmux then
+        return false
+      else
+        return true
+      end
+    end
+  }
+
+  packer.use {
     "christoomey/vim-tmux-navigator",
     disable = false,
     config = function()
       vim.g.tmux_navigator_save_on_switch = 1
+      vim.g.tmux_navigator_no_mappings = 1
     end,
     cond = function() 
       local is_tmux = os.getenv "TMUX"
@@ -423,16 +451,6 @@ return packer.startup(function()
       -- require "appearance"
     end,
     cond = function() return false end
-  }
-
-  packer.use {
-    "knubie/vim-kitty-navigator",
-    disable = true,
-    event = "BufWinEnter",
-    config = function()
-      -- require "appearance"
-    end,
-    cond = function() return true end
   }
 
   -- }}}
