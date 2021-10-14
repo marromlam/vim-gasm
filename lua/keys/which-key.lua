@@ -174,28 +174,24 @@ M.setup = function()
       -- l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
 	    l = {"<cmd>diffget //3<cr>", "Get diff from right"},
       
-	    b = {"<cmd>Git blame<cr>", "Git Blame"},
+      b = {"<cmd>Telescope git_branches<cr>", "Checkout branch" },
+	    B = {"<cmd>Git blame<cr>", "Git Blame"},
+      c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+      C = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
 
+      o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
       --p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
       r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
       R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
       -- s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
       
-	    s = {"<cmd>Git<cr>", "Git Status"},
+	    s = { "<cmd>Git<cr>", "Git Status" },
 
       P = { "<cmd>Git push<cr>", "Git push" },
       p = { "<cmd>Git pull<cr>", "Git pull" },
-      u = {
-        "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-        "Undo Stage Hunk",
-      },
-      o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-      -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-      c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-      C = {
-        "<cmd>Telescope git_bcommits<cr>",
-        "Checkout commit(for current file)",
-      },
+      u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+      t = { "<cmd>lua require 'telescope'.extensions.git_worktree.create_git_worktree()<cr>", "Create Git Worktree" },
+      w = { "<cmd>lua require 'telescope'.extensions.git_worktree.git_worktrees()<cr>", "Browse Git Worktrees" },
     },
 
 

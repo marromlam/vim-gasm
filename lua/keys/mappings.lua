@@ -71,11 +71,11 @@ function M.config()
     ---@usage change or add keymappings for insert mode
     insert_mode = {
       -- 'jk' for quitting insert mode
-      ["jk"] = "<ESC>",
+      -- ["jk"] = "<ESC>",
       -- 'kj' for quitting insert mode
-      ["kj"] = "<ESC>",
+      -- ["kj"] = "<ESC>",
       -- 'jj' for quitting insert mode
-      ["jj"] = "<ESC>",
+      -- ["jj"] = "<ESC>",
       -- Move current line / block with Alt-j/k ala vscode.
       ["<A-j>"] = "<Esc>:m .+1<CR>==gi",
       -- Move current line / block with Alt-j/k ala vscode.
