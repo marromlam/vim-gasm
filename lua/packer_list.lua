@@ -373,11 +373,17 @@ return packer.startup(function()
 
   packer.use {
     "jpalardy/vim-slime",
-    disable = true
+    disable = true,
+    config = function()
+      require('pack-config.slime')
+    end
   }
   packer.use {
     "hanschen/vim-ipython-cell",
-    disable = true
+    disable = true,
+    config = function()
+      require('pack-config.ipython_cell')
+    end
   }
 
   packer.use {
