@@ -288,6 +288,7 @@ return packer.startup(function()
     disable = false,
     after = "telescope.nvim",
     config = function()
+      require("pack-config.telescope").config()
       require("telescope").load_extension("git_worktree")
     end
   }
@@ -654,7 +655,8 @@ return packer.startup(function()
   -- Snap / faster fuzzy-finding
   packer.use {
     'camspiers/snap',
-    disable = true,
+    rocks = {'fzy'},
+    disable = false,
     after = {"which-key.nvim", "nvim-web-devicons"},
     config = function()
       require "pack-config.snap".config()
