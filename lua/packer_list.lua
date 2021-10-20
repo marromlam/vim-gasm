@@ -23,7 +23,8 @@ return packer.startup(function()
       disable = false,
       after = "packer.nvim",
       config = function()
-        require "appearance"
+        -- require "appearance"
+        -- maybe we should put here the theme we are loading
       end
   }
 
@@ -379,6 +380,7 @@ return packer.startup(function()
       require('pack-config.slime')
     end
   }
+
   packer.use {
     "hanschen/vim-ipython-cell",
     disable = true,
@@ -388,10 +390,13 @@ return packer.startup(function()
   }
 
   packer.use {
+    -- "IndianBoy42/kitty-runner.nvim",
+    -- "jghauser/kitty-runner.nvim",
     "marromlam/kitty-repl.nvim",
     disable = false,
-    event = "BufEnter",
+    -- event = "BufEnter",
     config = function()
+      -- require('kitty-runner').setup()
       require('kitty-repl').setup()
       require('pack-config.kitty-repl')
     end
@@ -469,6 +474,7 @@ return packer.startup(function()
     "kyazdani42/nvim-tree.lua",
     disable = false,
     cmd = "NvimTreeToggle",
+    commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
       require("pack-config.nvimtree").config()
     end,
@@ -553,7 +559,8 @@ return packer.startup(function()
     after = "nvim-base16.lua",
     config = function()
       --require "pack-config.statusline"
-      require "pack-config.galaxyline"
+      -- require "pack-config.galaxyline"
+      require "pack-config.galaxyline2"
     end
   }
 
@@ -735,6 +742,7 @@ return packer.startup(function()
     "blueyed/vim-diminactive",
     disable = true
   }
+  
   packer.use {
     'TaDaa/vimade',
     disable = true
@@ -771,11 +779,36 @@ return packer.startup(function()
   }
 
   -- Themes
+  packer.use {
+    "ellisonleao/gruvbox.nvim",
+    disable = false,
+    requires = {"rktjmp/lush.nvim"}
+  }
   -- {"morhetz/gruvbox"},
   -- {"joshdick/onedark.vim"},
   -- {"sainnhe/gruvbox-material"},
-  -- {'marko-cerovac/material.nvim'},
-  -- {"folke/tokyonight.nvim"},
+  --
+  packer.use {
+    'marko-cerovac/material.nvim',
+    disable = false
+  }
+
+  packer.use {
+    "folke/tokyonight.nvim",
+    disable = false
+  }
+
+  packer.use {
+    -- "MJ111/vim-piano",
+    "homedm/vim-play-piano",
+    disable = false
+  }
+
+  packer.use {
+    'Mofiqul/vscode.nvim',
+    disable = false
+  }
+  
   -- {"rktjmp/lush.nvim"},
   -- {"npxbr/gruvbox.nvim"},
   -- {"shaunsingh/nord.nvim"},
