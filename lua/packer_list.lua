@@ -268,11 +268,11 @@ return packer.startup(function()
     "tpope/vim-fugitive",
     disable = false,
     cmd = {
-        "Git"
+        "Git", "Gedit", "Gsplit"
     },
     setup = function()
       -- print('proper git setup')
-	    --require "keys.mappings".fugitive()
+	    require "pack-config.fugitive"
     end
   }
 
