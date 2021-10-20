@@ -142,6 +142,10 @@ end
 -- netrw config {{{
 
 g.netrw_fastbrowse = 0
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+vim.g.netrw_localrmdir='rm -r'
 
 vim.cmd [[
 " functions for file extension '.md'.
