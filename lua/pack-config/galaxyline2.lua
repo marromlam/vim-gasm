@@ -5,6 +5,7 @@ if not _test then
 end
 
 local gls = gl.section
+local hsl = require("lush.hsl")
 
 gl.short_line_list = {
     "LuaTree",
@@ -22,7 +23,6 @@ gl.short_line_list = {
     "Dashboard", "dashboard",
 }
 
-
 function dump(o)
    if type(o) == 'table' then
       local s = '{ '
@@ -36,6 +36,13 @@ function dump(o)
    end
  end
 
+-- local _, colors = pcall(require,  "appearance.palettes." .. "assegonia")
+-- local _, _colors = pcall(require,  "appearance.palettes." .. vim.g.colorscheme)
+-- local __colors = require("gruvbox.colors")
+
+-- print(dump(__colors))
+
+-- for k,v in pairs(_colors) do colors[k] = v end
 
 local colors = {
   line_bg = "#3c3836",
@@ -45,14 +52,13 @@ local colors = {
   blue = "#458588",
   purple = "#b16286",
   cyan = "#689d6a",
-  orange =  "#d65d0e",
+ orange =  "#d65d0e",
   magenta = "#9d0006",
   faded_green = "#79740e",
   faded_yellow = "#b57614",
   faded_blue = "#076678",
   violet = "#8f3f71",
 }
-
 
 local use_coc = false
 if vim.g.nerd_galaxyline_lsp == "coc" then
@@ -173,7 +179,7 @@ end
 
 insert_left{
   Left = {
-    provider = function() return "" end,
+    provider = function() return "" end,
     highlight = {colors.line_bg,}
   }
 }
@@ -183,7 +189,7 @@ insert_left{
 
 -- insert_left{
 --   Separa = {
---     provider = function() return " " end,
+--     provider = function() return "" end,
 --     highlight = {colors.line_bg, },
 --   }
 -- }
@@ -193,7 +199,7 @@ insert_left{
 -- {information panel start
 -- insert_left{
 --   Start = {
---     provider = function() return " " end,
+--     provider = function() return "" end,
 --     highlight = {colors.line_bg,}
 --   }
 -- }
@@ -292,7 +298,7 @@ insert_left {
 
 insert_left {
   Space = {
-    provider = function() return " " end,
+    provider = function() return "" end,
     highlight = {colors.red,colors.line_bg}
   }
 }
@@ -360,7 +366,7 @@ insert_left {
 
 insert_left{
   Separa = {
-    provider = function() return "" end,
+    provider = function() return "" end,
     highlight = {colors.line_bg, },
   }
 }
@@ -368,7 +374,7 @@ insert_left{
 
 insert_right{
   Start = {
-    provider = function() return " " end,
+    provider = function() return "" end,
     highlight = {colors.line_bg,}
   }
 }
@@ -475,7 +481,7 @@ insert_blank_line_at_right()
 
 insert_right{
   Right = {
-    provider = function() return "" end,
+    provider = function() return "" end,
     highlight = {colors.line_bg, },
   }
 }
@@ -490,7 +496,7 @@ insert_right{
 -- insert_blank_line_at_short_left()
 gls.short_line_left[0] = {
   Left = {
-    provider = function() return "" end,
+    provider = function() return "" end,
     highlight = {colors.line_bg,}
   }
 }
@@ -527,7 +533,7 @@ gls.short_line_left[2] = {
 
 gls.short_line_right[1] = {
   Separa = {
-    provider = function() return "" end,
+    provider = function() return "" end,
     highlight = {colors.line_bg,colors.line_bg}
   }
 }
@@ -545,3 +551,4 @@ gls.short_line_right[1] = {
 
 
 -- vim:foldmethod=marker
+
