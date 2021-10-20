@@ -7,26 +7,29 @@ M.config = function()
     return
   end
 
+
 local file = snap.config.file:with {reverse = true, suffix = ">>", consumer = "fzf"}
 local vimgrep = snap.config.vimgrep:with {reverse = true, suffix = ">>", limit = 50000}
 
 
 snap.maps {
   {"<Leader><Leader>", snap.config.file {producer = "ripgrep.file"}, {command = "ripgrepfile"}},
-  {"<Leader>fb", snap.config.file {producer = "vim.buffer"}, {command = "buffers"}},
-  {"<Leader>fo", snap.config.file {producer = "vim.oldfile"}, {command = "oldfiles"}},
-  {"<Leader>ff", snap.config.vimgrep {}, {command = "nose"}},
+  {"<Leader>sb", snap.config.file {producer = "vim.buffer"}, {command = "buffers"}},
+  {"<Leader>so", snap.config.file {producer = "vim.oldfile"}, {command = "oldfiles"}},
+  {"<Leader>sf", snap.config.vimgrep {}, {command = "nose",}},
 }
 
 
-snap.register.map({'n'}, {'<space>g'}, function()
+snap.register.map({'n'}, {'<space>sg'},
+  function()
     snap.run({
         prompt = '❯',
         producer = snap.get'consumer.fzf'(snap.get'producer.git.general'.args {"--status"}),
         select = snap.get'select_file'.select,
         multiselect = snap.get'select_file'.multiselect
     })
-end)
+ end
+)
 
 
 
@@ -64,7 +67,7 @@ local function icons_consumer(producer)
 end
 
 
-snap.register.map('n', '<Leader>Os',
+snap.register.map('n', '<Leader>ss',
   snap.create(
     function()
       return {
@@ -84,7 +87,7 @@ snap.register.map('n', '<Leader>Os',
 )
 
 
-snap.register.map( 'n', '<Leader>Of',
+snap.register.map( 'n', '<Leader>sG',
   snap.create(
     function()
       return {
@@ -98,11 +101,12 @@ snap.register.map( 'n', '<Leader>Of',
 )
 
 
-snap.register.map( 'n', '<Leader>Ol',
+snap.register.map( 'n', '<Leader>sl',
   snap.create(function()
     return {
       prompt = 'Ripgrep',
-      producer = snap.get 'consumer.limit'(50000, snap.get 'producer.ripgrep.vimgrep'),
+      producer = icons_consumer(snap.get 'consumer.limit'(50000, snap.get 'producer.ripgrep.vimgrep')),
+      -- producer = icons_consumer(snap.get 'consumer.limit'(50000, snap.get'consumer.fzy'(snap.get'producer.ripgrep.vimgrep'))),
       select = snap.get('select.vimgrep').select,
       multiselect = snap.get('select.vimgrep').multiselect,
       views = { snap.get 'preview.vimgrep' },
@@ -111,14 +115,20 @@ snap.register.map( 'n', '<Leader>Ol',
 )
 
 
-snap.register.map( 'n', '<leader>Ob',
+snap.register.map( 'n', '<leader>sb',
   snap.create(function()
     return {
-      prompt = 'Buffers',
+      prompt = 'Buffers ❯',
       producer = icons_consumer(snap.get 'consumer.fzf'(snap.get 'producer.vim.buffer')),
       select = snap.get('select.file').select,
       multiselect = snap.get('select.file').multiselect,
       views = { snap.get 'preview.file' },
+      layout = function()
+          local lines = vim.api.nvim_get_option("lines")
+          local height = math.floor((lines * 0.5))
+          local width = (vim.api.nvim_get_option("columns") - 10)
+          return {col = 10, row = (lines - height - 4), height = height, width = width}
+  end,
     }
   end)
 )
