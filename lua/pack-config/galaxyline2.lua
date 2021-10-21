@@ -52,7 +52,7 @@ local colors = {
   blue = "#458588",
   purple = "#b16286",
   cyan = "#689d6a",
- orange =  "#d65d0e",
+  orange =  "#d65d0e",
   magenta = "#9d0006",
   faded_green = "#79740e",
   faded_yellow = "#b57614",
@@ -179,8 +179,8 @@ end
 
 insert_left{
   Left = {
-    provider = function() return "" end,
-    highlight = {colors.line_bg,}
+    provider = function() return " --- " end,
+    highlight = {colors.line_bg,colors.red}
   }
 }
 
