@@ -5,7 +5,7 @@ end
 
 bufferline.setup {
     options = {
-        offsets = {{filetype = "NvimTree", text = "File Explorer", highlight="Directory", gui = "bold", padding = 1}},
+        offsets = {{filetype = "NvimTree", text = "File Explorer", highlight="NvimTreeHeader", gui = "bold", padding = 1}},
         buffer_close_icon = "",
         modified_icon = "",
         -- modified_icon = "●",
@@ -26,9 +26,10 @@ bufferline.setup {
         --mappings = true,
         always_show_bufferline = true
     },
-    -- highlights = {
+    highlights = {
     --   -- fill is the color of the bufferline (set to be the same as galaxyline)
-    --   fill = { guifg = colors.dark, guibg = colors.line_bg },
+    -- line_bg = "#3c3836",
+      fill = { guifg="#3c3836", guibg="#3c3836" },
     --   -- this is the default skin of a buffer tab
     --   background = { guifg = colors.accent, guibg = colors.dark },
     --   -- buffers
@@ -53,5 +54,5 @@ bufferline.setup {
     --   close_button = { guifg = colors.accent, guibg = colors.dark },
     --   close_button_visible = { guifg = colors.accent, guibg = colors.bg },
     --   close_button_selected = { guifg = colors.accent, guibg = colors.bg }
-    -- }
+    }
 }
