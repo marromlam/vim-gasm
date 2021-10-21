@@ -780,7 +780,7 @@ return packer.startup(function()
 
   -- Themes
   packer.use {
-    "ellisonleao/gruvbox.nvim",
+    "marromlam/gruvbox.nvim",
     disable = false,
     requires = {"rktjmp/lush.nvim"}
   }
