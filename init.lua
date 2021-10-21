@@ -83,7 +83,7 @@ endfunction
 ]]
 
 
-vim.cmd[[ let &runtimepath.=',' . expand("$HOME") . '/personal/harpoon/master' ]]
+vim.cmd[[ let &runtimepath.=',' . expand("$HOME") . '.local/share/own_nvim_packs' ]]
 
 
 -- vim:foldmethod=marker
