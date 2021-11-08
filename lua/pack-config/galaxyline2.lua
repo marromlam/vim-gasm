@@ -181,7 +181,7 @@ end
 insert_left{
   Left = {
     provider = function() return " --- " end,
-    highlight = {colors.line_bg,colors.red}
+    highlight = {colors.line_bg,colors.line_bg}
   }
 }
 
