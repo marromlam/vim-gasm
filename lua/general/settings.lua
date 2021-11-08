@@ -54,7 +54,7 @@ opt.writebackup = false         -- if a file is being edited by another program 
 opt.shortmess:append("sI")
 
 -- Disable tilde on end of buffer
-opt.fillchars = {eob = " "}
+opt.fillchars = {eob = " ", fold = " " }
 
 
 -- Set leader

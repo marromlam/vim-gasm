@@ -94,9 +94,9 @@ M.setup = function()
     -- }}}
 
 
-    ["e"] = { ":NvimTreeToggle<cr>", "Explorer" },
+    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     ["§"] = { "<cmd>Telescope find_files<CR>", "Find File" },
-    ["r"] = { "<cmd>Telescope live_grep<cr>", "Text" },
+    ["r"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
 
     -- Buffers {{{
 
