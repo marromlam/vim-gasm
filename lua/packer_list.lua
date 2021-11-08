@@ -715,7 +715,7 @@ return packer.startup(function()
 
   packer.use {
     "lervag/vimtex",
-    disable = False,
+    disable = false,
     event = "BufWinEnter",
     ft = "tex",
     config = function()
@@ -732,6 +732,10 @@ return packer.startup(function()
   -- {"Shatur/neovim-cmake"},
   -- {"skywind3000/asyncrun.vim"},
 
+  packer.use {
+    "github/copilot.vim",
+    disable = false
+  }
   -- }}}
 
 
