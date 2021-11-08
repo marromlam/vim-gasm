@@ -14,16 +14,12 @@ M.config = function()
   telescope.setup{
     active = false,
     defaults = {
-      vimgrep_arguments = {
-        'rg',
-        '--color=never',
-        '--no-heading',
-        '--with-filename',
-        '--line-number',
-        '--column',
-        '--smart-case'
-      },
-      prompt_prefix = "   ", selection_caret = " ➜ ", entry_prefix = "   ",
+      vimgrep_arguments = { 'rg', '--color=never', '--no-heading',
+                            '--with-filename', '--line-number', '--column',
+                            '--smart-case' },
+      prompt_prefix = "   ",
+      selection_caret = " ➜ ",
+      entry_prefix = "   ",
       results_title = '', preview_title = '', prompt_title = '',
       initial_mode = "insert", selection_strategy = "reset",
       sorting_strategy = "descending", layout_strategy = "horizontal",
@@ -39,8 +35,8 @@ M.config = function()
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
       -- path_display = { shorten = 5 },
       winblend = 0,
-      border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }, -- curved
+      -- border = {},
+      -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }, -- curved
       -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└'}, -- straight
       --
       color_devicons = true,
@@ -86,17 +82,18 @@ M.config = function()
       -- Your special builtin config goes in here
       buffers = {
         theme = "ivy",
-        results_title = '', preview_title = '', prompt_title = '',
-        sort_lastused = true, previewer = false,
-        layout_config = {
-          height = 0.2,
-          vertical = { mirror = true },
-          prompt_position = "bottom",
-        }
+        -- results_title = '', preview_title = '', prompt_title = '',
+        -- sort_lastused = true, previewer = false,
+        -- layout_config = {
+        --   height = 0.2,
+        --   vertical = { mirror = true },
+        --   prompt_position = "bottom",
+        -- }
       },
       live_grep = {
-        results_title = '', preview_title = '', prompt_title = '',
-        winblend = 0,
+        -- theme = "ivy",
+        -- results_title = '', preview_title = '', prompt_title = '',
+        -- winblend = 0,
         layout_config = {
           width = 0.9, height = 0.9,
           preview_width = 0.5,
@@ -105,7 +102,9 @@ M.config = function()
         },
       },
       find_files = {
-        results_title = '', preview_title = '', prompt_title = '',
+        -- results_title = '',
+        -- preview_title = '',
+        prompt_title = 'Find files in current project',
         layout_config = {
           width = 0.8, height = 0.8,
           preview_width = 0.5,
@@ -113,25 +112,26 @@ M.config = function()
           vertical = { mirror = false },
         },
       }
-    },
-    extensions = {
-      fzy_native = {
-        override_generic_sorter = false,
-        override_file_sorter = true,
-      },
-    },
+    }
+    -- extensions = {
+    --   fzy_native = {
+    --     override_generic_sorter = false,
+    --     override_file_sorter = true,
+    --   },
+    -- },
   }
 end
+
 
 
 -- fzf dotfiles from anywhere
 M.search_dotfiles = function()
   require("telescope.builtin").find_files({
-    prompt_title = "Search dotfiles",
+    prompt_title = "Search fictional couscous",
     cwd = "~/.dotfiles",
     show_line = false;
-    results_title = '',
-    preview_title = '',
+    -- results_title = '',
+    -- preview_title = '',
     no_ignore = true,
     hidden = true
   })
