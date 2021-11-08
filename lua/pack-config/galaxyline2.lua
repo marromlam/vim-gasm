@@ -45,7 +45,8 @@ function dump(o)
 -- for k,v in pairs(_colors) do colors[k] = v end
 
 local colors = {
-  line_bg = "#3c3836",
+  -- line_bg = "#3c3836",
+  line_bg = "#282828",
   red = "#cc241d",
   green = "#98971a",
   yellow = "#d79921",

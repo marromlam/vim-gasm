@@ -29,7 +29,10 @@ bufferline.setup {
     highlights = {
     --   -- fill is the color of the bufferline (set to be the same as galaxyline)
     -- line_bg = "#3c3836",
-      fill = { guifg="#3c3836", guibg="#3c3836" },
+    -- line_bg = "#3c3836",
+    -- dark0 = hsl("#282828"),
+    -- fill = { guifg="#3c3836", guibg="#3c3836" },
+      fill = { guifg="#282828", guibg="#282828" },
     --   -- this is the default skin of a buffer tab
     --   background = { guifg = colors.accent, guibg = colors.dark },
     --   -- buffers
