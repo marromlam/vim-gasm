@@ -104,7 +104,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
       prefix = "",
       spacing = 0,
    },
-   signs = true,
+   signs = false,
    underline = true,
    -- set this to true if you want diagnostics to show in insert mode
    update_in_insert = false,
