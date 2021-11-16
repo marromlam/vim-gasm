@@ -734,7 +734,13 @@ return packer.startup(function()
 
   packer.use {
     "github/copilot.vim",
-    disable = false
+    disable = false,
+    config = function()
+      vim.cmd[[
+      imap <silent><script><expr> <C-Y> copilot#Accept("\<CR>")
+      let g:copilot_no_tab_map = v:true
+      ]]
+    end
   }
   -- }}}
 
@@ -785,8 +791,19 @@ return packer.startup(function()
   -- Themes
   packer.use {
     "marromlam/gruvbox.nvim",
+    -- disable = function ()
+    --   if vim.g.theme == 'gruvbox' then
+    --     return false
+    --   else
+    --     return true
+    --   end
+    -- end,
     disable = false,
-    requires = {"rktjmp/lush.nvim"}
+    requires = {"rktjmp/lush.nvim"},
+    config = function()
+      vim.g.gruvbox_sign_column = 'bg0'
+      vim.g.gruvbox_contrast_dark = 'hard'
+    end
   }
   -- {"morhetz/gruvbox"},
   -- {"joshdick/onedark.vim"},
@@ -794,23 +811,47 @@ return packer.startup(function()
   --
   packer.use {
     'marko-cerovac/material.nvim',
-    disable = false
+    disable = function ()
+      if vim.g.theme == 'material' then
+        return true
+      else
+        return false
+      end
+    end,
+    config = function()
+      vim.g.material_style = 'palenight'
+    end
   }
 
   packer.use {
     "folke/tokyonight.nvim",
-    disable = false
+    disable = function ()
+      if vim.g.theme == 'material' then
+        return true
+      else
+        return false
+      end
+    end,
   }
 
   packer.use {
     -- "MJ111/vim-piano",
     "homedm/vim-play-piano",
-    disable = false
+    disable = true
   }
 
   packer.use {
     'Mofiqul/vscode.nvim',
-    disable = false
+    disable = function ()
+      if vim.g.theme == 'vscode' then
+        return true
+      else
+        return false
+      end
+    end,
+    config = function ()
+      vim.g.vscode_style = "dark"
+    end
   }
   
   -- {"rktjmp/lush.nvim"},

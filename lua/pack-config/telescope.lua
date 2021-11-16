@@ -24,7 +24,7 @@ M.config = function()
       initial_mode = "insert", selection_strategy = "reset",
       sorting_strategy = "descending", layout_strategy = "horizontal",
       layout_config = {
-        width = 0.5,
+        -- width = 1.0,
         prompt_position = "bottom",
         preview_cutoff = 100,
         horizontal = { mirror = false },
@@ -95,7 +95,7 @@ M.config = function()
         -- results_title = '', preview_title = '', prompt_title = '',
         -- winblend = 0,
         layout_config = {
-          width = 0.9, height = 0.9,
+          width = 0.99999, height = 0.4,
           preview_width = 0.5,
           horizontal = { mirror = false },
           vertical = { mirror = false },
@@ -106,7 +106,7 @@ M.config = function()
         -- preview_title = '',
         prompt_title = 'Find files in current project',
         layout_config = {
-          width = 0.8, height = 0.8,
+          -- width = 0.8, height = 0.8,
           preview_width = 0.5,
           horizontal = { mirror = false },
           vertical = { mirror = false },
