@@ -19,37 +19,12 @@
 
 
 vim.g.elite_mode = true
+vim.g.theme = "gruvbox"
 
-
--- Set appearance {{{
-
-vim.o.background = "dark" -- or "light" for light mode
--- vim.g.colors_lighter_contrast = false
-
--- gruvbox theme {{{
-vim.cmd([[colorscheme gruvbox]])
-vim.g.gruvbox_contrast_dark = 'hard'
-vim.g.gruvbox_sign_column = 'bg0'
--- }}}
-
-
--- tokyonight theme {{{
--- vim.cmd([[colorscheme tokyonight]])
--- }}}
-
-
--- VScode theme {{{
--- vim.cmd[[ colorscheme vscode ]]
--- vim.g.vscode_style = "dark"
--- }}}
-
-
--- material theme {{{
--- vim.cmd[[ colorscheme material ]]
--- let g:material_style = 'palenight'
--- }}}
-
--- }}}
+-- Own packages path : useful for development
+vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/gruvbox.nvim" ]]
+-- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/mytheme.nvim" ]]
+-- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/afterglow.nvim" ]]
 
 
 -- Set binaries
@@ -70,6 +45,8 @@ vim.cmd "silent! command PackerUpdate lua require 'packer_list' require('packer'
 require "general.settings"
 require "keys.mappings".config()
 
+
+-- Some stuff
 vim.cmd [[
 function! Synctex()
     let vimura_param = " --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . substitute(expand('%:p'),"tex$","pdf", "")
@@ -80,12 +57,17 @@ function! Synctex()
     endif
     redraw!
 endfunction
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
 ]]
 
 
-vim.cmd[[ let &runtimepath.=',' . expand("$HOME") . '.local/share/own_nvim_packs' ]]
+-- Set appearance
+vim.o.background = "dark" -- or "light" for light mode
+vim.g.vscode_style = "dark"
+vim.g.gruvbox_sign_column = 'bg0'
+vim.g.gruvbox_contrast_dark = 'hard'
+vim.g.afterglow_contrast_dark = 'medium'
+vim.g.afterglow_sign_column = 'bg0'
+vim.cmd('colorscheme ' .. vim.g.theme)
 
 
 -- vim:foldmethod=marker
