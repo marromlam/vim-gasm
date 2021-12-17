@@ -34,3 +34,7 @@ vim.g.tex_conceal = ""
 vim.g.vimtex_compiler_latexmk = { build_dir = "build", progname = "nvr" }
 -- let g.vimtex_latexmk_build_dir = './build'
 -- vim.g.vimtex_latexmk_progname = 'nvr'
+
+-- Config from castel.dev
+-- set conceallevel=1
+vim.g.tex_conceal='abdmg'
