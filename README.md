@@ -4,7 +4,7 @@ Aiming for a full-written in lua neovim configuration, luavim arises.
 
 ## Features
 * Full set of packs is lazy loaded.
-* Less than 0.5s startup time in very old computers.
+* Less than 30 ms startup time in my M1 Macbook Air.
 * +70 configures plugins.
 * Using builtin LSP and Treesitter.
 * Tabnine completion enabled.

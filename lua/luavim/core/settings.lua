@@ -259,7 +259,7 @@ vim.opt.titlestring = "nvim"        -- what the title of the window will be set 
 -- opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
 vim.opt.titlelen = 70
 
--- }}
+-- ]}}
 
 -- Utilities {{{
 
@@ -397,8 +397,8 @@ vim.opt.mousefocus = true
 -- these only read ".vim" files
 vim.opt.secure = true -- Disable autocmd etc for project local vimrc files.
 vim.opt.exrc = true -- Allow project local vimrc files example .nvimrc see :h exrc
--- vim.opt.whichwrap:append("<>hl") -- TODO what is this?
-vim.opt.whichwrap:append("+=<,>,[,],h,l")
+vim.opt.whichwrap:append("<>hl") -- TODO what is this?
+-- vim.opt.whichwrap:append("+=<,>,[,],h,l")
 
 -- vim.o.debug = "msg"
 --- NOTE: remove this once 0.6 lands, it is now default
