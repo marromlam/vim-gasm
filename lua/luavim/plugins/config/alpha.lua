@@ -20,7 +20,7 @@ dashboard.section.header.val = {
   [[▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀]],
   [[                                                      ]],
   [[                                                      ]],
-  [[              anno 1 ad neovim transitus              ]],
+  [[             anno uno ad neovim transitus             ]],
   [[                                                      ]],
 }
 

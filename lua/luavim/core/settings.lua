@@ -24,7 +24,7 @@ vim.opt.shortmess:append("c")
 
 vim.opt.updatetime = 300            -- faster completion
 vim.opt.timeout = true
-vim.opt.timeoutlen = 500           -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 200           -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.ttimeoutlen = 10
 
 -- }}}
@@ -235,7 +235,7 @@ vim.opt.inccommand = 'nosplit'
 
 -- Cursor {{{
 
--- vim.opt.cursorline = true           -- highlight the current line
+vim.opt.cursorline = true           -- highlight the current line
 
 -- This is from the help docs, it enables mode shapes, "Cursor" highlight, and blinking
 vim.opt.guicursor = {
@@ -259,7 +259,7 @@ vim.opt.titlestring = "nvim"        -- what the title of the window will be set 
 -- opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
 vim.opt.titlelen = 70
 
--- }}}
+-- }}
 
 -- Utilities {{{
 
@@ -397,7 +397,8 @@ vim.opt.mousefocus = true
 -- these only read ".vim" files
 vim.opt.secure = true -- Disable autocmd etc for project local vimrc files.
 vim.opt.exrc = true -- Allow project local vimrc files example .nvimrc see :h exrc
-vim.opt.whichwrap:append("<>hl") -- TODO what is this?
+-- vim.opt.whichwrap:append("<>hl") -- TODO what is this?
+vim.opt.whichwrap:append("+=<,>,[,],h,l")
 
 -- vim.o.debug = "msg"
 --- NOTE: remove this once 0.6 lands, it is now default
@@ -417,7 +418,6 @@ vim.opt.termguicolors = true
 
 -- Don't show status line on vim terminals
 vim.cmd [[ au TermOpen term://* setlocal nonumber laststatus=0 ]]
--- vim.cmd "set whichwrap+=<,>,[,],h,l"
 -- vim.cmd [[set iskeyword+=-]]
 
 -- Open a file from its last left off position
