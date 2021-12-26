@@ -3,6 +3,13 @@ vim.cmd([[
     hi link BqfPreviewRange Search
 ]])
 
+-- TODO -- - `BqfPreviewFloat`: highlight floating window
+-- TODO -- - `BqfPreviewBorder`: highlight border of floating window
+-- TODO -- - `BqfPreviewCursor`: highlight the cursor format `[lnum, col]` in preview window
+-- TODO -- - `BqfPreviewRange`: highlight the range format `[lnum, col, range]`,
+-- TODO --    which is produced by `pattern_hl`, `lsp_ranges_hl` and quickfix range
+-- TODO -- - `BqfSign`: highlight the sign in quickfix window
+
 require('bqf').setup({
     auto_enable = true,
     preview = {

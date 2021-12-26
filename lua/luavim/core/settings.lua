@@ -3,7 +3,7 @@
 
 -- Vim messages on vim actions {{{
 
---vim.opt.shortmess = {
+-- vim.opt.shortmess = {
 --  t = true, -- truncate file messages at start
 --  A = true, -- ignore annoying swap file messages
 --  o = true, -- file-read message overwrites previous
@@ -14,7 +14,7 @@
 --  sI = true,
 --  c = true,
 --  W = true, -- Don't show [w] or written when writing
---}
+-- }
 vim.opt.shortmess:append("sI")
 vim.opt.shortmess:append("c")
 
@@ -95,18 +95,10 @@ vim.opt.formatoptions = {
 -- vim.opt.foldtext = 'v:lua.luavim.folds()'
 vim.opt.foldopen = vim.opt.foldopen + 'search'
 vim.opt.foldlevelstart = 3
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
--- vim.opt.foldexpr = ""               -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
-vim.opt.foldmethod = 'expr'
--- vim.opt.foldmethod = 'manual'
-
--- }}}
-
--- Quickfix {{{
-
---- FIXME: Need to use a lambda rather than a lua function directly
---- @see https://github.com/neovim/neovim/pull/14886
--- vim.o.quickfixtextfunc = '{i -> v:lua.luavim.qftf(i)}'
+-- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldexpr = ""               -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
+-- vim.opt.foldmethod = 'expr'
+vim.opt.foldmethod = 'manual'
 
 -- }}}
 
@@ -244,10 +236,6 @@ vim.opt.guicursor = {
   [[sm:block-blinkwait175-blinkoff150-blinkon175]],
 }
 
--- if luavim.nightly then
---   vim.opt.cursorlineopt = 'screenline,number'
--- end
-
 -- }}}
 
 -- Title {{{
@@ -283,7 +271,7 @@ vim.opt.virtualedit = 'block' -- allow cursor to move where there is no text in 
 -- replace '100 with '0 the default which stores 100 marks
 -- add f0 so file marks aren't stored
 -- @credit: wincent
-vim.opt.shada = "!,'0,f0,<50,s10,h"
+-- vim.opt.shada = "!,'0,f0,<50,s10,h"
 
 -- }}}
 
@@ -400,8 +388,6 @@ vim.opt.exrc = true -- Allow project local vimrc files example .nvimrc see :h ex
 vim.opt.whichwrap:append("<>hl") -- TODO what is this?
 -- vim.opt.whichwrap:append("+=<,>,[,],h,l")
 
--- vim.o.debug = "msg"
---- NOTE: remove this once 0.6 lands, it is now default
 vim.opt.joinspaces = false
 vim.opt.gdefault = true
 -- vim.opt.cul = true TODO: what is this
@@ -417,7 +403,7 @@ vim.opt.termguicolors = true
 -- vim.opt.guifont = 'Fira Code Regular Nerd Font Complete Mono:h14'
 
 -- Don't show status line on vim terminals
-vim.cmd [[ au TermOpen term://* setlocal nonumber laststatus=0 ]]
+-- vim.cmd [[ au TermOpen term://* setlocal nonumber laststatus=0 ]]
 -- vim.cmd [[set iskeyword+=-]]
 
 -- Open a file from its last left off position
