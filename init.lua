@@ -19,7 +19,7 @@ vim.g.maplocalleader = ','
 
 
 -- source settings and general keymaps
-require("luavim.core.settings")
+require("luavim.core")
 
 
 -- load plugins, colorscheme and autocommands
@@ -28,7 +28,7 @@ require("luavim.colorscheme")
 require("luavim.autocommands")
 
 
--- TODO: fix this not working under wich-key
+-- TODO : fix this not working under which-key
 vim.api.nvim_set_keymap("n", "<Up>"   , ":resize -2<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Down>" , ":resize +2<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Left>" , ":vertical resize -2<CR>", { noremap = true, silent = true })
