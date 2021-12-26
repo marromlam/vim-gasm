@@ -20,7 +20,6 @@ vim.g.maplocalleader = ','
 
 -- source settings and general keymaps
 require("luavim.core.settings")
--- require("luavim.core.keymaps")
 
 
 -- load plugins, colorscheme and autocommands
@@ -30,10 +29,10 @@ require("luavim.autocommands")
 
 
 -- TODO: fix this not working under wich-key
-vim.api.nvim_set_keymap("n", "<Up>"    , ":resize -2<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Down>"  , ":resize +2<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Left>"  , ":vertical resize -2<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Right>" , ":vertical resize +2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Up>"   , ":resize -2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Down>" , ":resize +2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Left>" , ":vertical resize -2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
 
 
 -- vim:foldmethod=marker

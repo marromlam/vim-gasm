@@ -7,7 +7,7 @@ Aiming for a full-written in lua neovim configuration, luavim arises.
 * Less than 30 ms startup time in my M1 Macbook Air.
 * +70 configures plugins.
 * Using builtin LSP and Treesitter.
-* Tabnine completion enabled.
+* TabNine completion enabled.
 
 
 ## How does it look?
