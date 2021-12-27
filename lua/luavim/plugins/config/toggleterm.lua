@@ -6,9 +6,16 @@ M.config = function()
   if not status_ok then
     return
   end
+
   terminal.setup  {
     -- size can be a number or function which is passed the current terminal
-    size = 5,
+    size = function(term)
+      if term.direction == 'horizontal' then
+        return 15
+      elseif term.direction == 'vertical' then
+        return math.floor(vim.o.columns * 0.4)
+      end
+    end,
     -- open_mapping = [[<c-\>]],
     open_mapping = [[<c-t>]],
     hide_numbers = true, -- hide the number column in toggleterm buffers
@@ -19,8 +26,7 @@ M.config = function()
     insert_mappings = true, -- whether or not the open mapping applies in insert mode
     persist_size = true,
     -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
-    direction = "float",
-    -- direction = "horizontal",
+    direction = "horizontal",
     close_on_exit = true, -- close the terminal window when the process exits
     shell = vim.o.shell, -- change the default shell
     -- This field is only relevant if direction is set to 'float'
@@ -40,85 +46,55 @@ M.config = function()
       },
     },
   }
-  function dump(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. dump(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
-  end
-  --print(dump(terminal))
+
 end
 
 
 M.setup = function()
   local status_ok, terminal = pcall(require, "toggleterm")
   if not status_ok then
-    print(terminal)
     return
   end
-  -- Declare executables
-  executables = {
-    { "lazygit", "gg", "LazyGit" }
+
+  local float_handler = function(term)
+    if vim.fn.mapcheck('jk', 't') ~= '' then
+      vim.api.nvim_buf_del_keymap(term.bufnr, 't', 'jk')
+      vim.api.nvim_buf_del_keymap(term.bufnr, 't', '<esc>')
+    end
+  end
+
+  local Terminal = terminal.Terminal
+
+  local lazygit = Terminal:new {
+    cmd = 'lazygit',
+    dir = 'git_dir',
+    hidden = true,
+    direction = 'float',
+    on_open = float_handler,
   }
-  for _, exec in pairs(executables) do
-    require("pack-config.terminal").add_exec(exec[1], exec[2], exec[3])
-  end
-end
 
+  local htop = Terminal:new {
+    cmd = 'htop',
+    hidden = 'true',
+    direction = 'float',
+    on_open = float_handler,
+  }
 
-local function is_installed(exe)
-  return vim.fn.executable(exe) == 1
-end
+  core.command {
+    'Htop',
+    function() htop:toggle() end,
+  }
 
-M.add_exec = function(exec, keymap, name)
-  local status_ok, wk = pcall(require, "which-key")
-  if not status_ok then
-    print(terminal)
-    return
-  end
- 
-  wk.register(
-    {
-      ["gg"] = {
-        "<cmd>lua require('pack-config.terminal')._exec_toggle('" .. exec .. "')<CR>",
-        name 
-      },
-    },
-    { 
-      prefix = "<leader>",
-      noremap = true,
-      silent = true 
-    }
+  core.command {
+    'Lazygit',
+    function() lazygit:toggle() end,
+  }
+
+  core.map({'n'}, "<leader>gg",
+    function() lazygit:toggle() end,
+    "Lazygit"
   )
 
-end
-
-M._split = function(inputstr, sep)
-  if sep == nil then
-    sep = "%s"
-  end
-  local t = {}
-  for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
-    table.insert(t, str)
-  end
-  return t
-end
-
-M._exec_toggle = function(exec)
-  local binary = M._split(exec)[1]
-  if is_installed(binary) ~= true then
-    print("Please install executable " .. binary .. ". Check documentation for more information")
-    return
-  end
-  local Terminal = require("toggleterm.terminal").Terminal
-  local exec_term = Terminal:new { cmd = exec, hidden = true }
-  exec_term:toggle()
 end
 
 return M
