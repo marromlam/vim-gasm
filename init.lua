@@ -6,7 +6,8 @@ vim.g.elite_mode = true
 vim.g.os = vim.loop.os_uname().sysname
 vim.g.open_command = vim.g.os == 'Darwin' and 'open' or 'xdg-open'
 vim.g.dotfiles = vim.env.DOTFILES or vim.fn.expand '~/.dotfiles'
-vim.g.luavim_config = vim.g.dotfiles .. '/.config/nvim'
+vim.g.luavim_config = '~/.config/nvim'
+vim.g.skeleton_template_dir = vim.g.luavim_config .. '/templates'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
@@ -34,5 +35,13 @@ vim.api.nvim_set_keymap("n", "<Down>" , ":resize +2<CR>", { noremap = true, sile
 vim.api.nvim_set_keymap("n", "<Left>" , ":vertical resize -2<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
 
+
+-- TODO : find a good place for this
+vim.cmd[[
+  let g:skeleton_replacements = {}
+  function! g:skeleton_replacements.TITLE()
+    return toupper(expand("%:t:r"))
+  endfunction
+]]
 
 -- vim:foldmethod=marker

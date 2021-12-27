@@ -696,6 +696,11 @@ return packer.startup(function(use)
     -- config = package_configure 'vim-projectionist'
   }
 
+  use {
+    'noahfrederick/vim-skeleton',
+    disable = false,
+    -- config = package_configure 'vim-projectionist'
+  }
 
   -- }}}
 
@@ -997,4 +1002,4 @@ return packer.startup(function(use)
 end)
 
 
--- vim:foldmethod=marker
+-- vim:fdm=marker
