@@ -27,7 +27,43 @@ vim.cmd [[
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
+]]
 
+vim.cmd [[
+fun! SetQFControlVariable()
+    if getwininfo(win_getid())[0]['loclist'] == 1
+        let g:the_primeagen_qf_l = 1
+    else
+        let g:the_primeagen_qf_g = 1
+    end
+endfun
+
+fun! UnsetQFControlVariable()
+    if getwininfo(win_getid())[0]['loclist'] == 1
+        let g:the_primeagen_qf_l = 0
+    else
+        let g:the_primeagen_qf_g = 0
+    end
+endfun
+
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END
+
+augroup fixlist
+    autocmd!
+    autocmd BufWinEnter quickfix call SetQFControlVariable()
+    autocmd BufWinLeave * call UnsetQFControlVariable()
+augroup END
+
+fun! ToggleQFList()
+  if g:the_primeagen_qf_g == 1
+      cclose
+  else
+      copen
+  end
+endfun
 ]]
 
 -- Formatoptions
