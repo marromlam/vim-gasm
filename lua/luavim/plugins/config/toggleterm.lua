@@ -51,7 +51,7 @@ end
 
 
 M.setup = function()
-  local status_ok, terminal = pcall(require, "toggleterm")
+  local status_ok, toggleterm = pcall(require, "toggleterm")
   if not status_ok then
     return
   end
@@ -63,7 +63,7 @@ M.setup = function()
     end
   end
 
-  local Terminal = terminal.Terminal
+  local Terminal = require('toggleterm.terminal').Terminal
 
   local lazygit = Terminal:new {
     cmd = 'lazygit',
