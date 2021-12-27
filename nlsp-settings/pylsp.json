@@ -1,0 +1,5 @@
+{
+  "pylsp.configurationSources" : ["flake8"],
+  "pylsp.plugins.pycodestyle.enabled" : true,
+  "pylsp.plugins.pycodestyle.ignore" : ["E402" , "E111", "E114"]
+}
