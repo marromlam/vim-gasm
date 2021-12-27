@@ -52,7 +52,7 @@ local filetype = {
 local branch = {
 	"branch",
 	icons_enabled = true,
-	icon = "",
+  icon = '', -- e0a0
 }
 
 local location = {
