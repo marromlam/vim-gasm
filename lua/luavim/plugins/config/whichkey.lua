@@ -125,7 +125,7 @@ wk.register({
   ["<A-k>"]   = { ":move .-2<CR>==" },
   ["]q"]      = { "Next Quickfix element" },
   ["[q"]      = { "Previous Quickfix element" },
-  ["<C-q>"]   = { ":call QuickFixToggle()<CR>" },
+  -- ["<C-q>"]   = { ":call QuickFixToggle()<CR>" },
   },
   { mode = 'n', buffer = nil, silent = true, noremap = true, nowait = true }
 )
