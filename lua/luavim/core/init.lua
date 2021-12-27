@@ -93,6 +93,7 @@ end
 
 require('luavim.core.settings')
 require('luavim.core.mapper')
+require('luavim.core.mappings')
 require('luavim.core.functions')
 
 -- }}}
