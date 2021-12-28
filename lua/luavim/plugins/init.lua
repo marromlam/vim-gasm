@@ -291,7 +291,7 @@ return packer.startup(function(use)
 
   use {
     'hrsh7th/nvim-cmp',
-    disable = false,
+    disable = not core.plugins.cmp,
     event = "BufRead",
     config = function()
       require('luavim.plugins.config.cmp')
@@ -300,61 +300,61 @@ return packer.startup(function(use)
 
   use {
     "saadparwaiz1/cmp_luasnip",
-    disable = false,
+    disable = not core.plugins.cmp,
     after = "nvim-cmp",
   }
 
   use {
     "hrsh7th/cmp-nvim-lua",
-    disable = false,
+    disable = not core.plugins.cmp,
     after = "nvim-cmp",
   }
 
   use {
     "hrsh7th/cmp-nvim-lsp",
-    disable = false,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
   }
 
   use {
     "hrsh7th/cmp-buffer",
-    disable = false,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
   }
 
   use {
     "hrsh7th/cmp-path",
-    disable = false,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
   }
 
   use {
     'hrsh7th/cmp-nvim-lsp-document-symbol',
-    disable = false,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
   }
 
   use {
     'hrsh7th/cmp-cmdline',
-    disable = false,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
   }
 
   use {
     'f3fora/cmp-spell',
-    disable = false,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
   }
 
   use {
     'petertriho/cmp-git',
-    disable = true,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
   }
 
   use {
     'tzachar/cmp-tabnine',
-    disable = false,
+    disable = not core.plugins.cmp,
     after = 'nvim-cmp',
     run = './install.sh'
   }
@@ -362,8 +362,7 @@ return packer.startup(function(use)
   use {
     -- TODO: merge optional config I have for this plugin
     'L3MON4D3/LuaSnip',
-    -- disable = not core.plugins.cmp,
-    disable = false,
+    disable = not core.plugins.cmp,
     -- event = "InsertEnter",
     -- event = "InsertEnter",
     -- module = 'luasnip',
@@ -376,18 +375,20 @@ return packer.startup(function(use)
 
   use {
     "rafamadriz/friendly-snippets",
-    disable = false,
+    disable = not core.plugins.cmp,
   }
 
 
   use {
     'tzachar/cmp-fuzzy-path',
+    disable = not core.plugins.cmp,
     after = 'cmp-path',
     requires = { 'tzachar/fuzzy.nvim' }
   }
 
   use {
     'tzachar/cmp-fuzzy-buffer',
+    disable = not core.plugins.cmp,
      after = 'nvim-cmp',
      requires = { 'tzachar/fuzzy.nvim' }
   }
@@ -417,7 +418,7 @@ return packer.startup(function(use)
 
   use {
     "windwp/nvim-autopairs",
-    disable = false,
+    disable = not core.plugins.cmp,
     after = "nvim-cmp",
     config = function()
       require("luavim.plugins.config.autopairs")
@@ -440,7 +441,7 @@ return packer.startup(function(use)
 
   use {
     "neovim/nvim-lspconfig",
-    disable = false,
+    disable = not core.plugins.lsp,
     config = function()
       require("luavim.lsp")
     end
@@ -448,25 +449,25 @@ return packer.startup(function(use)
 
   use {
     "williamboman/nvim-lsp-installer",
-    disable = false,
+    disable = not core.plugins.lsp,
   }
 
   -- language server settings defined in json for
   use {
     "tamago324/nlsp-settings.nvim",
-    disable = false
+    disable = not core.plugins.lsp,
   }
 
   -- formatters and linters
   use {
     "jose-elias-alvarez/null-ls.nvim",
-    disable = false
+    disable = not core.plugins.lsp,
   }
 
   -- fixes lsp doc highlight
   use {
     "antoinemadec/FixCursorHold.nvim",
-    disable = false,
+    disable = not core.plugins.lsp,
     event = 'BufReadPost'
   }
 

@@ -14,6 +14,7 @@ _G.core = {
       blankline = true, -- show code scope with symbols
       bufferline = true, -- list open buffers up the top, easy switching too
       cmp = true,
+      lsp = true,
       --
       -- colorizes rgb, hex and other color namespaces
       colorizer = true, -- color RGB, HEX, CSS, NAME color codes
