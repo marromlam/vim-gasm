@@ -11,6 +11,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 -- this is just for developing my own pluggins
+vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/darkplus.nvim" ]]
 -- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/gruvbox.nvim" ]]
 -- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/mytheme.nvim" ]]
 -- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/afterglow.nvim" ]]
@@ -70,7 +71,7 @@ function! TermPDF(file) abort
   let time = str2float(reltimestr(reltime())) * 1000.0
   if time - g:termpdf_lastcalled > 1000
     call system('kitty @ set-background-opacity 1.0')
-    call system('kitty @ kitten termpdf.py ' . a:file)
+    call system('kitty @ kitten termpdf.py ' . a:file . ' -i -a')
     let g:termpdf_lastcalled = time
   endif
 endfunction
