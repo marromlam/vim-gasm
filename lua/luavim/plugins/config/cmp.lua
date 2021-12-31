@@ -1,9 +1,11 @@
 local present1, cmp = pcall(require, "cmp")
 if not present1 then
+  print("miss cmp")
 	return
 end
 local present2, luasnip = pcall(require, "luasnip")
 if not present2 then
+  print("miss luasnip")
 	return
 end
 
@@ -112,6 +114,9 @@ cmp.setup({
       if entry.source.name == 'cmp_tabnine' then
         vim_item.kind = ''
       end
+      if entry.source.name == 'copilot' then
+        vim_item.kind = 'ﯙ'
+      end
       -- Menu item provider
       vim_item.menu = ({
        nvim_lsp = '[LSP]',
@@ -122,6 +127,7 @@ cmp.setup({
        neorg = '[Neorg]',
        orgmode = '[Org]',
        cmp_tabnine = '[TN]',
+       copilot = '[Copilot]',
        luasnip = '[Snip]',
        buffer = '[Buffer]',
        fuzzy_buffer = '[Fuzzy Buffer]',
@@ -138,6 +144,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'copilot' },
     { name = 'cmp_tabnine' },
     { name = 'spell' },
     { name = 'path' },
