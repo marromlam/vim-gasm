@@ -43,6 +43,7 @@ _G.core = {
       -- Themes
       doom = false
    },
+   languages = { "py", "cpp", "hpp", "c", "h", "lua", "bash", "zsh", "tex", "beamer"}
    -- lsp = {}
 }
 
@@ -85,6 +86,14 @@ function core.command(args)
   end
 
   vim.cmd(string.format('command! -nargs=%s %s %s %s', nargs, types, name, rhs))
+end
+
+-- load plugin after entering vim ui
+function core.load_after_ui(plugin, delay)
+  if plugin then
+    delay = delay or 0
+    vim.defer_fn(function() require("packer").loader(plugin) end, delay)
+  end
 end
 
 -- }}}
