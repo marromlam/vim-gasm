@@ -98,7 +98,6 @@ M.on_attach = function(client, bufnr)
 	lsp_highlight_document(client)
 end
 
--- TODO : allow to use cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

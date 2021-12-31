@@ -81,7 +81,7 @@ return packer.startup(function(use)
     disable = false,
     cmd = 'StartupTime',
     config = function()
-      vim.g.startuptime_tries = 15
+      vim.g.startuptime_tries = 20
       vim.g.startuptime_exe_args = { '+let g:auto_session_enabled = 0' }
     end,
   }
@@ -89,10 +89,9 @@ return packer.startup(function(use)
   -- theme
   use {
     "folke/tokyonight.nvim",
+    -- "navarasu/onedark.nvim",
     disable = false,
   }
-
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
   -- }}}
 
@@ -153,7 +152,7 @@ return packer.startup(function(use)
 
   use {
     "lukas-reineke/indent-blankline.nvim",
-    disable = false,
+    disable = not core.plugins.blankline,
     event = "BufRead",
     config = function()
       require("luavim.plugins.config.indentline")
@@ -162,7 +161,7 @@ return packer.startup(function(use)
 
   use {
     "norcalli/nvim-colorizer.lua",
-    disable = false,
+    disable = not core.plugins.colorizer,
     event = "BufRead",
     config = function()
       require("luavim.plugins.config.colorizer").config()
@@ -175,7 +174,8 @@ return packer.startup(function(use)
 
   use {
     'nvim-treesitter/nvim-treesitter',
-    branch = "0.5-compat",
+    disable = not core.plugins.treesitter,
+    -- branch = "0.5-compat",
     event = 'BufRead',
     config = function()
       require("luavim.plugins.config.treesitter")
@@ -276,7 +276,7 @@ return packer.startup(function(use)
   use {
     'kevinhwang91/nvim-bqf',
     disable = false,
-    event = 'VimEnter',
+    event = 'QuickFixCmdPre',
     config = function()
       require("luavim.plugins.config.bqf")
     end,
@@ -288,84 +288,18 @@ return packer.startup(function(use)
 
   -- Completion & Snippets {{{
 
-
   use {
-    'hrsh7th/nvim-cmp',
+    "rafamadriz/friendly-snippets",
     disable = not core.plugins.cmp,
-    event = "BufRead",
-    config = function()
-      require('luavim.plugins.config.cmp')
-    end,
+    event = "InsertEnter",
   }
 
   use {
-    "saadparwaiz1/cmp_luasnip",
-    disable = not core.plugins.cmp,
-    after = "nvim-cmp",
-  }
-
-  use {
-    "hrsh7th/cmp-nvim-lua",
-    disable = not core.plugins.cmp,
-    after = "nvim-cmp",
-  }
-
-  use {
-    "hrsh7th/cmp-nvim-lsp",
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-  }
-
-  use {
-    "hrsh7th/cmp-buffer",
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-  }
-
-  use {
-    "hrsh7th/cmp-path",
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-  }
-
-  use {
-    'hrsh7th/cmp-nvim-lsp-document-symbol',
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-  }
-
-  use {
-    'hrsh7th/cmp-cmdline',
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-  }
-
-  use {
-    'f3fora/cmp-spell',
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-  }
-
-  use {
-    'petertriho/cmp-git',
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-  }
-
-  use {
-    'tzachar/cmp-tabnine',
-    disable = not core.plugins.cmp,
-    after = 'nvim-cmp',
-    run = './install.sh'
-  }
-
-  use {
-    -- TODO: merge optional config I have for this plugin
     'L3MON4D3/LuaSnip',
     disable = not core.plugins.cmp,
+    after = "friendly-snippets",
+    -- event = "VimEnter",
     -- event = "InsertEnter",
-    -- event = "InsertEnter",
-    -- module = 'luasnip',
     -- after = "friendly-snippets",
     -- after = "nvim-cmp",
     -- config = function()
@@ -373,48 +307,62 @@ return packer.startup(function(use)
     -- end,
   }
 
+
+
   use {
-    "rafamadriz/friendly-snippets",
+    'hrsh7th/nvim-cmp',
     disable = not core.plugins.cmp,
+    -- after = "friendly-snippets",
+    after = { "LuaSnip" },
+    requires = {
+      { "saadparwaiz1/cmp_luasnip", after={"nvim-cmp"} },
+      { "hrsh7th/cmp-nvim-lua", after="nvim-cmp" },
+      -- required by lsp already  { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-buffer", after="nvim-cmp" },
+      { "hrsh7th/cmp-path", after="nvim-cmp" },
+      { 'hrsh7th/cmp-nvim-lsp-document-symbol', after="nvim-cmp" },
+      { 'hrsh7th/cmp-cmdline', after="nvim-cmp" },
+      { 'f3fora/cmp-spell', after="nvim-cmp" },
+      { 'petertriho/cmp-git', after="nvim-cmp" },
+      { 'tzachar/cmp-tabnine', after="nvim-cmp", run = './install.sh'},
+      { 'hrsh7th/cmp-copilot', after="nvim-cmp" },
+    },
+    config = function()
+      require('luavim.plugins.config.cmp')
+    end,
   }
 
-
+  -- these two seem very interesting, but I cant get use to them ahaha
   use {
     'tzachar/cmp-fuzzy-path',
-    disable = not core.plugins.cmp,
+    disable = true,
     after = 'cmp-path',
     requires = { 'tzachar/fuzzy.nvim' }
   }
 
   use {
     'tzachar/cmp-fuzzy-buffer',
-    disable = not core.plugins.cmp,
+    disable = true,
      after = 'nvim-cmp',
      requires = { 'tzachar/fuzzy.nvim' }
   }
 
-  -- use {
-  --   'github/copilot.vim',
-  --   -- disable = not core.plugins.cmp,
-  --   disable = true,
-  --   after = 'nvim-cmp',
-  --   config = function()
-  --     vim.g.copilot_no_tab_map = true
-  --     vim.g.copilot_assume_mapped = true
-  --     vim.g.copilot_tab_fallback = ''
-  --     vim.g.copilot_filetypes = {
-  --       ['*'] = true,
-  --       dart = false,
-  --       gitcommit = false,
-  --       NeogitCommitMessage = false,
-  --     }
-  --     -- FIX -- core.imap('<c-h>', [ [copilot#Accept("\<CR>")] ], { expr = true, script = true })
-  --     -- FIX -- require('core.highlights').plugin('copilot', {
-  --     -- FIX --   'CopilotSuggestion',
-  --     -- FIX --   { link = 'Comment', force = true },
-  --     -- FIX -- })
-  --   end,
-  -- }
+  use {
+    'github/copilot.vim',
+    disable = not core.plugins.cmp,
+    after = 'nvim-cmp',
+    config = function()
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
+      vim.g.copilot_tab_fallback = ''
+      vim.g.copilot_filetypes = {
+        ['*'] = true,
+        gitcommit = false,
+        NeogitCommitMessage = false,
+      }
+      core.imap('<c-a>', [[copilot#Accept("\<CR>")]], { expr = true, script = true })
+    end,
+  }
 
   use {
     "windwp/nvim-autopairs",
@@ -442,34 +390,60 @@ return packer.startup(function(use)
   use {
     "neovim/nvim-lspconfig",
     disable = not core.plugins.lsp,
+    ft = core.languages,
+    requires = {
+      { "hrsh7th/cmp-nvim-lsp"},
+      {"williamboman/nvim-lsp-installer"},
+      {"tamago324/nlsp-settings.nvim"},
+      {"jose-elias-alvarez/null-ls.nvim"}, 
+      {"antoinemadec/FixCursorHold.nvim"},
+    },
+    setup = function()
+       core.load_after_ui("nvim-lspconfig", 0)
+       vim.defer_fn(function()
+          vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
+       end, 0)
+    end,
     config = function()
       require("luavim.lsp")
-    end
+    end,
   }
 
-  use {
-    "williamboman/nvim-lsp-installer",
-    disable = not core.plugins.lsp,
-  }
-
-  -- language server settings defined in json for
-  use {
-    "tamago324/nlsp-settings.nvim",
-    disable = not core.plugins.lsp,
-  }
-
-  -- formatters and linters
-  use {
-    "jose-elias-alvarez/null-ls.nvim",
-    disable = not core.plugins.lsp,
-  }
-
-  -- fixes lsp doc highlight
-  use {
-    "antoinemadec/FixCursorHold.nvim",
-    disable = not core.plugins.lsp,
-    event = 'BufReadPost'
-  }
+  -- use {
+  --   "williamboman/nvim-lsp-installer",
+  --   -- event = "VimEnter",
+  --   ft = core.languages,
+  --   -- event = "CursorMoved",
+  --   disable = not core.plugins.lsp,
+  -- }
+  --
+  -- -- language server settings defined in json for
+  -- use {
+  --   "tamago324/nlsp-settings.nvim",
+  --   -- event = "VimEnter",
+  --   ft = core.languages,
+  --   -- event = "CursorMoved",
+  --   disable = not core.plugins.lsp,
+  -- }
+  --
+  -- -- formatters and linters
+  -- use {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   -- event = "VimEnter",
+  --   ft = core.languages,
+  --   -- event = "CursorMoved",
+  --   disable = not core.plugins.lsp,
+  -- }
+  --
+  -- -- fixes lsp doc highlight
+  -- use {
+  --   "antoinemadec/FixCursorHold.nvim",
+  --   -- event = "VimEnter",
+  --   ft = core.languages,
+  --   -- event = "CursorMoved",
+  --   disable = not core.plugins.lsp,
+  --   -- event = 'BufReadPost'
+  -- }
 
   -- }}}
 
@@ -572,13 +546,13 @@ return packer.startup(function(use)
   use {
     "tpope/vim-vinegar",
     disable = false,
-    event = "BufWinEnter",
+    keys = {'-'},
   }
 
   use{
     "numToStr/Comment.nvim",
     disable = false,
-    keys = { "gcc", "gc" },
+    keys = { "gc" },
     cmd = "CommentToggle",
     config = function ()
        require("luavim.plugins.config.comment")
@@ -615,7 +589,7 @@ return packer.startup(function(use)
   use {
     "moll/vim-bbye",
     disable = false,
-    keys = {"<leader>c"}
+    keys = { "<leader>c" }
   }
 
   -- Sensible defaults
@@ -709,8 +683,17 @@ return packer.startup(function(use)
 
   use {
     'noahfrederick/vim-skeleton',
+    event = "BufNewFile",
     disable = false,
-    -- config = package_configure 'vim-projectionist'
+    config = function()
+      vim.g.skeleton_template_dir = vim.fn.expand("~/.config/nvim") .. "/templates"
+      vim.cmd [[
+        let g:skeleton_replacements = {}
+        function! g:skeleton_replacements.TITLE()
+          return toupper(expand("%:t:r"))
+        endfunction
+      ]]
+    end,
   }
 
   -- }}}
@@ -852,6 +835,7 @@ return packer.startup(function(use)
     config = function()
       require("luavim.plugins.config.telescope")
     end,
+    -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
     -- -- -- requires = {
     -- -- --   {
     -- -- --    "nvim-telescope/telescope-fzf-native.nvim",
@@ -989,7 +973,7 @@ return packer.startup(function(use)
     -- TODO : fix terminal not launching
     "akinsho/nvim-toggleterm.lua",
     disable = false,
-    keys = { "C-t", "<leader>gg", },
+    keys = { "<C-t>", "<leader>gg", },
     cmd = {"Htop", "LazyGit"},
     config = function()
       -- require("luavim.plugins.config.terminal")
