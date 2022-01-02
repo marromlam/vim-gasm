@@ -38,11 +38,9 @@ require("luavim.autocommands")
 -- maybe remove --    keepjumps normal! bbb
 -- maybe remove --    let kcmd = kcmd . '--open ' . key . ' '
 -- maybe remove --    if page
--- maybe remove --        let kcmd = kcmd . '-p ' . page 
+-- maybe remove --        let kcmd = kcmd . '-p ' . page
 -- maybe remove --    endif
 -- maybe remove --    exe "!" . kcmd
 -- maybe remove -- endfunction
-
-
 
 -- vim:fdm=marker
