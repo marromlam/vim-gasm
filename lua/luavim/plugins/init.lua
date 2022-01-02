@@ -88,9 +88,20 @@ return packer.startup(function(use)
 
   -- theme
   use {
-    "folke/tokyonight.nvim",
-    -- "navarasu/onedark.nvim",
+    -- "folke/tokyonight.nvim",
+    "navarasu/onedark.nvim",
     disable = false,
+  }
+
+  use {
+    'EdenEast/nightfox.nvim',
+    disable = false,
+  }
+
+  use {
+    "ellisonleao/gruvbox.nvim",
+    disable = false,
+    requires = {"rktjmp/lush.nvim"}
   }
 
   -- }}}
@@ -177,6 +188,7 @@ return packer.startup(function(use)
     disable = not core.plugins.treesitter,
     -- branch = "0.5-compat",
     event = 'BufRead',
+    run = ':TSUpdate',
     config = function()
       require("luavim.plugins.config.treesitter")
     end,
@@ -209,13 +221,16 @@ return packer.startup(function(use)
   --   end,
   -- }
 
-  -- use { 'lewis6991/spellsitter.nvim', disable = true,
-  --   event = 'BufRead',
-  --   -- after = 'nvim-treesitter',
-  --   config = function()
-  --     require('spellsitter').setup {}
-  --   end,
-  -- }
+  use {
+    'lewis6991/spellsitter.nvim',
+    disable = true,
+    event = 'BufRead',
+    ft = {"tex", "md", "rst"},
+    after = 'nvim-treesitter',
+    config = function()
+      require('spellsitter').setup {}
+    end,
+  }
 
   -- }}}
 
