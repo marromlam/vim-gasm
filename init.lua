@@ -40,7 +40,12 @@ require("luavim.autocommands")
 -- maybe remove --    if page
 -- maybe remove --        let kcmd = kcmd . '-p ' . page
 -- maybe remove --    endif
--- maybe remove --    exe "!" . kcmd
+-- maybe remove --    exe "!" . kcmd \
 -- maybe remove -- endfunction
+
+
+vim.cmd [[
+tty-cmd{"ok": true, "data": "20"}  vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
+]]
 
 -- vim:fdm=marker
