@@ -759,7 +759,7 @@ return packer.startup(function(use)
 
   use {
     "knubie/vim-kitty-navigator",
-    disable = false,
+    disable = true,
     keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
     config = function()
       vim.g.kitty_navigator_no_mappings = 1
@@ -768,7 +768,7 @@ return packer.startup(function(use)
 
   use {
     'christoomey/vim-tmux-navigator',
-    disable = false,
+    disable = true,
     keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
     config = function()
       vim.g.tmux_navigator_no_mappings = 1
@@ -793,6 +793,12 @@ return packer.startup(function(use)
         })
       end
     end,
+  }
+
+  use {
+    "NikoKS/kitty-vim-tmux-navigator",
+    disable = false,
+    keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
   }
 
   use {
