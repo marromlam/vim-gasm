@@ -796,11 +796,10 @@ return packer.startup(function(use)
   -- }
 
   use {
-    "~/Projects/personal/sailor.vim",
-    run = "./install.sh",
-    -- "NikoKS/kitty-vim-tmux-navigator",
+    "marromlam/sailor.vim",
     disable = false,
-    -- keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
+    run = "./install.sh",
+    keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
   }
 
   use {
