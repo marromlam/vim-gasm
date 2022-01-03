@@ -22,9 +22,9 @@ vim.opt.shortmess:append("c")
 
 -- Timings {{{
 
-vim.opt.updatetime = 300            -- faster completion
+vim.opt.updatetime = 300     -- faster completion
 vim.opt.timeout = true
-vim.opt.timeoutlen = 200           -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 200     -- time to wait for a mapped sequence to complete
 vim.opt.ttimeoutlen = 10
 
 -- }}}
@@ -34,16 +34,16 @@ vim.opt.ttimeoutlen = 10
 vim.opt.hidden = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.eadirection = 'hor' -- TODO what is dis?
+vim.opt.eadirection = 'hor' -- TODO what is this?
 
 -- exclude usetab as we do not want to jump to buffers in already open tabs
 -- do not use split or vsplit to ensure we don't open any new windows
 vim.o.switchbuf = 'useopen,uselast'
 vim.opt.fillchars = {
-  vert = '▕', -- alternatives │
+  vert = '▕',                                      -- alternatives │
   fold = ' ',
-  eob = ' ', -- suppress ~ at EndOfBuffer
-  diff = '╱', -- alternatives = ⣿ ░ ─
+  eob = ' ',                                       -- suppress ~ at EndOfBuffer
+  diff = '╱',                                      -- alternatives = ⣿ ░ ─
   msgsep = '‾',
   foldopen = '▾',
   foldsep = '│',
@@ -122,30 +122,11 @@ vim.opt.wildmode = 'longest:full,full' -- Shows a menu bar as opposed to an enor
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 -- Binary
 vim.opt.wildignore = {
-  '*.aux',
-  '*.out',
-  '*.toc',
-  '*.o',
-  '*.obj',
-  '*.dll',
-  '*.jar',
-  '*.pyc',
-  '*.rbc',
-  '*.class',
-  '*.gif',
-  '*.ico',
-  '*.jpg',
-  '*.jpeg',
-  '*.png',
-  '*.avi',
+  '*.aux', '*.out', '*.toc', '*.o', '*.obj', '*.dll', '*.jar', '*.pyc',
+  '*.rbc', '*.class', '*.gif', '*.ico', '*.jpg', '*.jpeg', '*.png', '*.avi',
   '*.wav',
   -- Temp/System
-  '*.*~',
-  '*~ ',
-  '*.swp',
-  '.lock',
-  '.DS_Store',
-  'tags.lock',
+  '*.*~', '*~ ', '*.swp', '.lock', '.DS_Store', 'tags.lock',
 }
 vim.opt.wildoptions = 'pum'
 vim.opt.pumblend = 3 -- Make popup window translucent
