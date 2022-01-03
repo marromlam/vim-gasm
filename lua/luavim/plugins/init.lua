@@ -757,48 +757,50 @@ return packer.startup(function(use)
 
   -- Navigation {{{
 
-  use {
-    "knubie/vim-kitty-navigator",
-    disable = true,
-    keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
-    config = function()
-      vim.g.kitty_navigator_no_mappings = 1
-    end,
-  }
+  -- use {
+  --   "knubie/vim-kitty-navigator",
+  --   disable = true,
+  --   keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
+  --   config = function()
+  --     vim.g.kitty_navigator_no_mappings = 1
+  --   end,
+  -- }
+
+  -- use {
+  --   'christoomey/vim-tmux-navigator',
+  --   disable = true,
+  --   keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
+  --   config = function()
+  --     vim.g.tmux_navigator_no_mappings = 1
+  --     -- Disable tmux navigator when zooming the Vim pane
+  --     vim.g.tmux_navigator_disable_when_zoomed = 1
+  --     vim.g.tmux_navigator_preserve_zoom = 1
+  --     vim.g.tmux_navigator_save_on_switch = 1
+  --     local is_tmux = os.getenv "TMUX"
+  --     if is_tmux then
+  --       require('which-key').register({
+  --         ['<C-H>'] = { '<cmd>TmuxNavigateLeft<cr>' },
+  --         ['<C-J>'] = { '<cmd>TmuxNavigateDown<cr>' },
+  --         ['<C-K>'] = { '<cmd>TmuxNavigateUp<cr>' },
+  --         ['<C-L>'] = { '<cmd>TmuxNavigateRight<cr>' },
+  --       })
+  --     else
+  --       require('which-key').register({
+  --         ['<C-H>'] = { '<cmd>KittyNavigateLeft<cr>' },
+  --         ['<C-J>'] = { '<cmd>KittyNavigateDown<cr>' },
+  --         ['<C-K>'] = { '<cmd>KittyNavigateUp<cr>' },
+  --         ['<C-L>'] = { '<cmd>KittyNavigateRight<cr>' },
+  --       })
+  --     end
+  --   end,
+  -- }
 
   use {
-    'christoomey/vim-tmux-navigator',
-    disable = true,
-    keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
-    config = function()
-      vim.g.tmux_navigator_no_mappings = 1
-      -- Disable tmux navigator when zooming the Vim pane
-      vim.g.tmux_navigator_disable_when_zoomed = 1
-      vim.g.tmux_navigator_preserve_zoom = 1
-      vim.g.tmux_navigator_save_on_switch = 1
-      local is_tmux = os.getenv "TMUX"
-      if is_tmux then
-        require('which-key').register({
-          ['<C-H>'] = { '<cmd>TmuxNavigateLeft<cr>' },
-          ['<C-J>'] = { '<cmd>TmuxNavigateDown<cr>' },
-          ['<C-K>'] = { '<cmd>TmuxNavigateUp<cr>' },
-          ['<C-L>'] = { '<cmd>TmuxNavigateRight<cr>' },
-        })
-      else
-        require('which-key').register({
-          ['<C-H>'] = { '<cmd>KittyNavigateLeft<cr>' },
-          ['<C-J>'] = { '<cmd>KittyNavigateDown<cr>' },
-          ['<C-K>'] = { '<cmd>KittyNavigateUp<cr>' },
-          ['<C-L>'] = { '<cmd>KittyNavigateRight<cr>' },
-        })
-      end
-    end,
-  }
-
-  use {
-    "NikoKS/kitty-vim-tmux-navigator",
+    "~/Projects/personal/sailor.vim",
+    run = "./install.sh",
+    -- "NikoKS/kitty-vim-tmux-navigator",
     disable = false,
-    keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
+    -- keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
   }
 
   use {
