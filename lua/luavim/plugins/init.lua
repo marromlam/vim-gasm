@@ -831,15 +831,13 @@ return packer.startup(function(use)
 
   use {
     "marromlam/kitty-repl.nvim",
+    -- "~/Projects/personal/kitty-repl.nvim",
     disable = not vim.g.elite_mode,
     keys = { "<leader>;" },
-    -- "IndianBoy42/kitty-runner.nvim",
-    -- "jghauser/kitty-runner.nvim",
-    -- event = "BufEnter",
+    cmd = {"KittyREPLStart"},
     config = function()
-      -- require('kitty-runner').setup()
       require('kitty-repl').setup()
-      require('plugins.conf3.kitty-repl')
+      require "luavim.plugins.config.repl"
     end
   }
 

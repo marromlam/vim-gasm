@@ -45,7 +45,16 @@ require("luavim.autocommands")
 
 
 vim.cmd [[
-tty-cmd{"ok": true, "data": "20"}  vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
+  vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
 ]]
+
+
+vim.cmd [[
+augroup KittyREPL
+  autocmd!
+  autocmd BufDelete *.py KittyREPLKill()
+augroup end
+]]
+
 
 -- vim:fdm=marker
