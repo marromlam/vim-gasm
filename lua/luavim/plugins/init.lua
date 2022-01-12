@@ -99,9 +99,10 @@ return packer.startup(function(use)
   }
 
   use {
-    "ellisonleao/gruvbox.nvim",
+    -- "ellisonleao/gruvbox.nvim",
+    "~/Projects/personal/gruvbox.nvim",
     disable = false,
-    requires = {"rktjmp/lush.nvim"}
+    -- requires = {"rktjmp/lush.nvim"}
   }
 
   -- }}}
@@ -930,7 +931,7 @@ return packer.startup(function(use)
   use {
     "ibab/vim-snakemake",
     disable = false,
-    ft = "smk"
+    ft = "snakemake"
   }
 
   -- markdown support

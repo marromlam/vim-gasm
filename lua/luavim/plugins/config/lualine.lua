@@ -21,9 +21,9 @@ local diagnostics = {
 local current_path = {
 	"current_path",
   fmt = function ()
-    return vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
+    return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
   end,
-  icon = "  ",
+  icon = " ",
 	colored = false,
   cond = hide_in_width
 }
@@ -90,13 +90,13 @@ lualine.setup({
 		lualine_c = { filename },
 		lualine_x = { spaces, },
 		lualine_y = { filetype, diagnostics },
-		lualine_z = { location, progress },
+		lualine_z = { location },
 	},
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = { current_path },
 		lualine_c = { filename },
-		lualine_x = { "location" },
+		lualine_x = { location },
 		lualine_y = {},
 		lualine_z = {},
 	},
