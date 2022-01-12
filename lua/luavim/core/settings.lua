@@ -378,7 +378,9 @@ vim.opt.confirm = true -- make vim prompt me to save before doing destructive th
 vim.opt.completeopt = { 'menuone', 'noselect' }  -- mostly for cmp
 vim.opt.hlsearch = false  -- if true highlights all matches on previous search pattern
 vim.opt.autowriteall = true -- automatically :write before running commands and changing files
-vim.opt.clipboard = { 'unnamedplus' }
+if not os.getenv("SSH_TTY") then
+  vim.opt.clipboard = { 'unnamedplus' }
+end
 vim.opt.laststatus = 2
 vim.opt.termguicolors = true
 -- vim.opt.guifont = 'Fira Code Regular Nerd Font Complete Mono:h14'
