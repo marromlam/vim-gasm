@@ -90,12 +90,12 @@ return packer.startup(function(use)
   use {
     -- "folke/tokyonight.nvim",
     "navarasu/onedark.nvim",
-    disable = false,
+    disable = true,
   }
 
   use {
     'EdenEast/nightfox.nvim',
-    disable = false,
+    disable = true,
   }
 
   use {
@@ -720,7 +720,7 @@ return packer.startup(function(use)
   use {
     "tpope/vim-fugitive",
     disable = false,
-    cmd = { "Git", "Gedit", "Gsplit", "Gread" },
+    cmd = { "Git", "Gedit", "Gsplit", "Gread", "Gblame" },
     setup = function()
 	    require("luavim.plugins.config.fugitive")
     end
