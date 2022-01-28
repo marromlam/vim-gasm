@@ -30,8 +30,25 @@ local function external_grep(word, no_ignore)
   return vim.cmd("copen")
 end
 
+local function grep_snakemake(filename)
+  -- these are the string we will search for with ripgrep
+  local _tokens = "(at boundary|WARN|ERROR)"
+  -- regexp for filenames
+  local _filename = (filename or vim.fn.input("RG <- FD (*)  "))
+  -- build the find and ripgrep commands (mind the '')
+  local _fd_cmd = 'find . -iname "' .. _filename .. '" -print0'
+  local _rg_cmd = 'rg --vimgrep --no-ignore "' .. _tokens .. '"'
+  -- pipe find results to rg to search for tokens on them
+  local _full_cmd = _fd_cmd .. " | xargs -0 " .. _rg_cmd
+  -- vim.cmd("silent cexpr system('" .. _full_cmd .. "')")
+  vim.cmd(("silent cexpr system('" .. _full_cmd .. "')"))
+  vim.cmd(("w:quickfix_title = " .. "'soy la polla'"))
+  -- print("silent find . -iname '" .. word0 .. "' -print0")
+  return vim.cmd("copen")
+end
 
-core.map({'n'}, "<leader>ss", external_grep, "Ripgrep to QuickFix")
+core.map({'n'}, "<leader>sr", external_grep, "Ripgrep to QuickFix")
+core.map({'n'}, "<leader>ss", grep_snakemake, "Ripgrep to QuickFix")
 
 
 -- vim:foldmethod=marker
