@@ -153,6 +153,7 @@ vim.opt.pumblend = 3 -- Make popup window translucent
 
 -- Display {{{
 
+vim.opt.colorcolumn = '81'
 vim.opt.conceallevel = 0 -- or 2
 vim.opt.breakindentopt = "sbr"
 vim.opt.linebreak = true -- lines wrap at words rather than random characters

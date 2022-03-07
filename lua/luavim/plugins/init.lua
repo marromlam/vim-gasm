@@ -99,8 +99,8 @@ return packer.startup(function(use)
   }
 
   use {
-    -- "ellisonleao/gruvbox.nvim",
-    "~/Projects/personal/gruvbox.nvim",
+    -- "ellisonleao/gruvbox2.nvim",
+    "~/Projects/personal/gruvbox2.nvim",
     disable = false,
     -- requires = {"rktjmp/lush.nvim"}
   }
@@ -249,7 +249,7 @@ return packer.startup(function(use)
 
   use {
     "vifm/vifm.vim",
-    disable = true,
+    disable = false,
     config = function()
       -- require("plugins.conf3.nvimtree").config()
     end,
@@ -986,6 +986,11 @@ return packer.startup(function(use)
     event = 'BufRead',
   }
 
+  use {
+    'chrisbra/csv.vim',
+    disable = false,
+    ft = 'csv',
+  }
   -- }}}
 
   -- Terminal {{{
