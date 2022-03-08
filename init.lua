@@ -52,6 +52,8 @@ require("luavim.autocommands")
 
 vim.cmd [[
   vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
+  autocmd TermOpen * setlocal nonumber norelativenumber
+  autocmd TermOpen * setlocal scl=no
 ]]
 
 -- vim:fdm=marker
