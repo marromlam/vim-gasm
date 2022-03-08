@@ -93,7 +93,7 @@ vim.opt.formatoptions = {
 -- TODO: fix ass
 -- vim.opt.foldtext = 'v:lua.luavim.folds()'
 vim.opt.foldopen = vim.opt.foldopen + "search"
-vim.opt.foldlevelstart = 3
+vim.opt.foldlevelstart = 0
 -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldexpr = "" -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
 -- vim.opt.foldmethod = 'expr'

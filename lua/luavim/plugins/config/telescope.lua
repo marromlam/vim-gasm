@@ -268,6 +268,18 @@ telescope.setup{
     })
   end
 
+  local function search_dotfiles()
+    require("telescope.builtin").find_files({
+      prompt_title = "Search nvim config",
+      cwd = "~/.config/nvim",
+      show_line = false;
+      -- results_title = '',
+      -- preview_title = '',
+      no_ignore = true,
+      hidden = true
+    })
+  end
+
   local function gh_notifications()
     telescope.extensions.ghn.ghn()
   end
@@ -324,6 +336,7 @@ require('which-key').register({
     ["d"] = { search_dotfiles, "Dotfiles" },  --NOTE I dont understand this
     ["g"] = { "<cmd>Telescope live_grep<cr>", "Live grep text" },
     ["m"] = { "<cmd>Telescope man_pages<cr>", "Man Page" }, -- builtins.man_pages
+    ["n"] = { search_dotfiles, "Dotfiles" },  --NOTE I dont understand this
     ["r"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     ["R"] = { "<cmd>Telescope registers<cr>", "Registers" },
     ["k"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
