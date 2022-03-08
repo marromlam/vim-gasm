@@ -42,7 +42,6 @@ local function grep_snakemake(filename)
   local _full_cmd = _fd_cmd .. " | xargs -0 " .. _rg_cmd
   -- vim.cmd("silent cexpr system('" .. _full_cmd .. "')")
   vim.cmd(("silent cexpr system('" .. _full_cmd .. "')"))
-  vim.cmd(("w:quickfix_title = " .. "'soy la polla'"))
   -- print("silent find . -iname '" .. word0 .. "' -print0")
   return vim.cmd("copen")
 end
