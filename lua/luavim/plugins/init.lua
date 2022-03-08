@@ -99,8 +99,8 @@ return packer.startup(function(use)
   }
 
   use {
-    -- "ellisonleao/gruvbox2.nvim",
-    "~/Projects/personal/gruvbox2.nvim",
+    "ellisonleao/gruvbox.nvim",
+    -- "~/Projects/personal/gruvbox.nvim",
     disable = false,
     -- requires = {"rktjmp/lush.nvim"}
   }
@@ -249,7 +249,7 @@ return packer.startup(function(use)
 
   use {
     "vifm/vifm.vim",
-    disable = false,
+    disable = true,
     config = function()
       -- require("plugins.conf3.nvimtree").config()
     end,
@@ -735,7 +735,7 @@ return packer.startup(function(use)
 
   use {
     'marromlam/git-worktree.nvim',
-    disable = false,
+    disable = true,
     after = "telescope.nvim",
     keys = { '<leader>gt', '<leader>gw' },
     config = function()
@@ -848,7 +848,7 @@ return packer.startup(function(use)
 
   use {
     "nvim-telescope/telescope.nvim",
-    disable = false,
+    disable = true,
     cmd = 'Telescope',
     keys = { '<leader><leader>', '<c-p>', '<leader>f', '<leader>g',
              '<leader>b'},
@@ -917,10 +917,27 @@ return packer.startup(function(use)
   use {
     'camspiers/snap',
     disable = true,
-    rocks = {'fzy'},
+    -- rocks = {'fzy'},
     after = {"which-key.nvim", "nvim-web-devicons"},
     config = function()
       require "plugins.conf3.snap".config()
+    end,
+  }
+
+  use {
+    'junegunn/fzf.vim',
+    run = './install --bin',
+    -- 'vijaymarupudi/nvim-fzf',
+    disable = true
+  } 
+
+  use {
+    'ibhagwan/fzf-lua',
+    after = {"which-key.nvim", "nvim-web-devicons"},
+    -- optional for icon support
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function()
+      require "luavim.plugins.config.fzf"
     end,
   }
 
