@@ -63,13 +63,22 @@ function! TermPDF(file) abort
   let time = str2float(reltimestr(reltime())) * 1000.0
   if time - g:termpdf_lastcalled > 1000
     call system('kitty @ set-background-opacity 1.0')
-    call system('kitty @ kitten termpdf.py ' . a:file . ' -i -a')
+    if empty($SSH_TTY)
+      call system('kitty @ kitten termpdf.py ' . a:file . ' -i -a')
+    else
+      " TODO: add sshing to the host
+      call system('kitty @ --to=tcp:localhost:$KITTY_PORT kitten termpdf.py ' . a:file . ' -i -a')
+    endif
     let g:termpdf_lastcalled = time
   endif
 endfunction
 
 function! TermPDFClose() abort
-  call system('kitty @ close-window --match title:termpdf')
+    if empty($SSH_TTY)
+      call system('kitty @ close-window --match title:termpdf')
+    else
+      call system('kitty @ --to=tcp:localhost:$KITTY_PORT close-window --match title:termpdf')
+    endif
   call system('kitty @ set-background-opacity 0.97')
 endfunction
 
@@ -92,8 +101,6 @@ augroup VimtexTest
 augroup end
 " }}}
 
-let folddigest_options = "nofoldclose,vertical,flexnumwidth"
-let folddigest_size = 40
 " }}}
 
 ]]
