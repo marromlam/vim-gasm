@@ -28,7 +28,7 @@ require'fzf-lua'.setup {
     hl = {
       -- normal         = 'StatusLineNC',        -- window normal color (fg+bg)
       normal = 'TelescopeNormal',
-      border         = 'FloatBorder',        -- border color (try 'FloatBorder')
+      border         = 'TelescopeBorder',        -- border color (try 'FloatBorder')
       -- Only valid with the builtin previewer:
       cursor         = 'Cursor',        -- cursor highlight (grep/LSP matches)
       cursorline     = 'CursorLine',    -- cursor line

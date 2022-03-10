@@ -80,6 +80,21 @@ M.setup = function()
     on_open = float_handler,
   }
 
+  local Path = require 'plenary.path'
+  local path = vim.fn.tempname()
+  
+  local vifm = Terminal:new {
+    cmd = ('vifm --choose-files "%s"'):format(path),
+    -- direction = "float",
+    close_on_exit = true,
+    on_close = function()
+      data = Path:new(path):read()
+      vim.schedule(function()
+        vim.cmd('e ' .. data)
+      end)
+    end
+  }
+
   core.command {
     'Htop',
     function() htop:toggle() end,
@@ -90,8 +105,18 @@ M.setup = function()
     function() lazygit:toggle() end,
   }
 
+  core.command {
+    'Vifm',
+    function() vifm:toggle() end,
+  }
+
   core.map({'n'}, "<leader>gg",
     function() lazygit:toggle() end,
+    "Lazygit"
+  )
+
+  core.map({'n'}, "<leader>e",
+    function() vifm:toggle() end,
     "Lazygit"
   )
 
