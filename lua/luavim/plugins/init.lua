@@ -99,8 +99,8 @@ return packer.startup(function(use)
   }
 
   use {
-    "ellisonleao/gruvbox.nvim",
-    -- "~/Projects/personal/gruvbox.nvim",
+    -- "ellisonleao/gruvbox.nvim",
+    "~/Projects/personal/gruvbox.nvim",
     disable = false,
     -- requires = {"rktjmp/lush.nvim"}
   }
@@ -821,7 +821,7 @@ return packer.startup(function(use)
     end
   }
 
-  use { 
+  use {
     "hanschen/vim-ipython-cell",
     disable = vim.g.elite_mode,
     keys = { "<leader>;" },
@@ -839,6 +839,23 @@ return packer.startup(function(use)
     config = function()
       require('kitty-repl').setup()
       require "luavim.plugins.config.repl"
+    end
+  }
+
+  use {
+    'dccsillag/magma-nvim',
+    run = ':UpdateRemotePlugins',
+    disable = true,
+    config = function ()
+      vim.cmd[[
+        nnoremap <silent><expr> <Leader>r  :MagmaEvaluateOperator<CR>
+        nnoremap <silent>       <Leader>rr :MagmaEvaluateLine<CR>
+        xnoremap <silent>       <Leader>r  :<C-u>MagmaEvaluateVisual<CR>
+        nnoremap <silent>       <Leader>rc :MagmaReevaluateCell<CR>
+        nnoremap <silent>       <Leader>rd :MagmaDelete<CR>
+        nnoremap <silent>       <Leader>ro :MagmaShowOutput<CR>
+        let g:magma_automatically_open_output = v:true
+      ]]
     end
   }
 
@@ -1016,8 +1033,8 @@ return packer.startup(function(use)
     -- TODO : fix terminal not launching
     "akinsho/nvim-toggleterm.lua",
     disable = false,
-    keys = { "<C-t>", "<leader>gg", },
-    cmd = {"Htop", "LazyGit"},
+    keys = { "<C-t>", "<leader>gg", "<leader>e" },
+    cmd = {"Htop", "LazyGit", "Vifm"},
     config = function()
       -- require("luavim.plugins.config.terminal")
       require("luavim.plugins.config.toggleterm").config()
