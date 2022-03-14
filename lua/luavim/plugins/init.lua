@@ -720,7 +720,7 @@ return packer.startup(function(use)
   use {
     "tpope/vim-fugitive",
     disable = false,
-    cmd = { "Git", "Gedit", "Gsplit", "Gread", "Gblame" },
+    cmd = { "Git", "Gedit", "Gsplit", "Gread", "Gblame", "OGlog" },
     setup = function()
 	    require("luavim.plugins.config.fugitive")
     end
@@ -800,7 +800,7 @@ return packer.startup(function(use)
     "marromlam/sailor.vim",
     disable = false,
     run = "./install.sh",
-    keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
+    -- keys = {"<C-H>", "<C-J>", "<C-K>", "<C-L>" },
   }
 
   use {
