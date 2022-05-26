@@ -10,4 +10,4 @@ __email__ = ["email"]
 @CURSOR@
 
 
-# vim: fdm=marker ts=2 sw=2 sts=2 sr noet
+# vim: fdm=marker ts=2 sw=2 sts=2 sr et
