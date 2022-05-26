@@ -67,6 +67,8 @@ function! TermPDF(file) abort
       call system('kitty @ kitten termpdf.py ' . a:file . ' -i -a')
     else
       " TODO: add sshing to the host
+      " echo 'kitty @ --to=tcp:localhost:$KITTY_PORT kitten termpdf.py ' . a:file . ' -i -a'
+      " call system('kitty @ --to=tcp:localhost:$KITTY_PORT kitten termpdf.py ' . a:file . ' -i -a')
       call system('kitty @ --to=tcp:localhost:$KITTY_PORT kitten termpdf.py ' . a:file . ' -i -a')
     endif
     let g:termpdf_lastcalled = time
