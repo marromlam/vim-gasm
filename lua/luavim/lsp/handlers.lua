@@ -34,7 +34,10 @@ M.setup = function()
 
 	vim.diagnostic.config(config)
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    { border = "rounded" }
+  )
 
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 		vim.lsp.handlers.signature_help,
@@ -94,6 +97,14 @@ M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	end
+  if client.resolved_capabilities.document_formatting then
+      vim.cmd([[
+      augroup LspFormatting
+          autocmd! * <buffer>
+          autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+      augroup END
+      ]])
+  end
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end
