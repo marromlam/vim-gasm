@@ -9,7 +9,7 @@ bufferline.setup({
 			{ filetype = "NvimTree", text = "", gui = "bold", padding = 1 },
 		},
 		modified_icon = "",
-		numbers = "ordinal",
+		numbers = "none",  -- ordinal
 		indicator_icon = "▎",
 		separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
 		-- close icon
