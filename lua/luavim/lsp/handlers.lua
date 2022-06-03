@@ -47,7 +47,7 @@ end
 
 local function lsp_highlight_document(client)
 	-- Set autocommands conditional on server_capabilities
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
       augroup lsp_document_highlight
@@ -70,11 +70,11 @@ local function lsp_keymaps(bufnr)
 	core.noremap({ "n" }, "gr", "<cmd>lua vim.lsp.buf.references()<CR>", "Show references")
 	core.noremap({ "n" }, "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
 	core.noremap({ "n" }, "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action")
-	core.noremap({ "n" }, "<leader>lf", "<cmd>lua vim.diagnostic.open_float()<CR>", "Open diagnostic float")
+	-- core.noremap({ "n" }, "<leader>lf", "<cmd>lua vim.diagnostic.open_float()<CR>", "Open diagnostic float")
 	core.noremap(
 		{ "n" },
 		"<leader>ll",
-		'<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
+		'<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>',
 		"Show line diagnostics"
 	)
 	core.noremap(
@@ -89,15 +89,16 @@ local function lsp_keymaps(bufnr)
 		'<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>',
 		"Go to next diagnostic"
 	)
-	core.noremap({ "n" }, "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", "Diagss")
-	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+	core.noremap({ "n" }, "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", "Diagss")
+	core.noremap({ "n" }, "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", "Diagss")
+	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end
 
 M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.document_formatting = false
 	end
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
       vim.cmd([[
       augroup LspFormatting
           autocmd! * <buffer>
