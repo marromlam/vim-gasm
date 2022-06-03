@@ -29,6 +29,7 @@ vim.cmd [[
   augroup end
 ]]
 
+
 vim.cmd [[
 fun! SetQFControlVariable()
     if getwininfo(win_getid())[0]['loclist'] == 1
@@ -73,3 +74,10 @@ vim.cmd [[
     autocmd BufWinEnter * :set formatoptions-=cro
   augroup end
 ]]
+
+
+vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
+  callback = function()
+    require("luavim.core.winbar").get_winbar()
+  end,
+})
