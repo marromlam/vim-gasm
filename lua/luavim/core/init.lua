@@ -105,6 +105,7 @@ require('luavim.core.settings')
 require('luavim.core.mapper')
 require('luavim.core.mappings')
 require('luavim.core.functions')
+require('luavim.core.winbar')
 
 -- }}}
 
