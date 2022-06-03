@@ -151,6 +151,16 @@ return packer.startup(function(use)
   }
 
   use {
+	  "SmiteshP/nvim-gps",
+    event = {'BufRead', "CursorMoved", "BufWinEnter", "BufFilePost",
+             "InsertEnter", "BufWritePost"},
+    after = {"nvim-treesitter", "nvim-web-devicons"},
+    config = function()
+      require "luavim.plugins.config.gps"
+    end
+  }
+
+  use {
     "nvim-lualine/lualine.nvim",
     disable = false,
     after = "nvim-web-devicons",
@@ -158,17 +168,6 @@ return packer.startup(function(use)
       require "luavim.plugins.config.lualine"
     end
   }
-
-
-  use {
-	"SmiteshP/nvim-gps",
-  event = {'BufRead', "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost"},
-  after = "nvim-treesitter",
-  setup = function()
-    require("nvim-gps").setup()
-  end
-}
-
 
   -- }}}
 
@@ -200,7 +199,8 @@ return packer.startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     disable = not core.plugins.treesitter,
     -- branch = "0.5-compat",
-    event = {'BufRead', "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost"},
+    event = {'BufRead', "CursorMoved", "BufWinEnter", "BufFilePost",
+             "InsertEnter", "BufWritePost"},
     run = ':TSUpdate',
     config = function()
       require("luavim.plugins.config.treesitter")
