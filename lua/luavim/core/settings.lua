@@ -39,7 +39,8 @@ vim.opt.eadirection = "hor" -- TODO what is this?
 -- do not use split or vsplit to ensure we don't open any new windows
 vim.o.switchbuf = "useopen,uselast"
 vim.opt.fillchars = {
-	vert = "▕", -- alternatives │
+	-- vert = "▕", -- alternatives │
+	vert = "│",
 	fold = " ",
 	eob = " ", -- suppress ~ at EndOfBuffer
 	diff = "╱", -- alternatives = ⣿ ░ ─
@@ -399,7 +400,7 @@ vim.opt.autowriteall = false -- automatically :write before running commands and
 if not os.getenv("SSH_TTY") then
 	vim.opt.clipboard = { "unnamedplus" }
 end
-vim.opt.laststatus = 2
+vim.opt.laststatus = 3
 vim.opt.termguicolors = true
 -- vim.opt.guifont = 'Fira Code Regular Nerd Font Complete Mono:h14'
 
