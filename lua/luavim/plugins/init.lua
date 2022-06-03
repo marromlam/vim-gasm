@@ -99,7 +99,8 @@ return packer.startup(function(use)
   }
 
   use {
-    "marromlam/gruvbox.nvim",
+    -- "marromlam/gruvbox.nvim",
+    "ellisonleao/gruvbox.nvim",
     -- "~/Projects/personal/gruvbox.nvim",
     disable = false,
     -- requires = {"rktjmp/lush.nvim"}
@@ -158,6 +159,17 @@ return packer.startup(function(use)
     end
   }
 
+
+  use {
+	"SmiteshP/nvim-gps",
+  event = {'BufRead', "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost"},
+  after = "nvim-treesitter",
+  setup = function()
+    require("nvim-gps").setup()
+  end
+}
+
+
   -- }}}
 
   -- Identation {{{
@@ -188,7 +200,7 @@ return packer.startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     disable = not core.plugins.treesitter,
     -- branch = "0.5-compat",
-    event = 'BufRead',
+    event = {'BufRead', "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost"},
     run = ':TSUpdate',
     config = function()
       require("luavim.plugins.config.treesitter")
