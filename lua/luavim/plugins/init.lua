@@ -353,7 +353,7 @@ return packer.startup(function(use)
       { 'f3fora/cmp-spell', after="nvim-cmp" },
       { 'petertriho/cmp-git', after="nvim-cmp" },
       { 'tzachar/cmp-tabnine', after="nvim-cmp", run = './install.sh'},
-      { 'hrsh7th/cmp-copilot', after="nvim-cmp" },
+      -- { 'hrsh7th/cmp-copilot', after="nvim-cmp" },
     },
     config = function()
       require('luavim.plugins.config.cmp')
@@ -535,25 +535,63 @@ return packer.startup(function(use)
 -- NO DEBUG YET --      end,
 -- NO DEBUG YET --    }
 -- NO DEBUG YET --
--- NO DEBUG YET --    use {
--- NO DEBUG YET --      'mfussenegger/nvim-dap', disable = true,
--- NO DEBUG YET --      module = 'dap',
--- NO DEBUG YET --      keys = { '<localleader>dc', '<localleader>db' },
--- NO DEBUG YET --      setup = package_configure('dap').setup,
--- NO DEBUG YET --      config = package_configure('dap').config,
--- NO DEBUG YET --      requires = {
--- NO DEBUG YET --        {
--- NO DEBUG YET --          'rcarriga/nvim-dap-ui',
--- NO DEBUG YET --          after = 'nvim-dap',
--- NO DEBUG YET --          config = function()
--- NO DEBUG YET --            local dapui = require 'dapui'
--- NO DEBUG YET --            dapui.setup()
--- NO DEBUG YET --            core.nnoremap('<localleader>duc', dapui.close, 'dap-ui: close')
--- NO DEBUG YET --            core.nnoremap('<localleader>dut', dapui.toggle, 'dap-ui: toggle')
--- NO DEBUG YET --          end,
--- NO DEBUG YET --        },
--- NO DEBUG YET --      },
--- NO DEBUG YET --    }
+
+use {
+  'mfussenegger/nvim-dap', disable = false,
+  -- module = 'dap',
+  -- keys = { '<localleader>dc', '<localleader>db' },
+  -- setup = package_configure('dap').setup,
+  -- config = package_configure('dap').config,
+  -- requires = {
+  --   {
+  --     'rcarriga/nvim-dap-ui',
+  --     after = 'nvim-dap',
+  --     config = function()
+  --       local dapui = require 'dapui'
+  --       dapui.setup()
+  --       core.nnoremap('<localleader>duc', dapui.close, 'dap-ui: close')
+  --       core.nnoremap('<localleader>dut', dapui.toggle, 'dap-ui: toggle')
+  --     end,
+  --   },
+  -- },
+  config = function()
+      local dap = require('dap')
+      dap.adapters.lldb = {
+        type = 'executable',
+        command = '/home3/marcos.romero/.linuxbrew/bin/lldb-vscode', -- adjust as needed, must be absolute path
+        name = 'lldb'
+      }
+      dap.configurations.cpp = {
+        {
+          name = 'Launch',
+          type = 'lldb',
+          request = 'launch',
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          end,
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+          args = {},
+          -- 💀
+          -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+          --
+          --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+          --
+          -- Otherwise you might get the following error:
+          --
+          --    Error on launch: Failed to attach to the target process
+          --
+          -- But you should be aware of the implications:
+          -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+          -- runInTerminal = false,
+        },
+      }
+      -- If you want to use this for Rust and C, add something like this:
+      dap.configurations.c = dap.configurations.cpp
+      dap.configurations.rust = dap.configurations.cpp
+  end
+}
+
 -- NO DEBUG YET --
 -- NO DEBUG YET --    use { 'jbyuki/one-small-step-for-vimkind', disable = true,
 -- NO DEBUG YET --      after = 'nvim-dap'
@@ -1018,9 +1056,29 @@ return packer.startup(function(use)
   }
 
    -- CMake integration
-   -- use {
-   --   "cdelledonne/vim-cmake",
-   -- }
+   use {
+     -- "cdelledonne/vim-cmake",
+     "Shatur/neovim-cmake",
+    requires = {'nvim-lua/plenary.nvim', "nvim-dap"},
+    config = function()
+      -- local Path = require('plenary.path')
+      require('cmake').setup({
+        -- cmake_executable = 'cmake', -- CMake executable to run.
+        parameters_file = 'compile_parameters.json', -- JSON file to store information about selected target, run arguments and build type.
+        -- build_dir = tostring(Path:new('{cwd}', 'build', '{os}-{build_type}')), -- Build directory. The expressions `{cwd}`, `{os}` and `{build_type}` will be expanded with the corresponding text values. Could be a function that return the path to the build directory.
+        -- samples_path = tostring(script_path:parent():parent():parent() / 'samples'), -- Folder with samples. `samples` folder from the plugin directory is used by default.
+        -- default_projects_path = tostring(Path:new(vim.loop.os_homedir(), 'Projects')), -- Default folder for creating project.
+        configure_args = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1' }, -- Default arguments that will be always passed at cmake configure step. By default tells cmake to generate `compile_commands.json`.
+        build_args = {}, -- Default arguments that will be always passed at cmake build step.
+        on_build_output = nil, -- Callback which will be called on every line that is printed during build process. Accepts printed line as argument.
+        quickfix_height = 10, -- Height of the opened quickfix.
+        quickfix_only_on_error = false, -- Open quickfix window only if target build failed.
+        copy_compile_commands = true, -- Copy compile_commands.json to current working directory.
+        dap_configuration = { type = 'lldb', request = 'launch' }, -- DAP configuration. By default configured to work with `lldb-vscode`.
+        dap_open_command = require('dap').repl.open, -- Command to run after starting DAP session. You can set it to `false` if you don't want to open anything or `require('dapui').open` if you are using https://github.com/rcarriga/nvim-dap-ui
+      })
+    end
+   }
 
    -- CMake (lua) integration : In the future we should try to use these two
    -- {"Shatur/neovim-cmake"},
