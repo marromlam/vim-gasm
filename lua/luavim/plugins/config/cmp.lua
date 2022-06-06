@@ -144,7 +144,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'copilot' },
+    -- { name = 'copilot' },
     { name = 'cmp_tabnine' },
     { name = 'spell' },
     { name = 'path' },
