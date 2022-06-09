@@ -377,7 +377,7 @@ return packer.startup(function(use)
 
   use {
     'github/copilot.vim',
-    disable = not core.plugins.cmp,
+    disable = true,
     after = 'nvim-cmp',
     config = function()
       vim.g.copilot_no_tab_map = true
