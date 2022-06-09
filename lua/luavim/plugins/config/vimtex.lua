@@ -58,6 +58,7 @@ augroup Markdown
 augroup end
 
 let g:termpdf_lastcalled = 0
+let g:termpdf_panelopened = 0
 function! TermPDF(file) abort
   " Implement some basic throttling
   let time = str2float(reltimestr(reltime())) * 1000.0
@@ -66,10 +67,14 @@ function! TermPDF(file) abort
     if empty($SSH_TTY)
       call system('kitty @ kitten termpdf.py ' . a:file . ' -i -a')
     else
-      " TODO: add sshing to the host
-      " echo 'kitty @ --to=tcp:localhost:$KITTY_PORT kitten termpdf.py ' . a:file . ' -i -a'
-      " call system('kitty @ --to=tcp:localhost:$KITTY_PORT kitten termpdf.py ' . a:file . ' -i -a')
-      call system('kitty @ --to=tcp:localhost:$KITTY_PORT kitten termpdf.py ' . a:file . ' -i -a')
+      if g:termpdf_panelopened == 0
+        let s:hostname = system("hostname")
+        call system('kitty @ --to=tcp:localhost:$KITTY_PORT launch --title=termpdf')
+        call system('kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match title:termpdf "ssh ' . s:hostname . '\n"')
+        sleep 1000m
+        let g:termpdf_panelopened = 1
+      endif
+      call system('kitty @ --to=tcp:localhost:$KITTY_PORT kitten kittens/termpdf.py ' . a:file . ' -i -a')
     endif
     let g:termpdf_lastcalled = time
   endif
@@ -81,6 +86,7 @@ function! TermPDFClose() abort
     else
       call system('kitty @ --to=tcp:localhost:$KITTY_PORT close-window --match title:termpdf')
     endif
+    let g:termpdf_panelopened = 0
   call system('kitty @ set-background-opacity 0.97')
 endfunction
 
