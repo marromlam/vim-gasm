@@ -35,14 +35,15 @@ function M.setup(client, buf)
 
   client.server_capabilities.document_formatting = enable
   client.server_capabilities.document_range_formatting = enable
-  if client.server_capabilities.document_formatting then
-    vim.cmd [[
-      augroup LspFormat
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
-      augroup END
-    ]]
-  end
+  -- -- if client.server_capabilities.document_formatting then
+  --   vim.cmd [[
+  --     augroup LspFormat
+  --       autocmd! * <buffer>
+  --       " autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
+  --       autocmd BufWritePre <buffer> Format
+  --     augroup END
+  --   ]]
+  -- -- end
 end
 
 function M.has_formatter(filetype)
