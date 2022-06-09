@@ -30,8 +30,10 @@ local sources = {
   b.formatting.shfmt,
   b.formatting.fixjson,
   b.formatting.black.with { extra_args = { "--fast" } },
+  b.formatting.clang_format,
   b.formatting.isort,
-  with_root_file(b.formatting.stylua, "stylua.toml"),
+  with_root_file(b.formatting.stylua, ".stylua.toml"),
+  with_root_file(b.formatting.clang_format, ".clang-format"),
 
   -- diagnostics
   b.diagnostics.write_good,
