@@ -88,21 +88,20 @@ return packer.startup(function(use)
 
   -- theme
   use {
-    -- "folke/tokyonight.nvim",
-    "navarasu/onedark.nvim",
+    "folke/tokyonight.nvim",
     disable = true,
   }
 
   use {
     'EdenEast/nightfox.nvim',
-    disable = true,
+    disable = false,
   }
 
   use {
     -- "marromlam/gruvbox.nvim",
     "ellisonleao/gruvbox.nvim",
     -- "~/Projects/personal/gruvbox.nvim",
-    disable = false,
+    disable = true,
     -- requires = {"rktjmp/lush.nvim"}
   }
 
