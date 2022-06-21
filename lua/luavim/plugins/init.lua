@@ -101,7 +101,7 @@ return packer.startup(function(use)
     -- "marromlam/gruvbox.nvim",
     "ellisonleao/gruvbox.nvim",
     -- "~/Projects/personal/gruvbox.nvim",
-    disable = true,
+    disable = false,
     -- requires = {"rktjmp/lush.nvim"}
   }
 
