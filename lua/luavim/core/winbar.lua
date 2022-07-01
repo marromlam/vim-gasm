@@ -13,6 +13,10 @@ M.winbar_filetype_exclude = {
   "Outline",
   "spectre_panel",
   "toggleterm",
+  "sh",
+  "term",
+  "terminal",
+  "FzfLua",
 }
 
 local get_filename = function()
@@ -35,7 +39,8 @@ local get_filename = function()
       file_icon_color = ""
     end
 
-    return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. filename .. "%*"
+    -- return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. filename .. "%*"
+    return " " .. "%#" .. hl_group .. "#" .. file_icon .. " " .. filename .. "%*"
   end
 end
 
