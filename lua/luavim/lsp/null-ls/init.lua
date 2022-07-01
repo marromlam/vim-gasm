@@ -1,8 +1,7 @@
 local null_ls_status_ok, nls = pcall(require, "null-ls")
 if not null_ls_status_ok then
-	return
+  return
 end
-
 
 local formatting = nls.builtins.formatting
 local diagnostics = nls.builtins.diagnostics
@@ -52,32 +51,30 @@ local sources = {
   b.hover.dictionary,
 }
 
-	-- 	formatting.prettier.with({
- --      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }
- --    }),
-	--
-	-- 	formatting.black.with({
- --      extra_args = { "--fast" }
- --    }),
-	--
-	-- 	formatting.stylua,
-	-- },
-  -- }}}
-  --
-
+-- 	formatting.prettier.with({
+--      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }
+--    }),
+--
+-- 	formatting.black.with({
+--      extra_args = { "--fast" }
+--    }),
+--
+-- 	formatting.stylua,
+-- },
+-- }}}
+--
 
 local opts = {
   on_attach = require("luavim.lsp.handlers").on_attach,
   capabilities = require("luavim.lsp.handlers").capabilities,
 }
-nls.setup({
-	debug = false,
-	sources = sources,
+nls.setup {
+  debug = true,
+  sources = sources,
   debounce = 150,
   save_after_format = false,
   on_attach = opts.on_attach,
   root_dir = nls_utils.root_pattern ".git",
-})
-
+}
 
 -- vim:foldmethod=marker
