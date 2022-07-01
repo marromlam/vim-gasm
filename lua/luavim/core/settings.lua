@@ -14,8 +14,8 @@
 --  c = true,
 --  W = true, -- Don't show [w] or written when writing
 -- }
-vim.opt.shortmess:append("sI")
-vim.opt.shortmess:append("c")
+vim.opt.shortmess:append "sI"
+vim.opt.shortmess:append "c"
 
 -- }}}
 
@@ -39,15 +39,15 @@ vim.opt.eadirection = "hor" -- TODO what is this?
 -- do not use split or vsplit to ensure we don't open any new windows
 vim.o.switchbuf = "useopen,uselast"
 vim.opt.fillchars = {
-	-- vert = "▕", -- alternatives │
-	vert = "│",
-	fold = " ",
-	eob = " ", -- suppress ~ at EndOfBuffer
-	diff = "╱", -- alternatives = ⣿ ░ ─
-	msgsep = "‾",
-	foldopen = "▾",
-	foldsep = "│",
-	foldclose = "▸",
+  -- vert = "▕", -- alternatives │
+  vert = "│",
+  fold = " ",
+  eob = " ", -- suppress ~ at EndOfBuffer
+  diff = "╱", -- alternatives = ⣿ ░ ─
+  msgsep = "‾",
+  foldopen = "▾",
+  foldsep = "│",
+  foldclose = "▸",
 }
 
 -- }}}
@@ -55,15 +55,15 @@ vim.opt.fillchars = {
 -- Diff options {{{
 
 vim.opt.diffopt = vim.opt.diffopt
-	+ {
-		"vertical",
-		"iwhite",
-		"hiddenoff",
-		"foldcolumn:0",
-		"context:4",
-		"algorithm:histogram",
-		"indent-heuristic",
-	}
+  + {
+    "vertical",
+    "iwhite",
+    "hiddenoff",
+    "foldcolumn:0",
+    "context:4",
+    "algorithm:histogram",
+    "indent-heuristic",
+  }
 
 -- }}}
 
@@ -72,19 +72,19 @@ vim.opt.diffopt = vim.opt.diffopt
 -- Options {{{
 
 vim.opt.formatoptions = {
-	["1"] = true,
-	["2"] = true, -- Use indent from 2nd line of a paragraph
-	q = true, -- continue comments with gq"
-	c = true, -- Auto-wrap comments using textwidth
-	r = true, -- Continue comments when pressing Enter
-	n = true, -- Recognize numbered lists
-	t = false, -- autowrap lines using text width value
-	j = true, -- remove a comment leader when joining lines.
-	-- Only break if the line was not longer than 'textwidth' when the insert
-	-- started and only at a white character that has been entered during the
-	-- current insert command.
-	l = true,
-	v = true,
+  ["1"] = true,
+  ["2"] = true, -- Use indent from 2nd line of a paragraph
+  q = true, -- continue comments with gq"
+  c = true, -- Auto-wrap comments using textwidth
+  r = true, -- Continue comments when pressing Enter
+  n = true, -- Recognize numbered lists
+  t = false, -- autowrap lines using text width value
+  j = true, -- remove a comment leader when joining lines.
+  -- Only break if the line was not longer than 'textwidth' when the insert
+  -- started and only at a white character that has been entered during the
+  -- current insert command.
+  l = true,
+  v = true,
 }
 
 -- }}}
@@ -122,30 +122,30 @@ vim.opt.wildmode = "longest:full,full" -- Shows a menu bar as opposed to an enor
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 -- Binary
 vim.opt.wildignore = {
-	"*.aux",
-	"*.out",
-	"*.toc",
-	"*.o",
-	"*.obj",
-	"*.dll",
-	"*.jar",
-	"*.pyc",
-	"*.rbc",
-	"*.class",
-	"*.gif",
-	"*.ico",
-	"*.jpg",
-	"*.jpeg",
-	"*.png",
-	"*.avi",
-	"*.wav",
-	-- Temp/System
-	"*.*~",
-	"*~ ",
-	"*.swp",
-	".lock",
-	".DS_Store",
-	"tags.lock",
+  "*.aux",
+  "*.out",
+  "*.toc",
+  "*.o",
+  "*.obj",
+  "*.dll",
+  "*.jar",
+  "*.pyc",
+  "*.rbc",
+  "*.class",
+  "*.gif",
+  "*.ico",
+  "*.jpg",
+  "*.jpeg",
+  "*.png",
+  "*.avi",
+  "*.wav",
+  -- Temp/System
+  "*.*~",
+  "*~ ",
+  "*.swp",
+  ".lock",
+  ".DS_Store",
+  "tags.lock",
 }
 vim.opt.wildoptions = "pum"
 vim.opt.pumblend = 3 -- Make popup window translucent
@@ -154,7 +154,7 @@ vim.opt.pumblend = 3 -- Make popup window translucent
 
 -- Display {{{
 
-vim.opt.colorcolumn = '81'
+vim.opt.colorcolumn = "81"
 vim.opt.conceallevel = 0 -- or 2
 vim.opt.breakindentopt = "sbr"
 vim.opt.linebreak = true -- lines wrap at words rather than random characters
@@ -168,11 +168,11 @@ vim.opt.showbreak = [[↪ ]] -- Options include -> '…', '↳ ', '→','↪ '
 --- This is used to handle markdown code blocks where the language might
 --- be set to a value that isn't equivalent to a vim filetype
 vim.g.markdown_fenced_languages = {
-	"js=javascript",
-	"ts=typescript",
-	"shell=sh",
-	"bash=sh",
-	"console=sh",
+  "js=javascript",
+  "ts=typescript",
+  "shell=sh",
+  "bash=sh",
+  "console=sh",
 }
 
 -- }}}
@@ -181,11 +181,11 @@ vim.g.markdown_fenced_languages = {
 
 vim.opt.list = true -- invisible chars
 vim.opt.listchars = {
-	eol = nil,
-	tab = "│ ",
-	extends = "›", -- Alternatives: … »
-	precedes = "‹", -- Alternatives: … «
-	trail = "•", -- BULLET (U+2022, UTF-8: E2 80 A2)
+  eol = nil,
+  tab = "│ ",
+  extends = "›", -- Alternatives: … »
+  precedes = "‹", -- Alternatives: … «
+  trail = "•", -- BULLET (U+2022, UTF-8: E2 80 A2)
 }
 
 -- }}}
@@ -201,7 +201,7 @@ vim.opt.tabstop = 2 -- insert 2 spaces for a tab
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.smartindent = true -- make indenting smarter again
-vim.opt.showtabline = 2 -- always show tabs
+vim.opt.showtabline = 0 -- always show tabs
 
 -- }}}
 
@@ -232,9 +232,9 @@ vim.opt.cursorline = true -- highlight the current line
 
 -- This is from the help docs, it enables mode shapes, "Cursor" highlight, and blinking
 vim.opt.guicursor = {
-	[[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]],
-	[[a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor]],
-	[[sm:block-blinkwait175-blinkoff150-blinkon175]],
+  [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]],
+  [[a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor]],
+  [[sm:block-blinkwait175-blinkoff150-blinkon175]],
 }
 
 -- }}}
@@ -254,12 +254,12 @@ vim.opt.titlelen = 70
 
 vim.opt.showmode = false
 vim.opt.sessionoptions = {
-	"globals",
-	"buffers",
-	"curdir",
-	"help",
-	"winpos",
-	-- "tabpages",
+  "globals",
+  "buffers",
+  "curdir",
+  "help",
+  "winpos",
+  -- "tabpages",
 }
 vim.opt.viewoptions = { "cursor", "folds" } -- save/restore just these (with `:{mk,load}view`)
 vim.opt.virtualedit = "block" -- allow cursor to move where there is no text in visual block mode
@@ -279,28 +279,28 @@ vim.opt.virtualedit = "block" -- allow cursor to move where there is no text in 
 -- Disable builtin vim plugins {{{
 
 local disabled_built_ins = {
-	-- "netrw",
-	-- "netrwPlugin",
-	-- "netrwSettings",
-	-- "netrwFileHandlers",
-	"gzip",
-	"zip",
-	"zipPlugin",
-	"tar",
-	"tarPlugin",
-	"getscript",
-	"getscriptPlugin",
-	"vimball",
-	"vimballPlugin",
-	"2html_plugin",
-	"logipat",
-	"rrhelper",
-	"spellfile_plugin",
-	"matchit",
+  -- "netrw",
+  -- "netrwPlugin",
+  -- "netrwSettings",
+  -- "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin",
+  "matchit",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-	vim.g["loaded_" .. plugin] = 1
+  vim.g["loaded_" .. plugin] = 1
 end
 
 -- }}}
@@ -330,7 +330,7 @@ endfunction
 -- Backup and swaps {{{
 
 vim.opt.undofile = true -- enable persistent undo
-vim.opt.undodir = os.getenv("HOME") .. "/.cache/undo" -- set an undo directory
+vim.opt.undodir = os.getenv "HOME" .. "/.cache/undo" -- set an undo directory
 
 vim.opt.swapfile = false -- creates a swapfile
 vim.opt.backup = false -- creates a backup file
@@ -366,7 +366,7 @@ vim.opt.sidescroll = 1
 
 -- vim.opt.spelllang = "en"
 -- vim.opt.spell = false
-vim.opt.spellsuggest:prepend({ 12 })
+vim.opt.spellsuggest:prepend { 12 }
 vim.opt.spelloptions = "camel"
 vim.opt.spellcapcheck = "" -- don't check for capital letters at start of sentence
 vim.opt.fileformats = { "unix", "mac", "dos" }
@@ -385,7 +385,7 @@ vim.opt.mousefocus = true
 -- these only read ".vim" files
 vim.opt.secure = true -- Disable autocmd etc for project local vimrc files.
 vim.opt.exrc = true -- Allow project local vimrc files example .nvimrc see :h exrc
-vim.opt.whichwrap:append("<>hl") -- TODO what is this?
+vim.opt.whichwrap:append "<>hl" -- TODO what is this?
 -- vim.opt.whichwrap:append("+=<,>,[,],h,l")
 
 vim.opt.joinspaces = false
@@ -397,8 +397,8 @@ vim.opt.confirm = true -- make vim prompt me to save before doing destructive th
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly for cmp
 vim.opt.hlsearch = false -- if true highlights all matches on previous search pattern
 vim.opt.autowriteall = false -- automatically :write before running commands and changing files
-if not os.getenv("SSH_TTY") then
-	vim.opt.clipboard = { "unnamedplus" }
+if not os.getenv "SSH_TTY" then
+  vim.opt.clipboard = { "unnamedplus" }
 end
 vim.opt.laststatus = 3
 vim.opt.termguicolors = true

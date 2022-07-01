@@ -1,18 +1,17 @@
 local M = {}
 
-
 M.config = function()
   local status_ok, terminal = pcall(require, "toggleterm")
   if not status_ok then
     return
   end
 
-  terminal.setup  {
+  terminal.setup {
     -- size can be a number or function which is passed the current terminal
     size = function(term)
-      if term.direction == 'horizontal' then
+      if term.direction == "horizontal" then
         return 15
-      elseif term.direction == 'vertical' then
+      elseif term.direction == "vertical" then
         return math.floor(vim.o.columns * 0.4)
       end
     end,
@@ -46,9 +45,7 @@ M.config = function()
       },
     },
   }
-
 end
-
 
 M.setup = function()
   local status_ok, toggleterm = pcall(require, "toggleterm")
@@ -57,32 +54,32 @@ M.setup = function()
   end
 
   local float_handler = function(term)
-    if vim.fn.mapcheck('jk', 't') ~= '' then
-      vim.api.nvim_buf_del_keymap(term.bufnr, 't', 'jk')
-      vim.api.nvim_buf_del_keymap(term.bufnr, 't', '<esc>')
+    if vim.fn.mapcheck("jk", "t") ~= "" then
+      vim.api.nvim_buf_del_keymap(term.bufnr, "t", "jk")
+      vim.api.nvim_buf_del_keymap(term.bufnr, "t", "<esc>")
     end
   end
 
-  local Terminal = require('toggleterm.terminal').Terminal
+  local Terminal = require("toggleterm.terminal").Terminal
 
   local lazygit = Terminal:new {
-    cmd = 'lazygit',
-    dir = 'git_dir',
+    cmd = "lazygit",
+    dir = "git_dir",
     hidden = true,
-    direction = 'float',
+    direction = "float",
     on_open = float_handler,
   }
 
   local htop = Terminal:new {
-    cmd = 'htop',
-    hidden = 'true',
-    direction = 'float',
+    cmd = "htop",
+    hidden = "true",
+    direction = "float",
     on_open = float_handler,
   }
 
-  local Path = require 'plenary.path'
+  local Path = require "plenary.path"
   local path = vim.fn.tempname()
-  
+
   local vifm = Terminal:new {
     cmd = ('vifm --choose-files "%s"'):format(path),
     -- direction = "float",
@@ -90,36 +87,39 @@ M.setup = function()
     on_close = function()
       data = Path:new(path):read()
       vim.schedule(function()
-        vim.cmd('e ' .. data)
+        vim.cmd("e " .. data)
       end)
-    end
+    end,
   }
 
   core.command {
-    'Htop',
-    function() htop:toggle() end,
+    "Htop",
+    function()
+      htop:toggle()
+    end,
   }
 
   core.command {
-    'Lazygit',
-    function() lazygit:toggle() end,
+    "Lazygit",
+    function()
+      lazygit:toggle()
+    end,
   }
 
   core.command {
-    'Vifm',
-    function() vifm:toggle() end,
+    "Vifm",
+    function()
+      vifm:toggle()
+    end,
   }
 
-  core.map({'n'}, "<leader>gg",
-    function() lazygit:toggle() end,
-    "Lazygit"
-  )
+  core.map({ "n" }, "<leader>gg", function()
+    lazygit:toggle()
+  end, "Lazygit")
 
-  core.map({'n'}, "<leader>e",
-    function() vifm:toggle() end,
-    "Lazygit"
-  )
-
+  core.map({ "n" }, "<leader>e", function()
+    vifm:toggle()
+  end, "Lazygit")
 end
 
 return M

@@ -1,8 +1,6 @@
-local wk = require("which-key")
+local wk = require "which-key"
 
-
-vim.cmd[[ set diffopt+=vertical ]]
-
+vim.cmd [[ set diffopt+=vertical ]]
 
 wk.register({
   ["g"] = {
@@ -20,7 +18,7 @@ wk.register({
     ["o"] = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     ["s"] = { "<cmd>Git<cr>", "Git Status" },
     ["P"] = { "<cmd>Git push<cr>", "Git push" },
-    ["p"] = { "<cmd>Git pull<cr>", "Git pull" }
+    ["p"] = { "<cmd>Git pull<cr>", "Git pull" },
   },
 }, { prefix = "<leader>" })
 

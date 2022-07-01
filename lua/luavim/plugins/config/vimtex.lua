@@ -1,7 +1,6 @@
 -- vim.g.vimtex_view_method = "general"
 -- vim.g.latex_view_general_viewer = "termpdf.py"
 
-
 vim.g.tex_flavor = "latex"
 vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.vimtex_quickfix_mode = 2
@@ -28,7 +27,7 @@ vim.g.tex_conceal = ""
 --                hyperref = 1,
 --                scrreprt = 1,
 --                fixltx2e = 1,
---                titlesec = 1 } 
+--                titlesec = 1 }
 -- }
 
 vim.g.vimtex_compiler_latexmk = { build_dir = "build", progname = "nvr" }
@@ -37,9 +36,7 @@ vim.g.vimtex_compiler_latexmk = { build_dir = "build", progname = "nvr" }
 
 -- Config from castel.dev
 -- set conceallevel=1
-vim.g.tex_conceal='abdmg'
-
-
+vim.g.tex_conceal = "abdmg"
 
 -- pdf viewer
 vim.cmd [[
@@ -112,7 +109,3 @@ augroup end
 " }}}
 
 ]]
-
-
-
-

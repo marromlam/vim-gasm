@@ -1,5 +1,4 @@
-
-vim.cmd[[
+vim.cmd [[
 set grepprg=rg\ --vimgrep
 
 function! Grep(...)
@@ -19,22 +18,21 @@ augroup quickfix
 augroup END
 ]]
 
-
 local function external_grep(word, no_ignore)
-  local word0 = (word or vim.fn.input("RG  "))
+  local word0 = (word or vim.fn.input "RG  ")
   if no_ignore then
     vim.cmd((("silent grep " .. word0) .. " --no-ignore"))
   else
     vim.cmd(("silent grep " .. word0))
   end
-  return vim.cmd("copen")
+  return vim.cmd "copen"
 end
 
 local function grep_snakemake(filename)
   -- these are the string we will search for with ripgrep
   local _tokens = "(at boundary|WARN|ERROR)"
   -- regexp for filenames
-  local _filename = (filename or vim.fn.input("RG <- FD (*)  "))
+  local _filename = (filename or vim.fn.input "RG <- FD (*)  ")
   -- build the find and ripgrep commands (mind the '')
   local _fd_cmd = 'find . -iname "' .. _filename .. '" -print0'
   local _rg_cmd = 'rg --vimgrep --no-ignore "' .. _tokens .. '"'
@@ -43,11 +41,10 @@ local function grep_snakemake(filename)
   -- vim.cmd("silent cexpr system('" .. _full_cmd .. "')")
   vim.cmd(("silent cexpr system('" .. _full_cmd .. "')"))
   -- print("silent find . -iname '" .. word0 .. "' -print0")
-  return vim.cmd("copen")
+  return vim.cmd "copen"
 end
 
-core.map({'n'}, "<leader>sr", external_grep, "Ripgrep to QuickFix")
-core.map({'n'}, "<leader>ss", grep_snakemake, "Ripgrep to QuickFix")
-
+core.map({ "n" }, "<leader>sr", external_grep, "Ripgrep to QuickFix")
+core.map({ "n" }, "<leader>ss", grep_snakemake, "Ripgrep to QuickFix")
 
 -- vim:foldmethod=marker

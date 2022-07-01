@@ -1,4 +1,4 @@
-vim.cmd[[
+vim.cmd [[
 try
   colorscheme gruvbox
 catch /^Vim\%((\a\+)\)\=:E185/
