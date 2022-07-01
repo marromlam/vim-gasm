@@ -4,7 +4,7 @@ vim.g.start_time = vim.fn.reltime()
 vim.g.elite_mode = true
 vim.g.os = vim.loop.os_uname().sysname
 vim.g.open_command = vim.g.os == "Darwin" and "open" or "xdg-open"
-vim.g.dotfiles = vim.fn.expand("~/.dotfiles")
+vim.g.dotfiles = vim.fn.expand "~/.dotfiles"
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
@@ -16,18 +16,13 @@ vim.g.maplocalleader = ","
 -- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/mytheme2.nvim" ]]
 
 -- source settings and general keymaps
-require("luavim.core")
+require "luavim.core"
 
 -- load plugins, colorscheme and autocommands
-require("luavim.plugins")
+require "luavim.plugins"
 vim.o.background = "dark" -- or "light" for light mode
-vim.g.vscode_style = "dark"
-vim.g.gruvbox_sign_column = 'bg0'
-vim.g.gruvbox_contrast_dark = 'hard'
-vim.g.afterglow_contrast_dark = 'medium'
-vim.g.afterglow_sign_column = 'bg0'
-require("luavim.colorscheme")
-require("luavim.autocommands")
+require "luavim.colorscheme"
+require "luavim.autocommands"
 
 -- TODO : find a good place for this
 -- maybe remove -- function! OpenPDFCitekey()
@@ -49,13 +44,13 @@ require("luavim.autocommands")
 -- maybe remove --    exe "!" . kcmd \
 -- maybe remove -- endfunction
 
-vim.cmd [[
-  augroup LspFormat
-    autocmd! * <buffer>
-    " autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
-    autocmd BufWritePre <buffer> Format
-  augroup END
-]]
+-- vim.cmd [[
+--   augroup LspFormat
+--     autocmd! * <buffer>
+--     autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
+--     autocmd BufWritePre <buffer> Format
+--   augroup END
+-- ]]
 
 vim.cmd [[
   vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
@@ -68,6 +63,7 @@ vim.cmd [[
     let $EDITOR='nvr --nostart --remote-tab-wait +"set bufhidden=delete"'
   endif
   nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>
+  set path+=**,.,,
 ]]
 
 -- vim:fdm=marker
