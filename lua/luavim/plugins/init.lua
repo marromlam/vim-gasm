@@ -862,7 +862,7 @@ return packer.startup(function(use)
   use {
     "tpope/vim-fugitive",
     disable = false,
-    cmd = { "Git", "Gedit", "Gsplit", "Gread", "Gblame", "OGlog" },
+    cmd = { "Git", "Gedit", "Gsplit", "Gread", "Gblame", "OGlog", "Glog" },
     setup = function()
       require "luavim.plugins.config.fugitive"
     end,
@@ -1166,6 +1166,11 @@ return packer.startup(function(use)
     ft = "conf",
   }
 
+  use {
+    'voldikss/vim-mma',
+    disable = false,
+    -- ft = 'nb'
+  }
   -- sets searchable path for filetypes like go so 'gf' works
   use {
     "tpope/vim-apathy",

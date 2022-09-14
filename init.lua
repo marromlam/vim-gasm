@@ -44,13 +44,13 @@ require "luavim.autocommands"
 -- maybe remove --    exe "!" . kcmd \
 -- maybe remove -- endfunction
 
--- vim.cmd [[
---   augroup LspFormat
---     autocmd! * <buffer>
---     autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
---     autocmd BufWritePre <buffer> Format
---   augroup END
--- ]]
+vim.cmd [[
+  augroup LspFormat
+    autocmd! * <buffer>
+    " autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
+    autocmd BufWritePre <buffer> Format
+  augroup END
+]]
 
 vim.cmd [[
   vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
