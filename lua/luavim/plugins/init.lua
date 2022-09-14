@@ -79,12 +79,6 @@ return packer.startup(function(use)
     end,
   }
 
-  -- mathematica
-  use {
-    "voldikss/vim-mma",
-    disable = true,
-  }
-
   use {
     "michaelb/sniprun",
     keys = "<leader>;",
