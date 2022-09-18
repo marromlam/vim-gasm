@@ -105,7 +105,7 @@ require "luavim.core.mapper"
 require "luavim.core.mappings"
 require "luavim.core.functions"
 
-if vim.g.has_gui then
+if not vim.g.has_gui then
   require "luavim.core.winbar"
 end
 

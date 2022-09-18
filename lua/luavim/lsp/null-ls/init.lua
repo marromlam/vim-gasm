@@ -26,7 +26,7 @@ end
 
 local with_root_file_dos = function(files)
     return function(utils)
-        print(utils.root_has_file(files))
+        --[[ print(utils.root_has_file(files)) ]]
         return utils.root_has_file(files)
     end
 end
