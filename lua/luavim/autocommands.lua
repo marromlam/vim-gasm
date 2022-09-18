@@ -29,6 +29,8 @@
 --   augroup end
 -- ]]
 
+vim.g.the_primeagen_qf_g = 0
+vim.g.the_primeagen_qf_l = 0
 vim.cmd [[
 let g:the_primeagen_qf_l = 0
 fun! SetQFControlVariable()
@@ -75,53 +77,55 @@ vim.cmd [[
   augroup end
 ]]
 
-vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
-  callback = function()
-    require("luavim.core.winbar").get_winbar()
-  end,
-})
+if not vim.g.has_gui == 1 then
+    vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
+        callback = function()
+            require("luavim.core.winbar").get_winbar()
+        end,
+    })
+end
 
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
-  end,
+    callback = function()
+        vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+    end,
 })
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function()
-    vim.cmd "set formatoptions-=cro"
-  end,
+    callback = function()
+        vim.cmd "set formatoptions-=cro"
+    end,
 })
 
 -- Set wrap and spell in markdown and gitcommit
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "gitcommit", "markdown", "tex" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
+    pattern = { "gitcommit", "markdown", "tex" },
+    callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.spell = true
+    end,
 })
 
 -- Remove statusline and tabline when in Alpha
 vim.api.nvim_create_autocmd({ "User" }, {
-  pattern = { "AlphaReady" },
-  callback = function()
-    vim.cmd [[
+    pattern = { "AlphaReady" },
+    callback = function()
+        vim.cmd [[
       set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
       set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
     ]]
-  end,
+    end,
 })
 
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
-  callback = function()
-    vim.cmd [[
+    pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
+    callback = function()
+        vim.cmd [[
       nnoremap <silent> <buffer> q :close<CR> 
       set nobuflisted 
     ]]
-  end,
+    end,
 })

@@ -8,6 +8,14 @@ vim.g.dotfiles = vim.fn.expand "~/.dotfiles"
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+vim.cmd [[
+if has('gui_running')
+  let g:has_gui = 1
+else
+  let g:has_gui = 0
+endif
+]]
+
 -- this is just for developing my own pluggins
 -- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/darkplus.nvim" ]]
 -- vim.cmd[[ let &runtimepath.="," . expand("$HOME") . "/Projects/personal/gruvbox.nvim" ]]
@@ -20,7 +28,6 @@ require "luavim.core"
 
 -- load plugins, colorscheme and autocommands
 require "luavim.plugins"
-vim.o.background = "dark" -- or "light" for light mode
 require "luavim.colorscheme"
 require "luavim.autocommands"
 
