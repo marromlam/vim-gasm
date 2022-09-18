@@ -77,13 +77,13 @@ vim.cmd [[
   augroup end
 ]]
 
-if not vim.g.has_gui == 1 then
-    vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
-        callback = function()
-            require("luavim.core.winbar").get_winbar()
-        end,
-    })
-end
+--[[ if not vim.g.has_gui then ]]
+vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
+    callback = function()
+        require("luavim.core.winbar").get_winbar()
+    end,
+})
+--[[ end ]]
 
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
