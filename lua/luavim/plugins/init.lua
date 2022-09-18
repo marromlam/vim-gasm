@@ -143,10 +143,6 @@ return packer.startup(function(use)
     -- "marromlam/gruvbox.nvim",
     "ellisonleao/gruvbox.nvim",
     -- "~/Projects/personal/gruvbox.nvim",
-    disable = false,
-    -- config = function()
-    --   require("luavim.plugins.config.gruvbox")
-    -- end
   }
 
   -- }}}
@@ -1002,8 +998,8 @@ return packer.startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     disable = false,
-    -- cmd = 'Telescope',
-    keys = { "<leader><leader>", "<c-p>", "<leader>f", "<leader>g", "<leader>b" },
+    cmd = "Telescope",
+    --[[ keys = { "<leader><leader>", "<c-p>", "<leader>f", "<leader>g", "<leader>b" }, ]]
     module = "telescope",
     config = function()
       require "luavim.plugins.config.telescope"
@@ -1120,7 +1116,7 @@ return packer.startup(function(use)
 
   use {
     "ibhagwan/fzf-lua",
-    keys = { "<leader><leader>", "<c-p>", "<leader>f", "<leader>g", "<leader>b" },
+    -- keys = { "<leader><leader>", "<c-p>", "<leader>f", "<leader>g", "<leader>b" },
     -- after = { "which-key.nvim", "nvim-web-devicons" },
     -- optional for icon support
     requires = { "kyazdani42/nvim-web-devicons" },
@@ -1245,6 +1241,13 @@ return packer.startup(function(use)
       -- require("luavim.plugins.config.terminal")
       require("luavim.plugins.config.toggleterm").config()
       require("luavim.plugins.config.toggleterm").setup()
+    end,
+  }
+
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require "luavim.plugins.config.zenmode"
     end,
   }
 
