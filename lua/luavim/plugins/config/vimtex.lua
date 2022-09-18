@@ -2,8 +2,36 @@
 -- vim.g.latex_view_general_viewer = "termpdf.py"
 
 vim.g.tex_flavor = "latex"
+
+-- vim.g.vimtex_compiler_latexmk = { build_dir = "build", progname = "nvr" }
+
+vim.cmd [[
+    let g:vimtex_compiler_latexmk = {
+        \ 'build_dir' : 'build',
+        \ 'progname' : 'nvr',
+        \ 'callback' : 1,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
+        \ 'hooks' : [],
+        \ 'options' : [
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+
+
+    " Disable custom warnings based on regexp
+    let g:vimtex_quickfix_ignore_filters = [
+          \ 'Marginpar on page',
+          \ 'Package hyperref Warning',
+          \ 'Overfull \\hbox',
+          \ 'Underfull \\hbox',
+          \]
+]]
 vim.g.vimtex_quickfix_open_on_warning = 0
-vim.g.vimtex_quickfix_mode = 2
+-- vim.g.vimtex_quickfix_mode = 2
 
 -- One of the neosnippet plugins will conceal symbols in LaTeX which is
 -- confusing
@@ -30,7 +58,6 @@ vim.g.tex_conceal = ""
 --                titlesec = 1 }
 -- }
 
-vim.g.vimtex_compiler_latexmk = { build_dir = "build", progname = "nvr" }
 -- let g.vimtex_latexmk_build_dir = './build'
 -- vim.g.vimtex_latexmk_progname = 'nvr'
 
@@ -40,6 +67,19 @@ vim.g.tex_conceal = "abdmg"
 
 -- pdf viewer
 vim.cmd [[
+    let g:vimtex_syntax_conceal = {
+          \ 'accents': 1,
+          \ 'cites': 1,
+          \ 'fancy': 1,
+          \ 'greek': 1,
+          \ 'math_bounds': 1,
+          \ 'math_delimiters': 1,
+          \ 'math_fracs': 1,
+          \ 'math_super_sub': 1,
+          \ 'math_symbols': 1,
+          \ 'sections': 0,
+          \ 'styles': 1,
+          \}
 function! CompileMarkdown() abort
   :only
   let md_file = expand('%:p')
@@ -62,7 +102,7 @@ function! TermPDF(file) abort
   if time - g:termpdf_lastcalled > 1000
     call system('kitty @ set-background-opacity 1.0')
     if empty($SSH_TTY)
-      call system('kitty @ kitten termpdf.py ' . a:file . ' -i -a')
+      call system('kitty @ kitten kittens/termpdf.py ' . a:file . ' -i -a')
     else
       if g:termpdf_panelopened == 0
         let s:hostname = system("hostname")
@@ -94,6 +134,9 @@ let g:vimtex_view_automatic = 0
 function! VimtexCallback(status) abort
   if a:status
     call TermPDF(b:vimtex.out())
+  elseif filereadable(b:vimtex.out())
+    call TermPDF(b:vimtex.out())
+    echo "Compilation was not completed!"
   endif
 endfunction
 
@@ -101,6 +144,8 @@ augroup VimtexTest
   autocmd!
   autocmd! User VimtexEventCompileStopped call TermPDFClose()
   autocmd! User VimtexEventCompileSuccess call VimtexCallback(1)
+  autocmd! User VimtexEventCompileStopped call VimtexCallback(0)
+  autocmd! User VimtexEventCompileFailed call VimtexCallback(0)
   autocmd! User VimtexEventView call VimtexCallback(1)
   autocmd FileType tex autocmd BufDelete <buffer> call TermPDFClose()
 augroup end
@@ -109,3 +154,6 @@ augroup end
 " }}}
 
 ]]
+
+local nvim_set_keymap = vim.api.nvim_set_keymap
+nvim_set_keymap("n", "<S-CR>", ":VimtexCompile<cr>", { noremap = true, silent = true })

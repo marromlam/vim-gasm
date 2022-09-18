@@ -8,6 +8,8 @@ local servers = {
   "pyright",
   "bashls",
   "jsonls",
+  -- "ltex",
+  "texlab",
   "yamlls",
   "rust_analyzer",
 }

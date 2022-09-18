@@ -20,6 +20,7 @@ end
 function M.format()
   if M.autoformat then
     vim.lsp.buf.formatting_sync(nil, 2000)
+    -- vim.lsp.buf.format({ timeout_ms = 2000 })  -- 0.8
   end
 end
 
