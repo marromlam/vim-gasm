@@ -382,11 +382,4 @@ require("which-key").register({
 
 -- }}}
 
--- vim:foldmethod=marker
---   },
--- }
--- }}}
-
--- }}}
-
--- vim:foldmethod=marker
+-- vim: fdm=marker

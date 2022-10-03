@@ -415,7 +415,7 @@ return packer.startup(function(use)
   use {
     "github/copilot.vim",
     disable = false,
-    after = "nvim-cmp",
+    event = "InsertEnter",
     config = function()
       require "luavim.plugins.config.copilot"
     end,
