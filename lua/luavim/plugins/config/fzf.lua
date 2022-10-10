@@ -49,7 +49,7 @@ require("fzf-lua").setup {
       layout = "flex", -- horizontal|vertical|flex
       flip_columns = 120, -- #cols to switch to horizontal on flex
       -- Only valid with the builtin previewer:
-      title = true, -- preview border title (file/buf)?
+      title = false, -- preview border title (file/buf)?
       scrollbar = "float", -- `false` or string:'float|border'
       -- float:  in-window floating border
       -- border: in-border chars (see below)

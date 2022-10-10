@@ -80,6 +80,7 @@ vim.cmd [[
 --[[ if not vim.g.has_gui then ]]
 vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
     callback = function()
+        vim.cmd [[set showtabline=0]]
         require("luavim.core.winbar").get_winbar()
     end,
 })
