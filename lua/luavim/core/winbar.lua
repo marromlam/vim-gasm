@@ -1,5 +1,8 @@
 local M = {}
 
+local highlights = require('core.highlights')
+local utils = require('core.statusline')
+
 M.winbar_filetype_exclude = {
     "help",
     "startify",

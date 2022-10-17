@@ -1,4 +1,7 @@
 -- main file
+-- TODO: sdfdsf
+-- BUG:
+
 
 vim.g.start_time = vim.fn.reltime()
 vim.g.elite_mode = true

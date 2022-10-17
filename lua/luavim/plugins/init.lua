@@ -71,7 +71,7 @@ return packer.startup(function(use)
 
     use {
         "dstein64/vim-startuptime",
-        disable = false,
+        disable = true,
         cmd = "StartupTime",
         config = function()
             vim.g.startuptime_tries = 20
@@ -82,7 +82,7 @@ return packer.startup(function(use)
     use {
         "michaelb/sniprun",
         keys = "<leader>;",
-        disable = false,
+        disable = true,
         run = "bash ./install.sh",
         config = function()
             require("sniprun").setup {
@@ -141,7 +141,8 @@ return packer.startup(function(use)
 
     use {
         --[[ "ellisonleao/gruvbox.nvim", ]]
-        "folke/tokyonight.nvim",
+        "lunarvim/horizon.nvim"
+        --[[ "folke/tokyonight.nvim", ]]
     }
 
     -- }}}
@@ -156,6 +157,11 @@ return packer.startup(function(use)
         config = function()
             require "luavim.plugins.config.alpha"
         end,
+    }
+
+    use {
+        'rcarriga/nvim-notify',
+        config = require 'luavim.plugins.config.notify'
     }
 
     -- }}}
@@ -197,16 +203,24 @@ return packer.startup(function(use)
             require "luavim.plugins.config.gps"
         end,
     }
+    --[[ use { ]]
+    --[[     "SmiteshP/nvim-navic", ]]
+    --[[     event = { "BufRead", "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, ]]
+    --[[     requires = "neovim/nvim-lspconfig", ]]
+    --[[     config = function() ]]
+    --[[         require "luavim.plugins.config.navic" ]]
+    --[[     end, ]]
+    --[[ } ]]
 
-    use {
-        "nvim-lualine/lualine.nvim",
-        disable = false,
-        after = "nvim-web-devicons",
-        config = function()
-            require "luavim.plugins.config.lualine"
-            -- require("luavim.plugins.config.lualine2").setup()
-        end,
-    }
+    --[[ use { ]]
+    --[[     "nvim-lualine/lualine.nvim", ]]
+    --[[     disable = false, ]]
+    --[[     after = "nvim-web-devicons", ]]
+    --[[     config = function() ]]
+    --[[         require "luavim.plugins.config.lualine" ]]
+    --[[         -- require("luavim.plugins.config.lualine2").setup() ]]
+    --[[     end, ]]
+    --[[ } ]]
 
     -- }}}
 
@@ -238,7 +252,7 @@ return packer.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         disable = not core.plugins.treesitter,
         -- branch = "0.5-compat",
-        event = { "BufRead", "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" },
+        --[[ event = { "BufRead", "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, ]]
         run = ":TSUpdate",
         config = function()
             require "luavim.plugins.config.treesitter"
@@ -452,6 +466,24 @@ return packer.startup(function(use)
             { "williamboman/nvim-lsp-installer" },
             { "tamago324/nlsp-settings.nvim" },
             { "jose-elias-alvarez/null-ls.nvim", commit = "697491edfbd21918b9cdead580f230d11e01cc91" },
+            {
+                'lvimuser/lsp-inlayhints.nvim',
+                config = function()
+                    require('lsp-inlayhints').setup({
+                        inlay_hints = {
+                            highlight = 'Comment',
+                            labels_separator = ' ⏐ ',
+                            parameter_hints = {
+                                prefix = '',
+                            },
+                            type_hints = {
+                                prefix = '=> ',
+                                remove_colon_start = true,
+                            },
+                        },
+                    })
+                end,
+            },
             { "antoinemadec/FixCursorHold.nvim" },
             { "simrat39/rust-tools.nvim" },
         },
@@ -1246,6 +1278,7 @@ return packer.startup(function(use)
 
     use {
         "folke/zen-mode.nvim",
+        disable = true,
         config = function()
             require "luavim.plugins.config.zenmode"
         end,

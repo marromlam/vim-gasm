@@ -424,4 +424,4 @@ vim.opt.termguicolors = true
 
 -- }}}
 
--- vim:foldmethod=marker
+-- vim: fdm=marker
