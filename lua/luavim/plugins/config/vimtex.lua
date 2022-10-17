@@ -37,6 +37,25 @@ vim.g.vimtex_quickfix_open_on_warning = 0
 -- confusing
 vim.g.tex_conceal = ""
 
+-- TODO : find a good place for this
+-- maybe remove -- function! OpenPDFCitekey()
+-- maybe remove --    let kcmd = 'kitty --single-instance --instance-group=1 '
+-- maybe remove --    let kcmd = kcmd . 'termpdf.py --nvim-listen-address '
+-- maybe remove --    let kcmd = kcmd . $NVIM_LISTEN_ADDRESS . ' '
+-- maybe remove --    let key=expand('<cword>')
+-- maybe remove --    keepjumps normal! ww
+-- maybe remove --    let page=expand('<cword>')
+-- maybe remove --    if page ==? 'p'
+-- maybe remove --        keepjumps normal! ww
+-- maybe remove --        let page=expand('<cword>')
+-- maybe remove --    endif
+-- maybe remove --    keepjumps normal! bbb
+-- maybe remove --    let kcmd = kcmd . '--open ' . key . ' '
+-- maybe remove --    if page
+-- maybe remove --        let kcmd = kcmd . '-p ' . page
+-- maybe remove --    endif
+-- maybe remove --    exe "!" . kcmd \
+-- maybe remove -- endfunction
 -- Can hide specifc warning messages from the quickfix window
 -- Quickfix with Neovim is broken or something
 -- https://github.com/lervag/vimtex/issues/773
