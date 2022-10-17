@@ -1,5 +1,5 @@
 autoload
-plugin
+plugin/packer_compiled.lua
 .sessions
 
 spell/en.utf-8.add.spl
