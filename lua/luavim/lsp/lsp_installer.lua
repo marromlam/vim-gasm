@@ -7,6 +7,7 @@ local servers = {
     "sumneko_lua",
     "pyright",
     "bashls",
+    "clangd",
     "jsonls",
     -- "ltex",
     "texlab",
