@@ -465,7 +465,7 @@ return packer.startup(function(use)
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/nvim-lsp-installer" },
             { "tamago324/nlsp-settings.nvim" },
-            { "jose-elias-alvarez/null-ls.nvim", commit = "697491edfbd21918b9cdead580f230d11e01cc91" },
+            { "jose-elias-alvarez/null-ls.nvim" },
             {
                 'lvimuser/lsp-inlayhints.nvim',
                 config = function()

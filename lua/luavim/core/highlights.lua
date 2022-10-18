@@ -490,6 +490,6 @@ core.augroup('UserHighlights', {
 -----------------------------------------------------------------------------//
 -- Color Scheme {{{1
 -----------------------------------------------------------------------------//
-core.wrap_err('theme failed to load because', vim.cmd.colorscheme, 'horizon')
+-- core.wrap_err('theme failed to load because', vim.cmd.colorscheme, 'horizon')
 
 return M
