@@ -438,7 +438,7 @@ end
 ---@return table[]
 function M.lsp_clients(ctx)
     local clients = vim.lsp.get_active_clients({ bufnr = ctx.bufnum })
-    if empty(clients) then return { { name = 'No LSP clients available', priority = 7 } } end
+    if empty(clients) then return { { name = 'none', priority = 7 } } end
     table.sort(clients, function(a, b)
         if a.name == 'null-ls' then
             return false

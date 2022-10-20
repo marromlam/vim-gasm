@@ -214,7 +214,7 @@ function core.ui.statusline()
   -----------------------------------------------------------------------------//
   local lsp_clients = core.map_callback(function(client, index)
     return component(client.name, 'StClient', {
-      prefix = index == 1 and ' ' or nil,
+      prefix = index == 1 and '' or nil,
       prefix_color = index == 1 and 'StMetadata' or nil,
       suffix = '', -- │
       suffix_color = 'StMetadataPrefix',
