@@ -1032,6 +1032,7 @@ return packer.startup(function(use)
         disable = false,
         cmd = "Telescope",
         --[[ keys = { "<leader><leader>", "<c-p>", "<leader>f", "<leader>g", "<leader>b" }, ]]
+        --[[ keys = { "<leader>t" }, ]]
         module = "telescope",
         config = function()
             require "luavim.plugins.config.telescope"
@@ -1242,6 +1243,16 @@ return packer.startup(function(use)
                 dap_open_command = require("dap").repl.open, -- Command to run after starting DAP session. You can set it to `false` if you don't want to open anything or `require('dapui').open` if you are using https://github.com/rcarriga/nvim-dap-ui
             }
         end,
+    }
+
+    use {
+      "nvim-telescope/telescope-bibtex.nvim",
+      keys = {"<leader>tb"},
+      requires = { {'nvim-telescope/telescope.nvim'}, },
+      --[[ after = { 'nvim-telescope/telescope.nvim' }, ]]
+      config = function ()
+        require"telescope".load_extension("bibtex")
+      end,
     }
 
     -- CMake (lua) integration : In the future we should try to use these two
