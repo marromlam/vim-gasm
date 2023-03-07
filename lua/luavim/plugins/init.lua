@@ -3,6 +3,9 @@
 -- Bootstrap packer
 local local_path = vim.fn.stdpath "data"
 local install_path = local_path .. "/site/pack/packer/start/packer.nvim"
+
+-- local highlight = require('core.highlights')
+
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = vim.fn.system {
         "git",
@@ -301,27 +304,15 @@ return packer.startup(function(use)
 
     -- Nvimtree {{{
 
-    use {
-        "kyazdani42/nvim-tree.lua",
-        disable = vim.g.elite_mode,
-        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-        keys = { "<leader>e" },
-        config = function()
-            require("plugins.conf3.nvimtree").config()
-        end,
+use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
     }
-
-    use {
-        "vifm/vifm.vim",
-        disable = true,
-        config = function()
-            -- require("plugins.conf3.nvimtree").config()
-        end,
-        setup = function()
-            -- print('nvim-tree set')
-            -- require "keys.mappings".nvimtree()
-        end,
-    }
+  }
 
     -- }}}
 
@@ -1032,7 +1023,7 @@ return packer.startup(function(use)
         disable = false,
         cmd = "Telescope",
         --[[ keys = { "<leader><leader>", "<c-p>", "<leader>f", "<leader>g", "<leader>b" }, ]]
-        --[[ keys = { "<leader>t" }, ]]
+        keys = { "<leader>tb" },
         module = "telescope",
         config = function()
             require "luavim.plugins.config.telescope"
@@ -1071,6 +1062,16 @@ return packer.startup(function(use)
                 require("telescope").load_extension "ui-select"
             end,
         },
+        use {
+            "nvim-telescope/telescope-bibtex.nvim",
+            ft = 'tex',
+            --[[ keys = { "<leader>tb" }, ]]
+            --[[ requires = { { 'nvim-telescope/telescope.nvim' }, }, ]]
+            --[[ after = { 'nvim-telescope/telescope.nvim' }, ]]
+            config = function()
+                require("telescope").load_extension("bibtex")
+            end,
+        }
 
         -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
         -- -- -- requires = {
@@ -1245,15 +1246,6 @@ return packer.startup(function(use)
         end,
     }
 
-    use {
-      "nvim-telescope/telescope-bibtex.nvim",
-      keys = {"<leader>tb"},
-      requires = { {'nvim-telescope/telescope.nvim'}, },
-      --[[ after = { 'nvim-telescope/telescope.nvim' }, ]]
-      config = function ()
-        require"telescope".load_extension("bibtex")
-      end,
-    }
 
     -- CMake (lua) integration : In the future we should try to use these two
     -- {"Shatur/neovim-cmake"},

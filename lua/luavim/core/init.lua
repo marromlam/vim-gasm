@@ -1,8 +1,7 @@
 local fn = vim.fn
 local api = vim.api
 local fmt = string.format
-local l = vim.log.levelsocal
-fmt = string.format
+local l = vim.log.levels
 
 
 -- Global namespace {{{
@@ -78,6 +77,12 @@ function core.fold(callback, list, accum)
     end
     return accum
 end
+
+
+---Check if a cmd is executable
+---@param e string
+---@return boolean
+function core.executable(e) return fn.executable(e) > 0 end
 
 ---@generic T : table
 ---@param callback fun(item: T, key: string | number, list: T[]): T

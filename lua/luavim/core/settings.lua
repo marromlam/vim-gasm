@@ -417,10 +417,10 @@ vim.opt.termguicolors = true
 
 -- Git editor {{{
 
--- if luavim.executable 'nvr' then
---   vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
---   vim.env.EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
--- end
+if vim.fn.executable('nvr') then
+  vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  vim.env.EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+end
 
 -- }}}
 

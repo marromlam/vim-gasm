@@ -4,7 +4,7 @@ if not present then
 end
 
 local servers = {
-    "sumneko_lua",
+    "lua_ls",
     "pyright",
     "bashls",
     "clangd",
@@ -30,7 +30,7 @@ for _, server in pairs(servers) do
         capabilities = require("luavim.lsp.handlers").capabilities,
     }
 
-    if server == "sumneko_lua" then
+    if server == "lua_ls" then
         local sumneko_opts = require "luavim.lsp.settings.sumneko_lua"
         opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
     end
