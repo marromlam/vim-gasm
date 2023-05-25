@@ -1,51 +1,131 @@
--- main file
+-- Basic {{{
+if vim.g.vscode then return end
 
-vim.g.start_time = vim.fn.reltime()
-vim.g.elite_mode = true
-vim.g.os = vim.loop.os_uname().sysname
-vim.g.open_command = vim.g.os == "Darwin" and "open" or "xdg-open"
-vim.g.dotfiles = vim.fn.expand "~/.dotfiles"
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+local g, fn, opt, loop, env, cmd =
+  vim.g, vim.fn, vim.opt, vim.loop, vim.env, vim.cmd
+local data = fn.stdpath('data')
 
-vim.cmd [[
+-- g.start_time = fn.reltime()
+g.elite_mode = true
+g.os = loop.os_uname().sysname
+g.open_command = g.os == 'Darwin' and 'open' or 'xdg-open'
+g.dotfiles = env.DOTFILES or fn.expand('~/.dotfiles')
+g.vim_dir = g.dotfiles .. '/.config/nvim'
+g.projects_dir = env.PROJECTS_DIR or fn.expand('~/projects')
+g.work_dir = g.projects_dir .. '/work'
+g.personal_dir = g.projects_dir .. '/personal'
+
+-- Leader bindings
+g.mapleader = ' ' -- Remap leader key
+g.maplocalleader = ',' -- Local leader is <Space>
+
+if vim.loader then vim.loader.enable() end
+
+cmd([[
 if has('gui_running')
   let g:has_gui = 1
 else
   let g:has_gui = 0
 endif
-]]
+]])
 
--- source settings and general keymaps
-require "luavim.core"
+-- }}}
 
--- load plugins, colorscheme and autocommands
-require "luavim.plugins"
-require "luavim.colorscheme"
-require "luavim.autocommands"
+-- Global namespace {{{
+local namespace = {
+  ui = {
+    winbar = { enable = true },
+    statuscolumn = { enable = true },
+    statusline = { enable = true },
+  },
+  -- some vim mappings require a mixture of commandline commands and function calls
+  -- this table is place to store lua functions to be called in those mappings
+  mappings = { enable = true },
+}
 
+-- This table is a globally accessible store to facilitating accessing
+-- helper functions and variables throughout my config
+_G.pde = pde or namespace
+_G.map = vim.keymap.set
+_G.P = vim.print
 
--- vim.cmd [[
---   augroup LspFormat
---     autocmd! * <buffer>
---     " autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
---     autocmd BufWritePre <buffer> Format
---   augroup END
--- ]]
+-- }}}
 
+-- Settings {{{
+-- Order matters here pde globals needs to be instantiated first etc.
 
-vim.cmd [[
-  vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
-  autocmd TermOpen * setlocal nonumber norelativenumber
-  autocmd TermOpen * setlocal scl=no
+require('pde.globals')
+require('pde.highlights')
+require('pde.ui')
+require('pde.settings')
 
-  if has('nvim') && executable('nvr')
-    " pip3 install neovim-remote
-    let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-    let $EDITOR='nvr --nostart --remote-tab-wait +"set bufhidden=delete"'
-  endif
-  nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>
-  set path+=**,.,,
-]]
+-- }}}
+
+-- Plugins {{{
+
+local lazypath = data .. '/lazy/lazy.nvim'
+if not loop.fs_stat(lazypath) then
+  fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    '--single-branch',
+    'https://github.com/folke/lazy.nvim.git',
+    lazypath,
+  })
+  vim.notify('Installed lazy.nvim')
+end
+opt.runtimepath:prepend(lazypath)
+
+--  $NVIM
+-- NOTE: this must happen after the lazy path is setup
+-- If opening from inside neovim terminal then do not load other plugins
+if env.NVIM then
+  return require('lazy').setup({ { 'willothy/flatten.nvim', config = true } })
+end
+
+require('lazy').setup('pde.plugins', {
+  ui = { border = pde.ui.current.border },
+  defaults = { lazy = true },
+  change_detection = { notify = false },
+  checker = {
+    enabled = true,
+    concurrency = 30,
+    notify = false,
+    frequency = 3600, -- check for updates every hour
+  },
+  performance = {
+    rtp = {
+      paths = { data .. '/site' },
+      disabled_plugins = {
+        -- 'netrw',
+        -- 'netrwPlugin'
+      },
+    },
+  },
+  dev = {
+    path = g.personal_dir,
+    patterns = { 'marcos' },
+    fallback = true,
+  },
+})
+
+-- }}}
+
+-- Maps {{{
+
+map('n', '<leader>pp', '<Cmd>Lazy<CR>', { desc = 'plugins' })
+map('n', '<leader>pm', '<Cmd>Mason<CR>', { desc = 'mason' })
+map('n', '<leader>x', '<Cmd>:bd<CR>', { desc = 'delete buffer' })
+map('n', '<leader>o', '<Cmd>:only<CR>', { desc = 'this only buffer' })
+
+-- }}}
+
+-- cfilter plugin allows filtering down an existing quickfix list
+cmd.packadd('cfilter')
+
+-- colour scheme
+vim.o.background = 'light' -- or "light"
+pde.pcall('theme failed to load because', cmd.colorscheme, 'horizon')
 
 -- vim: fdm=marker
