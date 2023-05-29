@@ -125,7 +125,7 @@ map('n', '<leader>o', '<Cmd>:only<CR>', { desc = 'this only buffer' })
 cmd.packadd('cfilter')
 
 -- colour scheme
-vim.o.background = 'light' -- or "light"
+vim.o.background = 'dark' -- or "light"
 pde.pcall('theme failed to load because', cmd.colorscheme, 'horizon')
 
 -- vim: fdm=marker
