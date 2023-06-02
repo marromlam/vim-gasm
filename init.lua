@@ -33,8 +33,45 @@ require "luavim.autocommands"
 --   augroup END
 -- ]]
 
-
+-- Handle windows clipboard
+-- test if ~/.wsl exists
+if vim.g.os == "Linux" and vim.fn.filereadable(vim.fn.expand "~/.wsl") then
+  vim.cmd [[
+  let g:clipboard = {
+    \   'name': 'WslClipboard',
+    \   'copy': {
+    \      '+': 'clip.exe',
+    \      '*': 'clip.exe',
+    \    },
+    \   'paste': {
+    \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \   },
+    \   'cache_enabled': 0,
+    \ }
+    ]]
+end
+if vim.g.os == "Windows" then
+  print('Windows detected, using WSL clipboard')
+  vim.cmd [[
+  let g:clipboard = {
+    \   'name': 'WslClipboard',
+    \   'copy': {
+    \      '+': 'clip.exe',
+    \      '*': 'clip.exe',
+    \    },
+    \   'paste': {
+    \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \   },
+    \   'cache_enabled': 0,
+    \ }
+    ]]
+end
 vim.cmd [[
+" au BufReadCmd *.docx call zip#Browse(expand("<amatch>"))
+  command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
   vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR> 
   autocmd TermOpen * setlocal nonumber norelativenumber
   autocmd TermOpen * setlocal scl=no
