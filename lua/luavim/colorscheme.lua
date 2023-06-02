@@ -19,9 +19,11 @@ end
 
 vim.cmd [[
 try
-  colorscheme horizon
+  " colorscheme templeos
+  colorscheme catppuccin-latte
+  " colorscheme horizon
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
-  set background=dark
+  set background=light
 endtry
 ]]
