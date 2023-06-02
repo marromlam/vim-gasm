@@ -33,10 +33,15 @@ end
 
 local sources = {
     b.formatting.fixjson,
-    -- b.formatting.black.with { extra_args = { "--fast" } },
+    b.formatting.black.with { extra_args = { "--fast" } },
     -- b.formatting.black.with { extra_args = { "--fast" } },
     --
     -- c/c++
+  	b.formatting.prettier.with({
+		filetypes = { "html", "css", "yaml", "markdown", "json" },
+	}),
+  b.formatting.xmlformat,
+  b.formatting.tidy,
     b.formatting.clang_format,
     b.formatting.clang_format.with({
         condition = with_root_file_dos({ ".clang-format" }),
@@ -46,9 +51,9 @@ local sources = {
     -- b.formatting.isort.with({
     --   condition = with_root_file_dos({"pyproject.toml"}),
     -- }),
-    b.formatting.autopep8.with({
-        condition = with_root_file_dos({ "pyproject.toml" }),
-    }),
+    -- b.formatting.autopep8.with({
+    --     condition = with_root_file_dos({ "pyproject.toml" }),
+    -- }),
     -- b.formatting.black.with({
     --   condition = with_root_file_dos({"pyproject.toml"}),
     -- }),

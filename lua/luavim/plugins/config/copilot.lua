@@ -17,7 +17,7 @@
 -- <M-[>                   Cycle to the previous suggestion.
 -- <Plug>(copilot-previous)
 
-vim.g.copilot_node_command = "$HOMEBREW_PREFIX/Cellar/node@16/16.17.0/bin/node"
+vim.g.copilot_node_command = "$HOMEBREW_PREFIX/Cellar/node@16/16.19.1/bin/node"
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
