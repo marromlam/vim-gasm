@@ -462,6 +462,27 @@ local function colorscheme_overrides()
             { PanelDarkBackground = { background = { from = 'Normal', alter = -25 } } },
             { PanelDarkHeading = { inherit = 'PanelDarkBackground', bold = true } },
         },
+        ['templeos'] = {
+            -----------------------------------------------------------------------------------------------
+            --- TODO: upstream these highlights to horizon.nvim
+            -----------------------------------------------------------------------------------------------
+            { Normal = { fg = '#C1C1C1' } },
+            -----------------------------------------------------------------------------------------------
+            { NormalNC = { inherit = 'Normal' } },
+            { WinSeparator = { fg = '#353647' } },
+            { Constant = { bold = true } },
+            { NonText = { fg = { from = 'Comment' } } },
+            { LineNr = { background = 'NONE' } },
+            { TabLineSel = { background = { from = 'SpecialKey', attr = 'fg' } } },
+            { VisibleTab = { background = { from = 'Normal', alter = 40 }, bold = true } },
+            { commentTSConstant = { inherit = 'Constant', bold = true } },
+            { luaTSConstructor = { inherit = 'Type', italic = false, bold = false } },
+            { PanelBackground = { link = 'Normal' } },
+            { PanelWinSeparator = { inherit = 'PanelBackground', fg = { from = 'WinSeparator' } } },
+            { PanelHeading = { bg = 'bg', bold = true, fg = { from = 'Normal', alter = -30 } } },
+            { PanelDarkBackground = { background = { from = 'Normal', alter = -25 } } },
+            { PanelDarkHeading = { inherit = 'PanelDarkBackground', bold = true } },
+        },
     }
     local hls = overrides[vim.g.colors_name]
     if not hls then return end
