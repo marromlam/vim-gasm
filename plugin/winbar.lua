@@ -1,143 +1,145 @@
----@diagnostic disable: duplicate-doc-param
+if not pde or not pde.ui.winbar.enable then return end
+local navic_loaded, navic = pcall(require, 'nvim-navic')
 
+local str = require('pde.strings')
+local section, spacer, display = str.section, str.spacer, str.display
 
-local highlights = require('luavim.core.highlights')
-local utils = require('luavim.core.statusline')
-
-local fn, api = vim.fn, vim.api
-local component = utils.component
-local component_raw = utils.component_raw
-local empty = core.empty
-local icons = core.style.icons.misc
-local contains = vim.tbl_contains
-
-local dir_separator = '/'
-local separator = icons.arrow_right
-local ellipsis = icons.ellipsis
+local fn, api, falsy, lsp_hl = vim.fn, vim.api, pde.falsy, pde.ui.lsp.highlights
+local icons, decorations, highlight =
+  pde.ui.icons.misc, pde.ui.decorations, pde.highlight
+local space, dir_separator, separator, ellipsis =
+  ' ', '/', icons.arrow_right, icons.ellipsis
 
 --- A mapping of each winbar items ID to its path
---- @type table<string, string>
-core.ui.winbar.state = {}
+---@type table<integer, (string|{start: {line: integer, character: integer}})>
+local state = {}
 
----@param id number
----@param _ number number of clicks
----@param _ "l"|"r"|"m" the button clicked
----@param _ string modifiers
-function core.ui.winbar.click(id, _, _, _)
-  if id then vim.cmd.edit(core.ui.winbar.state[id]) end
-end
+local hls = {
+  separator = 'WinbarDirectory',
+  inactive = 'NonText',
+  normal = 'Winbar',
+  crumb = 'WinbarCrumb',
+}
 
-highlights.plugin('winbar', {
-  { Winbar = { bold = false } },
-  { WinbarNC = { bold = false } },
-  { WinbarCrumb = { bold = true } },
-  { WinbarIcon = { inherit = 'Function' } },
-  { WinbarDirectory = { inherit = 'Directory' } },
+highlight.plugin('winbar', {
+  { [hls.normal] = { bold = false } },
+  { [hls.crumb] = { bold = true } },
+  { [hls.separator] = { inherit = 'Directory' } },
 })
 
-
-local get_gps = function()
-    local status_gps_ok, gps = pcall(require, "nvim-gps")
-    if not status_gps_ok then
-        return ""
-    end
-
-    local status_ok, gps_location = pcall(gps.get_location, {})
-    if not status_ok then
-        return ""
-    end
-
-    if not gps.is_available() or gps_location == "error" then
-        return ""
-    end
-
-    if not require("luavim.core.functions2").isempty(gps_location) then
-        return require("luavim.core.icons").ui.ChevronRight .. " " .. gps_location
-    else
-        return ""
-    end
+---@param id number
+function pde.ui.winbar.click(id)
+  if not id then return end
+  local item = state[id]
+  if type(item) == 'string' then vim.cmd.edit(item) end
+  if type(item) == 'table' and item.start then
+    api.nvim_win_set_cursor(
+      fn.getmousepos().winid,
+      { item.start.line, item.start.character }
+    )
+  end
 end
 
 local function breadcrumbs()
-  local location = get_gps()
-  local win = api.nvim_get_current_win()
-  return { component_raw(location, { priority = 1, win_id = win, type = 'winbar' }) }
+  local empty_state = {
+    { { separator, hls.separator }, { space }, { ellipsis, hls.inactive } },
+    priority = 0,
+  }
+  if not navic_loaded or not navic.is_available() then
+    return { empty_state }
+  end
+  local ok, data = pcall(navic.get_data)
+  if not ok or falsy(data) then return { empty_state } end
+  return pde.map(function(crumb, index)
+    local priority = #state + #data - index
+    state[priority] = crumb.scope
+    return {
+      {
+        { separator, hls.separator },
+        { space },
+        { crumb.icon, lsp_hl[crumb.type] or hls.inactive },
+        { space },
+        { crumb.name, hls.crumb, max_size = 35 },
+      },
+      priority = priority,
+      id = priority,
+      click = 'v:lua.pde.ui.winbar.click',
+    }
+  end, data)
 end
 
+---@param current_win integer
 ---@return string
-function core.ui.winbar.get()
-  local winbar = {}
-  local add = utils.winline(winbar)
+function pde.ui.winbar.render(current_win)
+  state = {}
 
-  add(utils.spacer(1))
+  local w1 = section:new(spacer(1))
 
   local bufname = api.nvim_buf_get_name(api.nvim_get_current_buf())
-  if empty(bufname) then return add(component('[No name]', 'Winbar', { priority = 0 })) end
+  if falsy(bufname) then
+    return w1 + section:new({ { { '[No name]', hls.normal } }, priority = 0 })
+  end
 
   local parts = vim.split(fn.fnamemodify(bufname, ':.'), '/')
 
-  core.foreach(function(part, index)
+  local wn = pde.map(function(part, index)
     local priority = (#parts - (index - 1)) * 2
     local is_last = index == #parts
-    local sep = is_last and separator or dir_separator
-    local hl = is_last and 'Winbar' or 'NonText'
-    local suffix_hl = is_last and 'WinbarDirectory' or 'NonText'
-    core.ui.winbar.state[priority] = table.concat(vim.list_slice(parts, 1, index), '/')
-    add(component(part, hl, {
+    local hl = is_last and hls.normal or hls.inactive
+    state[priority] = table.concat(vim.list_slice(parts, 1, index), '/')
+    return {
+      {
+        { part, hl },
+        not is_last and { ' ' .. dir_separator, hls.inactive } or nil,
+      },
       id = priority,
       priority = priority,
-      click = 'v:lua.core.ui.winbar.click',
-      suffix = sep,
-      suffix_color = suffix_hl,
-    }))
+      click = 'v:lua.pde.ui.winbar.click',
+    }
   end, parts)
-  add(unpack(breadcrumbs()))
-  return utils.display(winbar, api.nvim_win_get_width(api.nvim_get_current_win()))
+  local win = api.nvim_get_current_win()
+  local winbar = w1 + section:new(unpack(wn))
+  if win == current_win then
+    winbar = section:new(unpack(winbar)) + section:new(unpack(breadcrumbs()))
+  end
+  return display({ winbar }, api.nvim_win_get_width(win))
 end
 
-local blocked_fts = {
-  'NeogitStatus',
-  'DiffviewFiles',
-  'NeogitCommitMessage',
-  'toggleterm',
-  'DressingInput',
-  'org',
-}
-
-local allowed_fts = { 'toggleterm', 'neo-tree' }
-local allowed_buftypes = { 'terminal' }
-
+--- The reason for this wrapper function that decides whether to set the winbar
+--- is that the winbar cannot be cleared by returning a null or empty value
+--- so the extra line taken by the winbar will be set even in windows where this is not desirable
+--- see: https://github.com/neovim/neovim/issues/18660
 local function set_winbar()
-  core.foreach(function(w)
+  local current_win = api.nvim_get_current_win()
+  pde.foreach(function(w)
     local buf, win = vim.bo[api.nvim_win_get_buf(w)], vim.wo[w]
+
+    if vim.t[0].diff_view_initialized then return end
+
     local bt, ft, is_diff = buf.buftype, buf.filetype, win.diff
-    local ignored = contains(allowed_fts, ft) or contains(allowed_buftypes, bt)
-    if not ignored then
-      if
-        not contains(blocked_fts, ft)
-        and fn.win_gettype(api.nvim_win_get_number(w)) == ''
-        and bt == ''
-        and ft ~= ''
-        and not is_diff
-      then
-        win.winbar = '%{%v:lua.core.ui.winbar.get()%}'
-      elseif is_diff then
-        win.winbar = nil
-      end
+    local decor = decorations.get({ ft = ft, bt = bt, setting = 'winbar' })
+    if decor.ft == 'ignore' or decor.bt == 'ignore' then return end
+
+    local normal_win = falsy(fn.win_gettype(api.nvim_win_get_number(w)))
+
+    if
+      normal_win
+      and not decor.ft
+      and bt == ''
+      and ft ~= ''
+      and not is_diff
+    then
+      win.winbar = ('%%{%%v:lua.pde.ui.winbar.render(%d)%%}'):format(
+        current_win
+      )
+    elseif is_diff then
+      win.winbar = nil
     end
   end, api.nvim_tabpage_list_wins(0))
 end
 
-core.augroup('AttachWinbar', {
-  {
-    event = { 'BufWinEnter', 'TabNew', 'TabEnter', 'BufEnter', 'WinClosed' },
-    desc = 'Toggle winbar',
-    command = set_winbar,
-  },
-  {
-    event = 'User',
-    pattern = { 'DiffviewDiffBufRead', 'DiffviewDiffBufWinEnter' },
-    desc = 'Toggle winbar',
-    command = set_winbar,
-  },
+pde.augroup('AttachWinbar', {
+  event = { 'TabEnter', 'BufEnter', 'WinClosed' },
+  desc = 'Toggle winbar',
+  command = set_winbar,
 })
