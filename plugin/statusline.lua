@@ -163,6 +163,7 @@ local identifiers = {
     ['tsplayground'] = '侮',
     ['Trouble'] = '',
     ['NeogitStatus'] = '', -- '',
+    ['fugitive'] = '', -- '',
     ['norg'] = 'ﴬ',
     ['help'] = '',
     ['octo'] = '',
@@ -184,6 +185,7 @@ local identifiers = {
     ['dbui'] = 'Dadbod UI',
     ['tsplayground'] = 'Treesitter',
     ['NeogitStatus'] = 'Neogit Status',
+    ['fugitive'] = 'Fugitive',
     ['Neogit.*'] = 'Neogit',
     ['Trouble'] = 'Lsp Trouble',
     ['gitcommit'] = 'Git commit',
@@ -697,7 +699,7 @@ function pde.ui.statusline.render()
   -- Setup
   ----------------------------------------------------------------------------//
   local l1 = section:new({
-    { { icons.misc.block, hls.indicator } },
+    { { '' } },
     cond = not plain,
     before = '',
     after = '',
@@ -754,7 +756,6 @@ function pde.ui.statusline.render()
   -----------------------------------------------------------------------------//
   -- LSP
   -----------------------------------------------------------------------------//
-  local flutter = vim.g.flutter_tools_decorations or {}
   local diagnostics = diagnostic_info(ctx)
   local lsp_clients = pde.map(function(client)
     return {
@@ -768,14 +769,14 @@ function pde.ui.statusline.render()
       priority = client.priority,
     }
   end, stl_lsp_clients(ctx))
-  table.insert(lsp_clients[1][1], 1, { ' LSP(s): ', hls.metadata })
+  table.insert(lsp_clients[1][1], 1, { ': ', hls.metadata })
   -----------------------------------------------------------------------------//
   -- Left section
   -----------------------------------------------------------------------------//
   local l2 = section:new(
     { { { file_modified, hls.modified } }, cond = ctx.modified, priority = 1 },
     readonly_component,
-    { { { mode, mode_hl } }, priority = 0 },
+    -- { { { mode, mode_hl } }, priority = 0 },
     {
       { { search_count(), hls.count } },
       cond = vim.v.hlsearch > 0,
@@ -847,11 +848,6 @@ function pde.ui.statusline.render()
       },
       priority = 3,
       cond = has_pending_updates,
-    },
-    { { { flutter.app_version, hls.metadata } }, priority = 4 },
-    {
-      { { flutter.device and flutter.device.name or '', hls.metadata } },
-      priority = 4,
     },
     -----------------------------------------------------------------------------//
     -- LSP Clients

@@ -135,7 +135,7 @@ o.showbreak = [[↪ ]] -- Options include -> '…', '↳ ', '→','↪ '
 o.list = true -- invisible chars
 opt.listchars = {
   eol = nil,
-  tab = '  ', -- Alternatives: '▷▷',
+  tab = '▷▷', -- Alternatives: '▷▷',
   extends = '…', -- Alternatives: … » ›
   precedes = '░', -- Alternatives: … « ‹
   trail = '•', -- BULLET (U+2022, UTF-8: E2 80 A2)
@@ -182,7 +182,8 @@ opt.cursorlineopt = { 'both' }
 -- Title {{{1
 -----------------------------------------------------------------------------//
 function pde.modified_icon() return vim.bo.modified and icons.misc.circle or '' end
-o.titlestring = '%{fnamemodify(getcwd(), ":t")}%( %{v:lua.pde.modified_icon()}%)'
+o.titlestring =
+  '%{fnamemodify(getcwd(), ":t")}%( %{v:lua.pde.modified_icon()}%)'
 o.titleold = fn.fnamemodify(vim.loop.os_getenv('SHELL'), ':t')
 o.title = true
 o.titlelen = 70

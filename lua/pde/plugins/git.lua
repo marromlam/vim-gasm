@@ -62,7 +62,6 @@ return {
         '<cmd>Telescope git_status<cr>',
         desc = 'Open changed file',
       },
-      { '<leader>gs', '<cmd>Git<cr>', desc = 'Git Status' },
       { '<leader>gP', '<cmd>Git push<cr>', desc = 'Git push' },
       { '<leader>gp', '<cmd>Git pull<cr>', desc = 'Git pull' },
     },

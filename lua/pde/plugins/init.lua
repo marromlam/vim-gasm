@@ -458,20 +458,6 @@ return {
   -- }}}
 
   -- TPOPE {{{
-  {
-    'kristijanhusak/vim-dadbod-ui',
-    dependencies = 'tpope/vim-dadbod',
-    cmd = { 'DBUI', 'DBUIToggle', 'DBUIAddConnection' },
-    init = function()
-      vim.g.db_ui_use_nerd_fonts = 1
-      vim.g.db_ui_show_database_icon = 1
-      map('n', '<leader>db', '<cmd>DBUIToggle<CR>', { desc = 'dadbod: toggle' })
-    end,
-  },
-  {
-    'tpope/vim-eunuch',
-    cmd = { 'Move', 'Rename', 'Remove', 'Delete', 'Mkdir' },
-  },
   { 'tpope/vim-sleuth', event = 'VeryLazy' },
   { 'tpope/vim-repeat', event = 'VeryLazy' },
   {

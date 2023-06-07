@@ -2,6 +2,7 @@ if not pde then return end
 
 local fn, api, v, env, cmd, fmt =
   vim.fn, vim.api, vim.v, vim.env, vim.cmd, string.format
+local notify = vim.notify
 
 ----------------------------------------------------------------------------------------------------
 -- HLSEARCH
@@ -206,64 +207,78 @@ local save_excluded = {
   'neo-tree-popup',
   'lua.luapad',
   'gitcommit',
+  'fugitive.*',
   'NeogitCommitMessage',
 }
+local filenames_excluded = {}
 local function can_save()
+  -- notify('can_save ' .. vim.bo.filetype)
+  -- local path = api.nvim_buf_get_name(0)
+  -- notify('can_save ' .. path)
+
   return pde.falsy(fn.win_gettype())
     and pde.falsy(vim.bo.buftype)
     and not pde.falsy(vim.bo.filetype)
     and vim.bo.modifiable
+    and not string.match(api.nvim_buf_get_name(0), 'fugitive://')
     and not vim.tbl_contains(save_excluded, vim.bo.filetype)
 end
 
-pde.augroup('Utilities', {
-  ---@source: https://vim.fandom.com/wiki/Use_gf_to_open_a_file_via_its_URL
-  event = { 'BufReadCmd' },
-  pattern = { 'file:///*' },
-  nested = true,
-  command = function(args)
-    cmd.bdelete({ bang = true })
-    cmd.edit(vim.uri_to_fname(args.file))
-  end,
-}, {
-  -- always add a guard clause when creating plugin files
-  event = 'BufNewFile',
-  pattern = { vim.g.vim_dir .. '/plugin/**.lua' },
-  command = 'norm! iif not pde then return end',
-}, {
-  --- disable formatting in directories in third party repositories
-  event = { 'BufEnter' },
-  command = function(args)
-    local paths = vim.split(vim.o.runtimepath, ',')
-    local match = pde.find(function(dir)
-      local path = api.nvim_buf_get_name(args.buf)
-      if vim.startswith(path, env.PERSONAL_PROJECTS_DIR) then return false end
-      if vim.startswith(path, env.VIMRUNTIME) then return true end
-      return vim.startswith(path, dir)
-    end, paths)
-    vim.b[args.buf].formatting_disabled = match ~= nil
-  end,
-}, {
-  event = { 'BufLeave' },
-  pattern = { '*' },
-  command = function(args)
-    if api.nvim_buf_line_count(args.buf) <= 1 then return end
-    if can_save() then cmd('silent! write ++p') end
-  end,
-}, {
-  event = { 'BufWritePost' },
-  pattern = { '*' },
-  nested = true,
-  command = function()
-    if pde.falsy(vim.bo.filetype) or fn.exists('b:ftdetect') == 1 then
-      cmd([[
+pde.augroup(
+  'Utilities', -- Utilities
+  {
+    ---@source: https://vim.fandom.com/wiki/Use_gf_to_open_a_file_via_its_URL
+    event = { 'BufReadCmd' },
+    pattern = { 'file:///*' },
+    nested = true,
+    command = function(args)
+      cmd.bdelete({ bang = true })
+      cmd.edit(vim.uri_to_fname(args.file))
+    end,
+  },
+  {
+    -- always add a guard clause when creating plugin files
+    event = 'BufNewFile',
+    pattern = { vim.g.vim_dir .. '/plugin/**.lua' },
+    command = 'norm! iif not pde then return end',
+  },
+  {
+    --- disable formatting in directories in third party repositories
+    event = { 'BufEnter' },
+    command = function(args)
+      local paths = vim.split(vim.o.runtimepath, ',')
+      local match = pde.find(function(dir)
+        local path = api.nvim_buf_get_name(args.buf)
+        if vim.startswith(path, env.PERSONAL_PROJECTS_DIR) then return false end
+        if vim.startswith(path, env.VIMRUNTIME) then return true end
+        return vim.startswith(path, dir)
+      end, paths)
+      vim.b[args.buf].formatting_disabled = match ~= nil
+    end,
+  },
+  {
+    event = { 'BufLeave' },
+    pattern = { '*' },
+    command = function(args)
+      if api.nvim_buf_line_count(args.buf) <= 1 then return end
+      if can_save() then cmd('silent! write ++p') end
+    end,
+  },
+  {
+    event = { 'BufWritePost' },
+    pattern = { '*' },
+    nested = true,
+    command = function()
+      if pde.falsy(vim.bo.filetype) or fn.exists('b:ftdetect') == 1 then
+        cmd([[
         unlet! b:ftdetect
         filetype detect
         call v:lua.vim.notify('Filetype set to ' . &ft, "info", {})
       ]])
-    end
-  end,
-})
+      end
+    end,
+  }
+)
 
 pde.augroup('TerminalAutocommands', {
   event = { 'TermClose' },
