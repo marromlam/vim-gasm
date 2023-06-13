@@ -26,9 +26,7 @@ local function general_overrides()
         bg = { from = 'FloatBorder', attr = 'fg' },
       },
     },
-    ---------------------------------------------//
-    -- Popup menu
-    ---------------------------------------------//
+    -- Popup menu OK
     { Pmenu = { bg = { from = 'Normal', alter = -0.15 } } },
     -----------------------------------------------------------------------------//
     -- Created highlights

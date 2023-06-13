@@ -105,7 +105,7 @@ local function colors()
   local number_fg = highlight.get('Number', 'fg')
   local normal_bg = highlight.get('Normal', 'bg')
 
-  local bg_color = highlight.tint(normal_bg, -0.25)
+  local bg_color = highlight.tint(normal_bg, -0.05)
 
   -- stylua: ignore
   highlight.all({
