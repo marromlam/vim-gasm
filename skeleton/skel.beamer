@@ -1,0 +1,87 @@
+% !TEX program = xelatex
+
+% Packages {{{
+
+\documentclass[9pt,aspectratio=43]{beamer}
+\usetheme{Compostela}
+
+\usepackage{array}
+\newcommand{\TupleVersion}{v1r0@LcosK}
+
+\newenvironment{variableblock}[3]{%
+  \setbeamercolor{block body}{#2}
+  \setbeamercolor{block title}{#3}
+  \begin{block}{#1}}{\end{block}}
+
+% }}}
+
+% Configuration of the document {{{
+
+\newcommand{\TalkPlace}{ Compostela }
+\newcommand{\TalkAuthor}{ \href{mailto:me@mycomany.com}{Me} }
+\newcommand{\TalkAuthorShort}{ Me }
+\newcommand{\TalkTitle}{ @BASENAME@ }
+\newcommand{\TalkTitleShort}{ @BASENAME@ }
+\newcommand{\TalkInstitute}{ Company }
+\newcommand{\TalkDate}{ \today }
+\newcommand{\TalkDateNumber}{ \today }
+
+% }}}
+
+
+\begin{document}
+
+
+% Titlepage and table of contents {{{
+
+\begin{frame}[plain, overlaytitlepage=0.9]
+  \begin{minipage}[b][\textheight][b]{5cm}
+    % \includegraphics[height=0.5cm]{logos/mylogo1}\hspace{1mm}
+    % \includegraphics[height=0.5cm]{logos/mylogo2}\hspace{1mm}
+    % \includegraphics[height=0.5cm]{logos/mylogo3}\hspace{1mm}\\[2mm]
+    % \includegraphics[height=0.5cm]{logos/mylogo4}\hspace{1mm}
+    % \includegraphics[height=0.5cm]{logos/mylogo5}\\[-1mm]
+  \end{minipage}
+\end{frame}
+
+\begin{frame}[plain, overlaytoc=0.9]
+  \addtocounter{framenumber}{-1}
+  \hspace*{5.3cm}\begin{minipage}{8cm}
+    \tableofcontents
+  \end{minipage}
+\end{frame}
+
+% }}}
+
+
+\section{Section}
+
+
+\subsection{Subsection}
+
+
+% frame 1 {{{
+%
+\begin{frame}[default]
+\frametitle{noframetitle}
+
+@CURSOR@
+
+\end{frame}
+%
+% }}}
+
+
+% Bibliography {{{
+
+\begin{thebibliography}{9}
+
+\end{thebibliography}
+
+% }}}
+
+
+\end{document}
+
+
+% vim: ft=tex fdm=marker ts=2 sw=2 sts=2 sr noet

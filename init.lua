@@ -1,47 +1,39 @@
--- This is the init.lua file for my neovim config
+-- bootstrap lazy.nvim, LazyVim and your plugins
+--
+--
+--
 
--- basics {{{1
+if vim.g.vscode then
+  return
+end
 
-vim.g.start_time = vim.fn.reltime()
-vim.g.elite_mode = true
+local data = vim.fn.stdpath("data")
+
+if vim.loader then
+  vim.loader.enable()
+end
+
 vim.g.os = vim.loop.os_uname().sysname
 vim.g.open_command = vim.g.os == "Darwin" and "open" or "xdg-open"
+
 vim.g.dotfiles = vim.env.DOTFILES or vim.fn.expand("~/.dotfiles")
 vim.g.vim_dir = vim.g.dotfiles .. "/.config/nvim"
 
--- leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+vim.g.projects_directory = vim.fn.expand("~/Projects")
+vim.g.personal_directory = vim.g.projects_directory .. "/personal"
+vim.g.work_directory = vim.g.projects_directory .. "/work"
 
--- project directories
-vim.g.projects_dir = vim.env.PROJECTS_DIR or vim.fn.expand("~/projects")
-vim.g.work_dir = vim.env.PROJECTS_DIR .. "/work"
-
--- Ensure all autocommands are cleared
-vim.api.nvim_create_augroup("vimrc", {})
-vim.cmd([[
-if has('gui_running')
-  let g:has_gui = 1
-else
-  let g:has_gui = 0
-endif
-]])
-
-local ok, reload = pcall(require, "plenary.reload")
-local RELOAD = ok and reload.reload_module or function(...) return ... end
-local function R(name)
-  RELOAD(name)
-  return require(name)
-end
-
--- }}}
-
--- Global namespace {{{
-
+-- Leader bindings
+vim.g.mapleader = " " -- Remap leader key
+vim.g.maplocalleader = "\\" -- Local leader is <Space>
+--
+--
+-- Global namespace
 local namespace = {
   ui = {
-    winbar = { enable = true },
-    foldtext = { enable = false },
+    winbar = { enable = false },
+    statuscolumn = { enable = true },
+    statusline = { enable = true },
   },
   -- some vim mappings require a mixture of commandline commands and function calls
   -- this table is place to store lua functions to be called in those mappings
@@ -50,83 +42,134 @@ local namespace = {
 
 -- This table is a globally accessible store to facilitating accessing
 -- helper functions and variables throughout my config
-_G.vim6 = vim6 or namespace
-
+_G.mrl = mrl or namespace
 _G.map = vim.keymap.set
+_G.P = vim.print
 
--- }}}
+require("mrl.globals")
+-- require("mrl.highlights")
+require("mrl.settings")
+require("mrl.ui")
+require("config.lazy")
+require("mrl.settings")
 
--- Settings {{{
--- Order matters here as globals needs to be instantiated first etc.
-R("vim6.globals")
-R("vim6.highlights")
-R("vim6.ui")
-R("vim6.settings")
-
--- }}}
-
--- Plugins {{{
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--single-branch",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
+function mrl.get_hi(name, id)
+  id = id or 0
+  local hi = vim.api.nvim_get_hl(0, { name = name })
+  return hi
 end
-vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup("vim6.plugins", {
-  ui = { border = vim6.ui.current.border },
-  defaults = { lazy = true },
-  change_detection = { notify = false },
-  checker = {
-    enabled = true,
-    concurrency = 30,
-    notify = false,
-    frequency = 3600, -- check for updates every hour
-  },
-  performance = {
-    rtp = {
-      paths = { vim.fn.stdpath("data") .. "/site" },
-      -- disabled_plugins = { "netrw", "netrwPlugin" },
-    },
-  },
-  dev = {
-    path = vim.g.projects_dir .. "/personal/",
-    patterns = { "akinsho" },
-    fallback = true,
-  },
+vim.api.nvim_create_user_command("Format", function()
+  -- check if null-ls exists
+  local check, nullls = pcall(require, "null-ls")
+  -- check if a formatting source of null-ls is registered
+  --  wait 2 sec to get the server started
+  vim.wait(2000, function()
+    return check
+      and nullls.is_registered({ method = nullls.methods.FORMATTING })
+  end, 1)
+
+  if check and nullls.is_registered({ method = nullls.methods.FORMATTING }) then
+    vim.lsp.buf.format()
+  else
+    vim.cmd([[normal gg=G<C-o>]])
+  end
+end, {})
+
+vim.keymap.set(
+  { "n" },
+  "<leader>lf",
+  "<cmd>Format<CR>",
+  { silent = true, desc = "lsp-format current buffer" }
+)
+
+--sdfsdf
+-- vim.api.nvim_set_hl(0, "LineNr", {
+--   fg = mrl.get_hi("Comment").fg,
+--   bg = mrl.get_hi("Normal").bg,
+-- })
+vim.api.nvim_set_hl(0, "LineNrAbove", {
+  fg = mrl.get_hi("Comment").fg,
+  bg = mrl.get_hi("Normal").bg,
+})
+vim.api.nvim_set_hl(0, "LineNrBelow", {
+  fg = mrl.get_hi("Comment").fg,
+  bg = mrl.get_hi("Normal").bg,
 })
 
--- map for plugin manager
-map("n", "<leader>pl", "<Cmd>Lazy<CR>", { desc = "plugin manager" })
-map("n", "<leader>pm", "<Cmd>Mason<CR>", { desc = "server manager" })
--- cfilter plugin allows filtering down an existing quickfix list
-vim.cmd.packadd("cfilter")
--- Color Scheme
--- vim6.wrap_err("theme failed to load because", vim.cmd.colorscheme, "horizon")
--- vim6.wrap_err("theme failed to load because", vim.cmd.colorscheme, "gruvbox")
-vim6.wrap_err("theme failed to load because", vim.cmd.colorscheme, "base16-gruvbox-dark-hard")
+vim.api.nvim_set_hl(0, "GitSignsAdd", {
+  fg = mrl.get_hi("GitSignsAdd").fg,
+  bg = mrl.get_hi("Normal").bg,
+})
+vim.api.nvim_set_hl(0, "GitSignsChange", {
+  fg = mrl.get_hi("GitSignsChange").fg,
+  bg = mrl.get_hi("Normal").bg,
+})
+vim.api.nvim_set_hl(0, "GitSignsDelete", {
+  fg = mrl.get_hi("GitSignsDelete").fg,
+  bg = mrl.get_hi("Normal").bg,
+})
+vim.api.nvim_set_hl(0, "GitSignsUntracked", {
+  fg = mrl.get_hi("GitSignsUntracked").fg,
+  bg = mrl.get_hi("Normal").bg,
+})
 
--- }}}
+vim.api.nvim_set_hl(0, "StatuslineGitSignsAdd", {
+  fg = mrl.get_hi("GitSignsAdd").fg,
+  bg = mrl.get_hi("StatusLine").bg,
+})
 
--- old stuff
--- vim.cmd [[
---   vmap <leader>sk ::w !kitty @ --to=tcp:localhost:$KITTY_PORT send-text --match=num:1 --stdin<CR><CR>
---   autocmd TermOpen * setlocal nonumber norelativenumber
---   autocmd TermOpen * setlocal scl=no
---
---   if has('nvim') && executable('nvr')
---     " pip3 install neovim-remote
---     let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
---     let $EDITOR='nvr --nostart --remote-tab-wait +"set bufhidden=delete"'
---   endif
---   nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>
---   set path+=**,.,,
--- ]]
+vim.api.nvim_set_hl(0, "StatuslineGitSignsDelete", {
+  fg = mrl.get_hi("GitSignsDelete").fg,
+  bg = mrl.get_hi("StatusLine").bg,
+})
 
+vim.api.nvim_set_hl(0, "StatuslineSearch", {
+  fg = mrl.get_hi("Search").fg,
+  bg = mrl.get_hi("Search").bg,
+})
+
+vim.api.nvim_set_hl(0, "StatuslineBranch", {
+  fg = mrl.get_hi("Search").bg,
+  bg = mrl.get_hi("StatusLine").bg,
+})
+
+vim.api.nvim_set_hl(0, "StatuslineRed", {
+  fg = mrl.get_hi("GitSignsDelete").fg,
+  bg = mrl.get_hi("StatusLine").bg,
+})
+vim.api.nvim_set_hl(0, "StatuslineParentDirectory", {
+  fg = mrl.get_hi("IncSearch").bg,
+  bg = mrl.get_hi("StatusLine").bg,
+  bold = true,
+})
+vim.api.nvim_set_hl(0, "StatuslineEnv", {
+  fg = mrl.get_hi("Error").bg,
+  bg = mrl.get_hi("StatusLine").bg,
+  bold = true,
+  italic = true,
+})
+vim.api.nvim_set_hl(0, "StatuslineDirectory", {
+  fg = mrl.get_hi("Comment").fg,
+  bg = mrl.get_hi("Statusline").bg,
+  bold = false,
+  italic = true,
+})
+vim.api.nvim_set_hl(0, "StatuslineDirectoryInactive", {
+  fg = mrl.get_hi("Comment").fg,
+  bg = mrl.get_hi("Statusline").bg,
+  bold = false,
+  italic = false,
+})
+vim.api.nvim_set_hl(0, "StatuslineFilename", {
+  fg = mrl.get_hi("Normal").fg,
+  bg = mrl.get_hi("Statusline").bg,
+  bold = true,
+  italic = false,
+})
+vim.api.nvim_set_hl(0, "WinSeparator", {
+  fg = mrl.get_hi("Statusline").bg,
+  bg = mrl.get_hi("Normal").bg,
+  bold = false,
+})
 -- vim: fdm=marker
