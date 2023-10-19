@@ -196,7 +196,6 @@ nnoremap(
   [[:b <Tab>]],
   { silent = false, desc = "open buffer list" }
 )
-nnoremap("<leader><leader>", [[<c-^>]], { desc = "switch to last buffer" })
 -----------------------------------------------------------------------------//
 -- Capitalize
 -----------------------------------------------------------------------------//
