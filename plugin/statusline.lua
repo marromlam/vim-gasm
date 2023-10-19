@@ -920,7 +920,7 @@ function mrl.ui.statusline.render()
     },
     {
       {
-        { "Col:", hls.metadata_prefix },
+        { "", hls.metadata_prefix },
         { space },
         { fmt("%+2s", col), hls.title },
       },

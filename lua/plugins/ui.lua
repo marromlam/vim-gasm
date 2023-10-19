@@ -74,5 +74,8 @@ return {
         "buffer: close buffer",
       },
     },
+    config = function()
+      require("mini.bufremove").setup()
+    end,
   },
 }
