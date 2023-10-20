@@ -2,7 +2,11 @@ if not mrl or not mrl.ui.statusline.enable then
   return
 end
 
-local my_vault = "~/Library/Mobile Documents"
+local my_vault = vim.fn.expand("~/Library/Mobile Documents")
+local work1 = vim.fn.expand("~/projects/work")
+local personal1 = vim.fn.expand("~/projects/personal")
+local work2 = vim.fn.expand("~/Projects/work")
+local personal2 = vim.fn.expand("~/Projects/personal")
 
 mrl.ui.statusline = {}
 
@@ -354,6 +358,8 @@ local function dir_env(directory)
     [vim.env.HOME] = "~",
     [vim.g.work_directory] = "$WORK",
     [vim.g.personal_directory] = "$PERSONAL",
+    [personal1] = "$PERSONAL",
+    [work1] = "$WORK",
     [vim.g.personal_directory .. "/dotfiles"] = "$DOTFILES",
     [vim.g.projects_directory] = "$PROJECTS",
     [vim.env.VIMRUNTIME] = "$VIMRUNTIME",
