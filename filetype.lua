@@ -15,6 +15,9 @@ vim.filetype.add({
     Snakefile = "snakemake",
   },
   pattern = {
+    [".*%.map"] = "xml",
+    [".*%.cnk"] = "xml",
+    [".*%.avsc"] = "json",
     [".*%.conf"] = "conf",
     [".*%.theme"] = "conf",
     [".*%.gradle"] = "groovy",
