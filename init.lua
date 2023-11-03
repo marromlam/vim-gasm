@@ -49,12 +49,19 @@ _G.mrl = mrl or namespace
 _G.map = vim.keymap.set
 _G.P = vim.print
 
+-- If opening from inside neovim terminal then do not load other plugins
+if vim.env.NVIM then
+  return require("lazy").setup({ { "willothy/flatten.nvim", config = true } })
+end
+
 require("mrl.globals")
 -- require("mrl.highlights")
 require("mrl.settings")
 require("mrl.ui")
 require("config.lazy")
 require("mrl.settings")
+
+vim.cmd.packadd("cfilter")
 
 function mrl.get_hi(name, id)
   id = id or 0
@@ -95,6 +102,10 @@ vim.api.nvim_set_hl(0, "LineNrAbove", {
   fg = mrl.get_hi("Comment").fg,
   bg = mrl.get_hi("Normal").bg,
 })
+vim.api.nvim_set_hl(0, "NotifyBackground", {
+  fg = mrl.get_hi("Comment").fg,
+  bg = mrl.get_hi("Normal").bg,
+})
 vim.api.nvim_set_hl(0, "LineNrBelow", {
   fg = mrl.get_hi("Comment").fg,
   bg = mrl.get_hi("Normal").bg,
@@ -102,19 +113,19 @@ vim.api.nvim_set_hl(0, "LineNrBelow", {
 
 vim.api.nvim_set_hl(0, "GitSignsAdd", {
   fg = mrl.get_hi("GitSignsAdd").fg,
-  bg = mrl.get_hi("Normal").bg,
+  -- bg = mrl.get_hi("Normal").bg,
 })
 vim.api.nvim_set_hl(0, "GitSignsChange", {
   fg = mrl.get_hi("GitSignsChange").fg,
-  bg = mrl.get_hi("Normal").bg,
+  -- bg = mrl.get_hi("Normal").bg,
 })
 vim.api.nvim_set_hl(0, "GitSignsDelete", {
   fg = mrl.get_hi("GitSignsDelete").fg,
-  bg = mrl.get_hi("Normal").bg,
+  -- bg = mrl.get_hi("Normal").bg,
 })
 vim.api.nvim_set_hl(0, "GitSignsUntracked", {
   fg = mrl.get_hi("GitSignsUntracked").fg,
-  bg = mrl.get_hi("Normal").bg,
+  -- bg = mrl.get_hi("Normal").bg,
 })
 
 vim.api.nvim_set_hl(0, "Statusline", {
@@ -124,6 +135,8 @@ vim.api.nvim_set_hl(0, "Statusline", {
 
 vim.api.nvim_set_hl(0, "StatuslineGitSignsAdd", {
   fg = mrl.get_hi("GitSignsAdd").fg,
+    -- other stuff
+    -- other stuff
   bg = mrl.get_hi("StatusLine").bg,
 })
 
