@@ -9,4 +9,14 @@ return {
     --     enable = false,
     --     opts = {},
     -- },
+    {
+        "mbbill/undotree",
+        keys = {
+            {
+                "<leader>u",
+                vim.cmd.UndotreeToggle,
+                "Toggle undotree",
+            },
+        },
+    },
 }

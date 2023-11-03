@@ -1,4 +1,7 @@
 return {
+  {
+    "willothy/flatten.nvim",
+  },
 
   {
     "marromlam/sailor.vim",

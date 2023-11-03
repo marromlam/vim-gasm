@@ -79,7 +79,8 @@ return {
         desc = "Open changed file",
       },
       { "<leader>gP", "<cmd>Git push<cr>", desc = "Git push" },
-      { "<leader>gp", "<cmd>Git pull<cr>", desc = "Git pull" },
+      { "<leader>gp", "<cmd>Git pull --rebase<cr>", desc = "Git pull" },
+      { "<leader>gt", ":Git push -u origin ", desc = "git: set target branch" },
     },
   },
   {
