@@ -59,7 +59,8 @@ require("mrl.globals")
 require("mrl.settings")
 require("mrl.ui")
 require("config.lazy")
-require("mrl.settings")
+-- require("mrl.settings")
+vim.cmd([[set nonu nornu]])
 
 vim.cmd.packadd("cfilter")
 
@@ -93,11 +94,18 @@ vim.keymap.set(
   { silent = true, desc = "lsp-format current buffer" }
 )
 
+vim.keymap.set(
+  { "n" },
+  "<leader>tl",
+  '<cmd>:exec &nu==&rnu? "se nu!" : "se rnu!"<CR>',
+  { silent = true, desc = "toggle line number" }
+)
+
 --sdfsdf
--- vim.api.nvim_set_hl(0, "LineNr", {
---   fg = mrl.get_hi("Comment").fg,
---   bg = mrl.get_hi("Normal").bg,
--- })
+vim.api.nvim_set_hl(0, "LineNr", {
+  fg = mrl.get_hi("Comment").fg,
+  bg = mrl.get_hi("Normal").bg,
+})
 vim.api.nvim_set_hl(0, "LineNrAbove", {
   fg = mrl.get_hi("Comment").fg,
   bg = mrl.get_hi("Normal").bg,
@@ -135,8 +143,8 @@ vim.api.nvim_set_hl(0, "Statusline", {
 
 vim.api.nvim_set_hl(0, "StatuslineGitSignsAdd", {
   fg = mrl.get_hi("GitSignsAdd").fg,
-    -- other stuff
-    -- other stuff
+  -- other stuff
+  -- other stuff
   bg = mrl.get_hi("StatusLine").bg,
 })
 

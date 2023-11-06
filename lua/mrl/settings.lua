@@ -1,15 +1,15 @@
 -- Message output on vim actions {{{1
 vim.opt.shortmess = {
-    t = true, -- truncate file messages at start
-    A = true, -- ignore annoying swap file messages
-    o = true, -- file-read message overwrites previous
-    O = true, -- file-read message overwrites previous
-    T = true, -- truncate non-file messages in middle
-    f = true, -- (file x of x) instead of just (x of x
-    F = true, -- Don't give file info when editing, NOTE: this breaks autocommand messages
-    s = true,
-    c = true,
-    W = true, -- Don't show [w] or written when writing
+  t = true, -- truncate file messages at start
+  A = true, -- ignore annoying swap file messages
+  o = true, -- file-read message overwrites previous
+  O = true, -- file-read message overwrites previous
+  T = true, -- truncate non-file messages in middle
+  f = true, -- (file x of x) instead of just (x of x
+  F = true, -- Don't give file info when editing, NOTE: this breaks autocommand messages
+  s = true,
+  c = true,
+  W = true, -- Don't show [w] or written when writing
 }
 -----------------------------------------------------------------------------//
 -- Timings {{{1
@@ -29,49 +29,49 @@ vim.opt.eadirection = "hor"
 -- do not use split or vsplit to ensure we don't open any new windows
 vim.opt.switchbuf = "useopen,uselast"
 vim.opt.fillchars = {
-    eob = " ", -- suppress ~ at EndOfBuffer
-    diff = "╱", -- alternatives = ⣿ ░ ─
-    msgsep = " ", -- alternatives: ‾ ─
-    fold = " ",
-    foldopen = "▽", -- '▼'
-    foldclose = "▷", -- '▶'
-    foldsep = " ",
+  eob = " ", -- suppress ~ at EndOfBuffer
+  diff = "╱", -- alternatives = ⣿ ░ ─
+  msgsep = " ", -- alternatives: ‾ ─
+  fold = " ",
+  foldopen = "▽", -- '▼'
+  foldclose = "▷", -- '▶'
+  foldsep = " ",
 }
 
-vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.opt.nu = false
+vim.opt.relativenumber = false
 -----------------------------------------------------------------------------//
 -- Diff {{{1
 -----------------------------------------------------------------------------//
 -- Use in vertical diff mode, blank lines to keep sides aligned, Ignore whitespace changes
 vim.opt.diffopt = vim.opt.diffopt
-    + {
-        "vertical",
-        "iwhite",
-        "hiddenoff",
-        "foldcolumn:0",
-        "context:4",
-        "algorithm:histogram",
-        "indent-heuristic",
-        "linematch:60",
-    }
+  + {
+    "vertical",
+    "iwhite",
+    "hiddenoff",
+    "foldcolumn:0",
+    "context:4",
+    "algorithm:histogram",
+    "indent-heuristic",
+    "linematch:60",
+  }
 -----------------------------------------------------------------------------//
 -- Format Options {{{1
 -----------------------------------------------------------------------------//
 vim.opt.formatoptions = {
-    ["1"] = true,
-    ["2"] = true, -- Use indent from 2nd line of a paragraph
-    q = true,   -- continue comments with gq"
-    c = true,   -- Auto-wrap comments using textwidth
-    r = true,   -- Continue comments when pressing Enter
-    n = true,   -- Recognize numbered lists
-    t = false,  -- autowrap lines using text width value
-    j = true,   -- remove a comment leader when joining lines.
-    -- Only break if the line was not longer than 'textwidth' when the insert
-    -- started and only at a white character that has been entered during the
-    -- current insert command.
-    l = true,
-    v = true,
+  ["1"] = true,
+  ["2"] = true, -- Use indent from 2nd line of a paragraph
+  q = true, -- continue comments with gq"
+  c = true, -- Auto-wrap comments using textwidth
+  r = true, -- Continue comments when pressing Enter
+  n = true, -- Recognize numbered lists
+  t = false, -- autowrap lines using text width value
+  j = true, -- remove a comment leader when joining lines.
+  -- Only break if the line was not longer than 'textwidth' when the insert
+  -- started and only at a white character that has been entered during the
+  -- current insert command.
+  l = true,
+  v = true,
 }
 -----------------------------------------------------------------------------//
 -- Folds {{{1
@@ -90,7 +90,8 @@ vim.opt.grepformat = vim.opt.grepformat ^ { "%f:%l:%c:%m" }
 vim.opt.conceallevel = 2
 vim.opt.breakindentopt = "sbr"
 vim.opt.linebreak = true -- lines wrap at words rather than random characters
-vim.opt.signcolumn = "yes:1"
+-- vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "no"
 vim.opt.ruler = false
 vim.opt.cmdheight = 0
 vim.opt.showbreak = [[↪ ]] -- Options include -> '…', '↳ ', '→','↪ '
@@ -98,11 +99,11 @@ vim.opt.showbreak = [[↪ ]] -- Options include -> '…', '↳ ', '→','↪ '
 -- List chars
 vim.opt.list = true -- invisible chars
 vim.opt.listchars = {
-    eol = nil,
-    tab = "▷▷", -- Alternatives: '▷▷',
-    extends = "…", -- Alternatives: … » ›
-    precedes = "░", -- Alternatives: … « ‹
-    trail = "•", -- BULLET (U+2022, UTF-8: E2 80 A2)
+  eol = nil,
+  tab = "▷▷", -- Alternatives: '▷▷',
+  extends = "…", -- Alternatives: … » ›
+  precedes = "░", -- Alternatives: … « ‹
+  trail = "•", -- BULLET (U+2022, UTF-8: E2 80 A2)
 }
 
 -- Indentation
@@ -131,10 +132,10 @@ vim.opt.emoji = false
 
 -- Cursor
 vim.opt.guicursor = {
-    "n-v-c-sm:block-Cursor",
-    "i-ci-ve:ver25-iCursor",
-    "r-cr-o:hor20-Cursor",
-    "a:blinkon0",
+  "n-v-c-sm:block-Cursor",
+  "i-ci-ve:ver25-iCursor",
+  "r-cr-o:hor20-Cursor",
+  "a:blinkon0",
 }
 vim.opt.cursorlineopt = { "both" }
 
@@ -146,17 +147,17 @@ vim.opt.titlelen = 70
 -- Utilities
 vim.opt.showmode = false
 vim.opt.sessionoptions = {
-    "globals",
-    "buffers",
-    "curdir",
-    "winpos",
-    "winsize",
-    "help",
-    "tabpages",
-    "terminal",
+  "globals",
+  "buffers",
+  "curdir",
+  "winpos",
+  "winsize",
+  "help",
+  "tabpages",
+  "terminal",
 }
 vim.opt.viewoptions = { "cursor", "folds" } -- save/restore just these (with `:{mk,load}view`)
-vim.opt.virtualedit = "block"               -- allow cursor to move where there is no text in visual block mode
+vim.opt.virtualedit = "block" -- allow cursor to move where there is no text in visual block mode
 
 -- Jumplist
 vim.opt.jumpoptions = { "stack" } -- make the jumplist behave like a browser stack
